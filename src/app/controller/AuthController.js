@@ -29,6 +29,7 @@ class AuthController {
 				res.status(200).json({ message: 'User valid' })
 			else res.status(404).json({ message: 'Not found' })
 		} catch (error) {
+			console.log(error);
 			res.status(400).json({ message: 'Error' })
 		}
 	}
