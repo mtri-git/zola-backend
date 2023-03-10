@@ -72,18 +72,22 @@ class AuthController {
 				})
 
 				// set refresh token in redis db
-				redis.deleteRefreshToken(id)
-				const redisResponse = redis.setRefreshToken(
+				await redis.deleteRefreshToken(id)
+				const redisResponse = await redis.setRefreshToken(
 					id,
 					token.refreshToken
 				)
+				
+				console.log(redisResponse);
+
+				
 				if (redisResponse === CODE_ERROR) {
 					res.status(500).json({ error: 'Server error' })
 					return
 				}
 
 				
-				console.log({ refresh: token.refreshToken })
+				// console.log({ refresh: token.refreshToken })
 				res.cookie('refreshToken', token.refreshToken, {
 					httpOnly: true,
 					sameSite: 'none',

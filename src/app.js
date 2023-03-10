@@ -39,6 +39,7 @@ if (app.get('env') == 'production') {
 } else {
 	app.use(morgan('dev')) //log to console on development
 }
+
 // Connect db
 db.connect()
 redis.connect()
