@@ -1,0 +1,169 @@
+const Message = require('../../models/Message')
+const Room = require('../../models/Room')
+const User = require('../../models/User')
+
+class RoomController {
+	// create new chat room need a list of member id
+	async createRoom(req, res) {
+		try {
+			if (req.user) {
+				const { name, users, isRoom } = req.body
+				const roomData = { name, users, isRoom }
+				roomData.created_by = req.user.id
+				// Check user add to room is exist\
+				const validUserList = await User.exists({
+					_id: { $in: roomData.users },
+				})
+
+				if (isRoom && roomData.users.length === 1) {
+					res.status(400).json({
+						message: 'A room has to have more than 2 users',
+					})
+				}
+
+				if (validUserList) {
+					roomData.users.push(req.user.id)
+					const room = new Room(roomData)
+					await room.save()
+					res.status(201).json({
+						message: 'Create a new chat room',
+						data: room,
+					})
+				} else {
+					res.status(400).json({ message: 'Invalid list of user' })
+				}
+			} else {
+				res.status(401).json({ message: 'Not authorize' })
+			}
+		} catch (err) {
+			console.log(err)
+			res.status(500).json({ message: 'Server error' })
+		}
+	}
+
+	async checkRoomWithTwoUser(req, res) {
+		try {
+			if (req.user) {
+				const user = await User.findOne({
+					username: req.query.username,
+				})
+				const room = await Room.findOne({
+					users: { $size: 2, $all: [req.user.id, user._id] },
+				})
+				console.log(room)
+				if (room && user) {
+					res.status(403).json({
+						message: 'Room is existed. Cant create new',
+					})
+				} else res.status(200).json({ message: 'Room is not existed.' })
+			} else {
+				res.status(401).json({ message: "Can't access this" })
+			}
+		} catch (error) {
+			console.log(error)
+			res.status(500).json({ message: "Can't access this !" })
+		}
+	}
+
+	async getRoomById(req, res) {
+		try {
+			if (req.user) {
+				const room = await Room.findOne({_id: req.params.roomId, deleted_at: null})
+
+				if (room.users.includes(req.user.id)) {
+					const roomDoc = await Room.getRoomById(req.params.roomId)
+
+					res.status(200).json({ room: roomDoc })
+				} else res.status(401).json({ error: "Can't access this." })
+			} else {
+				res.status(401).json({ message: "Can't access this" })
+			}
+		} catch (error) {
+			console.log(error)
+			res.status(500).json({ message: "Can't access this !" })
+		}
+	}
+
+	async getRoomByUserById(req, res) {
+		try {
+			let rooms = await Room.getRoomByUserId(req.user.id)
+			rooms = rooms.map((room) => {
+				if (room.last_message?.deleted_at) room.last_message = null
+				delete room.last_message?.deleted_at
+				return room
+			})
+			res.status(200).json({ Rooms: rooms })
+		} catch (err) {
+			console.log(err)
+			res.status(500).json('Fail')
+		}
+	}
+
+	async getAllUserInRoom(req, res) {
+		try {
+			const room = await Room.findById(req.query.roomId)
+			console.log(room.users)
+			const users = await Promise.all(
+				room.users.map((userId) => User.getUserWithId(userId))
+			)
+			res.status(200).json({ user: users })
+		} catch (err) {
+			console.error('Get all User In Room: ', err)
+			res.status(500).json({ Error: err })
+		}
+	}
+
+	async addUserToRoom() {
+		// using $addToSet to void duplicated values
+		const room = await Room.findById(req.body.roomId)
+		const user = await User.findOne({ username: req.body.username })
+		if (await !User.exists({ _id: req.body.userId })) {
+			res.status(401).json({ message: 'User not existed' })
+			return
+		}
+		if (!room.users.includes(req.user.id)) {
+			res.status(401).json({ message: 'Not authorization' })
+			return
+		}
+		try {
+			if (req.body.userId)
+				await Room.updateOne(
+					{ _id: req.body.roomId },
+					{ $addToSet: { users: req.body.userId } }
+				)
+			else if (req.body.username)
+				await Room.updateOne(
+					{ _id: req.body.roomId },
+					{ $addToSet: { users: user._id } }
+				)
+
+			res.status(200).json({ message: 'Add user to room complete' })
+		} catch (err) {
+			res.status(500).json({ Error: err })
+		}
+	}
+
+	async removeUserFromRoom() {
+		// using $addToSet to void duplicated values
+		const room = await Room.findById(req.body.roomId)
+		if (await !User.exists({ _id: req.body.userId })) {
+			res.status(401).json({ message: 'User not existed' })
+			return
+		}
+		if (!room.users.includes(req.user.id)) {
+			res.status(401).json({ message: 'Not authorization' })
+			return
+		}
+		try {
+			await Room.updateOne(
+				{ _id: req.body.roomId },
+				{ $pull: { users: req.body.userId } }
+			)
+			res.status(200).json({ message: 'Remove user from room complete' })
+		} catch (err) {
+			res.status(500).json({ Error: err })
+		}
+	}
+}
+
+module.exports = new RoomController()
