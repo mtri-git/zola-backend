@@ -20,7 +20,7 @@ app.use(cookieParser())
 app.use(compression())
 app.use(
 	cors({
-		origin: ["http://localhost:5173", "http://localhost:5175"],
+		origin: ["http://localhost:5173", "http://localhost:5175", "https://zola-admin.vercel.app"],
 		credentials: true,
 	})
 )
