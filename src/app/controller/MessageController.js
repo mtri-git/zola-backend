@@ -111,7 +111,16 @@ class MessageController {
 				const messages = await Message.where().byContentInRoom(
 					req.params.roomId,
 					req.query.search
-				)
+				).lean()
+				
+				// each message in messages will have messageType property to identify type of message
+				messages.forEach((message) => {
+					if(message.sender.username === req.user.username)
+						message.messageType = "sender"
+					else
+						message.messageType = "receiver"
+				})
+
 				res.status(200).json({ messages: messages })
 			} else {
 				res.status(401).json("You can't access this room")

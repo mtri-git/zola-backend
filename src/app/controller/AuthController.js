@@ -58,7 +58,7 @@ class AuthController {
 				return res.status(400).json({message: "This account has been deleted"})
 
 
-			const { id, fullname, username, avatarUrl } = user
+			const { id, fullname, username, avatarUrl, coverUrl } = user
 			const validPassword = await bcrypt.compare(
 				req.body.password,
 				user.password
@@ -101,7 +101,7 @@ class AuthController {
 					.status(200)
 					.json({
 						token: token.accessToken,
-						user: { id, fullname, username, avatarUrl },
+						user: { id, fullname, username, avatarUrl, coverUrl },
 					})
 					.end()
 			} else {
