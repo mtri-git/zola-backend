@@ -11,7 +11,7 @@ router.get('/reply/:id', authMiddleware, CommentController.getReplyComment)
 router.get('/:commentId',authMiddleware ,CommentController.getComment)
 router.post('/create',authMiddleware ,CommentController.createComment)
 router.delete('/:commentId', authMiddleware ,CommentController.deleteComment)
-router.patch('/:commentId/like', authMiddleware ,CommentController.likeOrUnlikeComment)
+router.put('/:commentId/like', authMiddleware ,CommentController.likeOrUnlikeComment)
 
 
 module.exports = router
