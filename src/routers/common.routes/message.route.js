@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const messageController = require('../app/controller/MessageController')
-const authMiddleware = require('../middleware/auth.middleware')
+const messageController = require('../../app/controller/MessageController')
+const authMiddleware = require('../../middleware/auth.middleware')
 
-const upload = require('../configs/upload')
+const upload = require('../../configs/upload')
 
 //get all chat messages from a chat room
 router.get('/find/:roomId', authMiddleware, messageController.getMessageByRoomId)

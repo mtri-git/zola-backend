@@ -5,7 +5,7 @@ const morgan = require('morgan')
 const compression = require('compression')
 const fs = require('fs')
 const path = require('path')
-const route = require('./routers')
+const route = require('./routers/common.routes')
 const db = require('./configs/db/db.config')
 const redis = require('./services/redis.service')
 

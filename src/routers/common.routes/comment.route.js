@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const CommentController = require('../app/controller/CommentController')
-const authMiddleware = require('../middleware/auth.middleware')
+const CommentController = require('../../app/controller/CommentController')
+const authMiddleware = require('../../middleware/auth.middleware')
 
 
 router.get('/me', authMiddleware,authMiddleware, CommentController.getAllCommentByUserId)

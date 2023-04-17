@@ -90,7 +90,15 @@ const UserSchema = new Schema({
 		type: Date,
 		default: null,
 	},
-})
+},)
+
+
+UserSchema.options.toJSON = {
+	transform: function (doc, ret) {
+	  delete ret.__v;
+	  return ret
+	}
+  };
 
 //virtual
 UserSchema.virtual('friends').get(function () {
@@ -122,10 +130,11 @@ UserSchema.statics.getUser = function (param) {
 	return this.findOne(param).lean()
 }
 
-UserSchema.statics.getUserWithIdLessData = function (id) {
+UserSchema.statics.getUserWithIdLessData = function (id, reqId) {
 	return this.findById(id).select(
-		'fullname username contact_info status avatarUrl last_online'
-	)
+		'fullname follower username contact_info status avatarUrl last_online'
+		)
+
 }
 
 // instances method
@@ -148,6 +157,7 @@ UserSchema.pre('updateOne', (next) => {
 	this.updated_at = Date.now()
 	next()
 })
+
 
 const User = mongoose.model('User', UserSchema)
 module.exports = User

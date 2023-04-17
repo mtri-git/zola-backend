@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const roomController = require('../app/controller/RoomController')
-const authMiddleware = require('../middleware/auth.middleware')
+const roomController = require('../../app/controller/RoomController')
+const authMiddleware = require('../../middleware/auth.middleware')
 
 // create a new room
 router.post('/create', authMiddleware, roomController.createRoom)

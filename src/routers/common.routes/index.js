@@ -7,7 +7,7 @@ const commentRoute = require('./comment.route')
 const otpRoute = require('./otp.route')
 const fileRoute = require('./file.route')
 
-const adminRoute = require('./admin.routes')
+const adminRoute = require('../admin.routes')
 
 const ROOT_ROUTE = '/api/v1'
 

@@ -9,13 +9,15 @@ const notificationSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  read: {
+  isRead: {
     type: Boolean,
     default: false
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    expires: 86400 
+    // expire after 2 months
   }
 });
 

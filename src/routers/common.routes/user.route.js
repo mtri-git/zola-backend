@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const userController = require('../app/controller/UserController')
-const authMiddleware = require('../middleware/auth.middleware')
+const userController = require('../../app/controller/UserController')
+const authMiddleware = require('../../middleware/auth.middleware')
 
-const upload = require('../configs/upload')
+const upload = require('../../configs/upload')
 
 
 // Search user
@@ -31,10 +31,10 @@ router.patch('/change-cover', upload.single("file"), authMiddleware, userControl
 router.get('/friends', authMiddleware ,userController.getFriendsByUserId)
 
 //get follower
-router.get('/followers', userController.getFollower)
+router.get('/followers', authMiddleware, userController.getFollower)
 
 //get following
-router.get('/followings', userController.getFollowing)
+router.get('/followings', authMiddleware, userController.getFollowing)
 
 //get friends
 router.get('/recommend-friends', authMiddleware, userController.recommendFriends)

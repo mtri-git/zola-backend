@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const authMiddleware = require('../middleware/auth.middleware')
-const fileController = require('../app/controller/FileController')
+const authMiddleware = require('../../middleware/auth.middleware')
+const fileController = require('../../app/controller/FileController')
 
 
 router.get('/', authMiddleware, fileController.getFile)

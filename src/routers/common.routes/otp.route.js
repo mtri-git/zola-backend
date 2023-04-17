@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const otpController = require('../app/controller/OtpController')
+const otpController = require('../../app/controller/OtpController')
 
 
 // request otp

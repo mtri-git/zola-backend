@@ -41,19 +41,6 @@ class MessageController {
 			for (let i = 0; i < attach_files.length; i++) {
 					await unlinkAsync(attach_files[i].path)
 			}
-
-			// console.log(uploadData)
-
-			// const { format, resource_type, created_at, url } = uploadData
-			// const file = new File({
-			// 	owner: req.user.id,
-			// 	resource_type: resource_type,
-			// 	format: format,
-			// 	url: url,
-			// 	created_at: created_at,
-			// })
-			// await file.save()
-
 			messageData.attach_files = uploadData
 			const message = new Message({ ...messageData, sender: req.user.id, type: "media" })
 			await message.save()
@@ -123,7 +110,7 @@ class MessageController {
 
 				res.status(200).json({ messages: messages })
 			} else {
-				res.status(401).json("You can't access this room")
+				res.status(401).json({message: "You can't access this room"})
 			}
 		} catch (error) {
 			console.log('Error get message: ', error)

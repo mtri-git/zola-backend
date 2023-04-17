@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const postController = require('../app/controller/PostController')
-const authMiddleware = require('../middleware/auth.middleware')
-const upload = require('../configs/upload')
+const postController = require('../../app/controller/PostController')
+const authMiddleware = require('../../middleware/auth.middleware')
+const upload = require('../../configs/upload')
 
 // search post
 router.get('/', authMiddleware, postController.searchPost)

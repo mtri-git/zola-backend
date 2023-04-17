@@ -1,8 +1,8 @@
 
 const express = require('express')
 const router = express.Router()
-const authController = require('../app/controller/AuthController')
-const authMiddleware = require('../middleware/auth.middleware')
+const authController = require('../../app/controller/AuthController')
+const authMiddleware = require('../../middleware/auth.middleware')
 
 router.post('/login', authController.login)
 router.post('/verify-user', authController.isUserExisted)

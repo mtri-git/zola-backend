@@ -230,13 +230,21 @@ class UserController {
 	async getFollower(req, res) {
 		try {
 			const user = await User.findOne({ username: req.query.username })
-
+			const myId = req.user.id
+			
 			const follower = await Promise.all(
 				user.follower.map((userId) =>
 					User.getUserWithIdLessData(userId)
 				)
 			)
-			res.status(200).json({ data: follower })
+
+			const data = follower.map((user) => {
+				user._doc.isFollowing = user._doc.follower.includes(req.user.id)
+				delete user._doc.follower
+				return user
+			})
+
+			res.status(200).json({ data })
 		} catch (err) {
 			console.log('Error', err)
 			res.status(500).json({ message: 'Server error' })
