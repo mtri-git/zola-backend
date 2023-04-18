@@ -54,6 +54,7 @@ const UserSchema = new Schema({
 			ref: 'User',
 		},
 	],
+	not_notification: [],
 	contact_info: {
 		address: {
 			type: String,
@@ -125,7 +126,7 @@ UserSchema.statics.getUserWithId = function (id) {
 	)
 }
 
-// parrams is objec like {id: id} or {username: username}
+// params is object like {id: id} or {username: username}
 UserSchema.statics.getUser = function (param) {
 	return this.findOne(param).lean()
 }

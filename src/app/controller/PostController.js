@@ -1,6 +1,7 @@
 const Post = require('../../models/Post')
 const User = require('../../models/User')
 const Comment = require('../../models/Comment')
+const Notification = require('../../models/Notification')
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
 const { default: mongoose, Mongoose } = require('mongoose')
 const File = require('../../models/File')
@@ -11,8 +12,13 @@ class PostController {
 		try {
 			const _user = await User.findById(req.user.id)
 			let post = await Post.getPostWithId(req.params.postId)
-			post._doc.isLike = post.like_by.some( (element)=>  element.username === _user.username)
-			// const comment = await Comment.find({postId: req.params.postId}).count()
+			post._doc.isLike = post.like_by.some(
+				(element) => element.username === _user.username
+			)
+			
+			post._doc.totalLike = post.like_by.length
+			post._doc.totalComment = post.comments.length
+			
 			res.status(200).json({ data: post.toObject() })
 		} catch (err) {
 			console.log(err.message)
@@ -26,13 +32,16 @@ class PostController {
 			const searchText = req.query.search
 			const filter = req.query.filter || 'new'
 			const sort = () => {
-				if(filter === 'new') return {created_at: -1}
-				if(filter === 'hot') return {like_by: -1}
+				if (filter === 'new') return { created_at: -1 }
+				if (filter === 'hot') return { like_by: -1 }
 			}
 
 			const currentUser = await User.findById(req.user.id)
 
-			const post = await Post.find({ content: new RegExp(searchText, 'i'), deleted_at: null })
+			const post = await Post.find({
+				content: new RegExp(searchText, 'i'),
+				deleted_at: null,
+			})
 				.select('-__v -deleted_at')
 				.populate({
 					path: 'author',
@@ -60,14 +69,15 @@ class PostController {
 				})
 				.sort(sort())
 
-				let data = post.map((p) => {
-					p._doc.totalLike = p.like_by.length
-					p._doc.totalComment = p.comments.length
-					p._doc.isLike = p.like_by.some(e => e.username === currentUser.username)
-					return p.toObject()
-				})
+			let data = post.map((p) => {
+				p._doc.totalLike = p.like_by.length
+				p._doc.totalComment = p.comments.length
+				p._doc.isLike = p.like_by.some(
+					(e) => e.username === currentUser.username
+				)
+				return p.toObject()
+			})
 
-				
 			// const comment = await Comment.find({postId: req.params.postId}).count()
 			res.status(200).json({ data: data })
 		} catch (err) {
@@ -159,7 +169,8 @@ class PostController {
 			let { content, scope } = req.body
 			let attach_files = req.files
 
-			if(!scope) scope = 'public'
+			if (!scope) scope = 'public'
+
 			// check scope later
 			if (!attach_files) {
 				const post = new Post({
@@ -170,7 +181,9 @@ class PostController {
 				await post.save()
 				return res.status(201).json({ message: 'Post successfully' })
 			}
+
 			let uploadData = []
+
 			for (let i = 0; i < attach_files.length; i++) {
 				const data = await addNewFile(
 					attach_files[i].path,
@@ -197,6 +210,27 @@ class PostController {
 				attach_files,
 			})
 			await post.save()
+
+			// send notification to followers
+
+			const user = await User.findById(req.user.id)
+			const noNotification = new Set(user.not_notification)
+
+			// get list user that will receive notification
+			const notificationUser = user.follower.filter(user => !noNotification.has(user.toString()))
+
+			await Promise.all(
+				notificationUser.map((follower) => {
+					Notification.create({
+						message: `${user.username} đã đăng bài viết mới`,
+						receiver: follower.toString(),
+						author: req.user.id,
+						type: 'post',
+						postId: post._id,
+					})
+				})
+			)
+
 			return res.status(201).json({ message: 'Add a post successful' })
 		} catch (err) {
 			console.log('Add Post: ', err)
@@ -219,7 +253,7 @@ class PostController {
 			} else
 				return res
 					.status(400)
-				.json({ message: 'Post is not existed to update' })
+					.json({ message: 'Post is not existed to update' })
 		} catch (error) {}
 	}
 	async sharePost(req, res) {
@@ -256,7 +290,10 @@ class PostController {
 			if (req.user.id === post.author.toString()) {
 				post.deleted_at = Date.now()
 				await post.save()
-				await File.updateMany({_id: { $in: post.attach_files}}, {deleted_at: Date.now()})
+				await File.updateMany(
+					{ _id: { $in: post.attach_files } },
+					{ deleted_at: Date.now() }
+				)
 				return res
 					.status(200)
 					.json({ message: 'The post has been deleted' })
@@ -402,13 +439,18 @@ class PostController {
 	async getLikedPost(req, res) {
 		try {
 			const paginateQuery = req.query
-			const _user = await User.findOne({username: req.query.username})
+			const _user = await User.findOne({ username: req.query.username })
 			const userId = _user ? _user.id : req.user.id
 
 			const pageSize = Number(paginateQuery.pageSize) || 10
 			const offset = Number(paginateQuery.offset) || 1
 
-			let _posts = await Post.getLikeByPost(userId, req.user.id, offset, pageSize)
+			let _posts = await Post.getLikeByPost(
+				userId,
+				req.user.id,
+				offset,
+				pageSize
+			)
 
 			const totalPost = await Post.find({
 				like_by: userId,
