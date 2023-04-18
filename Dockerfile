@@ -2,7 +2,7 @@
 FROM node:16
 
 # cài đặt Yarn sử dụng npm
-# RUN npm install --global yarn
+RUN npm install --global yarn
 
 # thiết lập thư mục làm việc
 WORKDIR /app
