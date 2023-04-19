@@ -78,7 +78,6 @@ const UserSchema = new Schema({
 		type: Date,
 		default: null,
 	},
-	devices: [],
 	created_date: {
 		type: Date,
 		default: Date.now,

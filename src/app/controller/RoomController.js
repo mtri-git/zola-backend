@@ -1,6 +1,7 @@
 const Message = require('../../models/Message')
 const Room = require('../../models/Room')
 const User = require('../../models/User')
+const roomService = require('../../services/room.service')
 
 class RoomController {
 	// create new chat room need a list of member id
@@ -73,31 +74,42 @@ class RoomController {
 				if (room.users.includes(req.user.id)) {
 					const roomDoc = await Room.getRoomById(req.params.roomId)
 
-					res.status(200).json({ room: roomDoc })
-				} else res.status(401).json({ error: "Can't access this." })
+					return res.status(200).json({ room: roomDoc })
+				} else 
+				{
+					return res.status(401).json({ error: "Can't access this." })
+				}
 			} else {
-				res.status(401).json({ message: "Can't access this" })
+				return res.status(401).json({ message: "Can't access this" })
 			}
 		} catch (error) {
 			console.log(error)
-			res.status(500).json({ message: "Can't access this !" })
+			return res.status(500).json({ message: "Can't access this !" })
 		}
 	}
 
 	async getRoomByUserById(req, res) {
 		try {
-			let rooms = await Room.getRoomByUserId(req.user.id)
-			rooms = rooms.map((room) => {
-				if (room.last_message?.deleted_at) room.last_message = null
-				delete room.last_message?.deleted_at
-				return room
-			})
-			res.status(200).json({ Rooms: rooms })
+			const {limit, offset} = req.query
+			let rooms = await roomService.getRoomByUserId(req.user.id, offset, limit)
+			
+			return res.status(200).json({ Rooms: rooms })
 		} catch (err) {
 			console.log(err)
-			res.status(500).json('Fail')
+			return res.status(500).json('Fail')
 		}
 	}
+
+	async getRoomBasicInfo(req, res) {
+		try {
+			let room = await Room.findOne({ _id: req.params.roomId })
+			return res.status(200).json({ data: room })
+		} catch (error) {
+			console.log(error)
+			return res.status(500).json({ message: "Can't access this !" })
+		}
+	}
+
 
 	async getAllUserInRoom(req, res) {
 		try {

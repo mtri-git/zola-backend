@@ -1,8 +1,10 @@
 const mongoose = require('mongoose')
 
 const DeviceSchema = new mongoose.Schema({
-    device_id: { type: String, unique:true },
-    ip: String
+    fcm_token: { type: String, unique:true },
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    name: String,
+    ip: String,
 })
 
 const Device = mongoose.model('Device', DeviceSchema)

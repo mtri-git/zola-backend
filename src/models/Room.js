@@ -21,14 +21,27 @@ const RoomSchema = new mongoose.Schema({
 			ref: 'User',
 		},
 	],
-	last_message: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Message',
-	},
+	// last_message: {
+	// 	type: mongoose.Schema.Types.ObjectId,
+	// 	ref: 'Message',
+	// },
 	created_at: { type: Date, default: Date.now },
 	updated_at: Date,
 	deleted_at: {type: Date, default: null}
 })
+
+//virtual
+
+RoomSchema.virtual('last_message', {
+	ref: 'Message',
+	localField: '_id',
+	foreignField: 'roomId',
+	options: {
+	  sort: { created_at: -1 },
+	  limit: 1,
+	},
+  });
+  
 
 // statics
 RoomSchema.statics.getRoomById = function (id) {
@@ -41,11 +54,11 @@ RoomSchema.statics.getRoomById = function (id) {
 			path: 'created_by',
 			select: 'contact_info username fullname status avatarUrl',
 		})
-		.populate({
-			path: 'last_message',
-			select: 'sender content type created_at deleted_at',
-			populate: { path: 'sender', select: 'fullname -_id' },
-		})
+		// .populate({
+		// 	path: 'last_message',
+		// 	select: 'sender content type created_at deleted_at',
+		// 	populate: { path: 'sender', select: 'fullname -_id' },
+		// })
 		.lean()
 
 	if (room.last_message?.deleted_at) room.last_message = null

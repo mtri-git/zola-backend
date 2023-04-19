@@ -82,6 +82,7 @@ MessageSchema.query.byContentInRoom = function (roomId, search) {
 			deleted_at: null,
 		})
 			.select('-roomId')
+			.sort({ created_at: -1 })
 			.populate({
 				path: 'sender',
 				select: 'username status contact_info avatarUrl last_online -_id',
@@ -94,6 +95,7 @@ MessageSchema.query.byContentInRoom = function (roomId, search) {
 				path: 'attach_files',
 				select: 'resource_type format url',
 			})
+			
 }
 
 MessageSchema.statics.getLastMessageInRoom = function (roomId) {
