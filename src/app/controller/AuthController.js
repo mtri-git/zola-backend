@@ -6,9 +6,10 @@ const {
 	verifyToken,
 	generateAccessToken,
 } = require('../../utils/jwtHandle')
+const {DEFAULT_AVATAR} = require('../../utils/image.helper')
 const { generateUsername } = require('../../utils/genarateUsername')
 const redis = require('../../services/redis.service')
-const { CODE_SUCCESS, CODE_ERROR } = require('../../constants/serviceCode')
+const passport = require('../../services/google.service')
 
 require('dotenv/config')
 
@@ -80,16 +81,14 @@ class AuthController {
 				)
 				
 				console.log(redisResponse);
-
 				
-				if (redisResponse === CODE_ERROR) {
-					res.status(500).json({ error: 'Server error' })
-					return
+				if (redisResponse !== 'OK') {
+					return res.status(500).json({ error: 'Server error' })
 				}
 
 				
 				// console.log({ refresh: token.refreshToken })
-				res.cookie('refreshToken', token.refreshToken, {
+				return res.cookie('refreshToken', token.refreshToken, {
 					httpOnly: true,
 					sameSite: 'none',
 					// process.env.NODE_ENV === 'development' ? true : 'none',
@@ -105,7 +104,7 @@ class AuthController {
 					})
 					.end()
 			} else {
-				res.status(400).json({
+				return res.status(400).json({
 					message: 'Invalid Phone, Email, Username or Password',
 				})
 			}
@@ -118,7 +117,7 @@ class AuthController {
 	async logout(req, res) {
 		try {
 			const response = await redis.deleteRefreshToken(req.user.id)
-			if (response === CODE_SUCCESS) {
+			if (response) {
 				res.clearCookie('refreshToken')
 				return res.status(200).json({ message: 'Log out' }).end()
 			}
@@ -150,6 +149,7 @@ class AuthController {
 			user.birthday = new Date(user.birthday)
 			// gen username
 			user.username = generateUsername(user.fullname)
+			user.avatarUrl = DEFAULT_AVATAR
 
 			await user.save()
 			res.status(200).json({ message: 'Register successful' })
@@ -272,6 +272,20 @@ class AuthController {
 			res.status(500).json({ message: 'Error' })
 		}
 	}
+
+	googleLogin(req, res) {
+		return passport.authenticate('google', { scope: ['profile'] })
+	}
+
+	googleLoginCallback(req, res) {
+		return passport.authenticate('google', { failureRedirect: '/login' }),
+		function(req, res) {
+			// Successful authentication, redirect home.
+			res.redirect('/');
+		}
+	}
+
+
 }
 
 module.exports = new AuthController()

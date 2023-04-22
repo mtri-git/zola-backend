@@ -30,7 +30,9 @@ const MessageSchema = new mongoose.Schema({
 		ref: 'User',
 		required: true,
 	},
-	content: { type: String, required: true,  },
+	content: { type: String, required: function() {
+		return !this.attach_files || (this.attach_files && this.attach_files.length === 0);
+	  }  },
 	reply_to: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Message',
@@ -42,7 +44,7 @@ const MessageSchema = new mongoose.Schema({
 			ref: 'User',
 		}
 	],
-	type: {type: String, default: "message"},
+	type: {type: String, default: "message"}, // text, image, video, file
 	attach_files: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

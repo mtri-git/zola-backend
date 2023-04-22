@@ -1,39 +1,34 @@
 const cloudinary = require('../configs/cloudinary.config')
-const File = require('../models/File')
+const MessageFile = require('../models/MessageFile')
 
 const fs = require('fs')
 const { promisify } = require('util')
 
 const fileConfig = {
-	imageConfig: {
-		resource_type: 'image',
-		folder: 'zola_files/images',
-	},
 
-	videoConfig: {
-		resource_type: 'video',
-		folder: 'zola_files/videos',
-	},
+    imageConfig: {
+        resource_type: 'image',
+        folder: 'zola_files/images',
+        format: 'jpg',
+    },
 
-	audioConfig: {
-		resource_type: 'video',
-		folder: 'zola_files/audios',
-	},
+    videoConfig: {
+        resource_type: 'video',
+        folder: 'zola_files/videos',
+    },
 
-	otherConfig: {
-		resource_type: 'auto',
-		folder: 'zola_files/others',
-	},
+    audioConfig: {
+        resource_type: 'video',
+        folder: 'zola_files/audios',
+    },
+    
+    otherConfig: {
+        resource_type: 'auto',
+        folder: 'zola_files/others',
+    }
 }
 
-const addNewFile = async (
-	path,
-	type,
-	myFormat,
-	userId,
-	scope,
-	isFromPost = false
-) => {
+const addNewFile = async (path, type, myFormat, userId, scope, isFromPost = false) => {
 	try {
 		const config = (type, _format) => {
 			switch (type) {
@@ -43,15 +38,19 @@ const addNewFile = async (
 
 				case 'video':
 					return fileConfig.videoConfig
+					break
 
 				case 'audio':
 					return fileConfig.audioConfig
+					break
 
 				case 'other':
 					return fileConfig.otherConfig
+					break
 
 				default:
 					return fileConfig.otherConfig
+					break
 			}
 		}
 
@@ -68,18 +67,17 @@ const addNewFile = async (
 			data.result
 		const isPrivate = scope === 'private'
 		// console.log({ format, public_id ,resource_type, created_at, url })
-		const file = new File({
-			owner: userId,
+		const messageFile = new MessageFile({
+            roomId: roomId,
+			sender: userId,
 			public_id: public_id,
 			resource_type: resource_type,
 			format: format,
 			url: url,
-			isPrivate,
-			isFromPost: isFromPost,
 			created_at: created_at,
 		})
-		await file.save()
-		return file
+		await messageFile.save()
+		return messageFile
 	} catch (error) {
 		console.log('Add file: ', error.message)
 		return { result: 'error' }

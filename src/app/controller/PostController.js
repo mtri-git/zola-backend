@@ -1,6 +1,5 @@
 const Post = require('../../models/Post')
 const User = require('../../models/User')
-const Comment = require('../../models/Comment')
 const Notification = require('../../models/Notification')
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
 const { default: mongoose, Mongoose } = require('mongoose')

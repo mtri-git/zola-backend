@@ -4,6 +4,8 @@ const router = express.Router()
 const authController = require('../../app/controller/AuthController')
 const authMiddleware = require('../../middleware/auth.middleware')
 
+router.get('/google', authController.googleLogin)
+router.get('/google/callback', authController.googleLoginCallback)
 router.post('/login', authController.login)
 router.post('/verify-user', authController.isUserExisted)
 router.post('/register', authController.register)

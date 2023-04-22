@@ -40,6 +40,7 @@ const server = http.createServer(app)
 
 // create socket.io instance and attach it to the global object and config
 global.io = socketIo(server);
+
 configureSocketIO(io);
 
 server.on('error', errorHandler)

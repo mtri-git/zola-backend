@@ -1,5 +1,4 @@
 const { verifyToken } = require('../utils/jwtHandle')
-const redis = require('../services/redis.service')
 
 const authMiddleware = async (req, res, next) => {
 	let header = req.header('Authorization')

@@ -14,6 +14,9 @@ router.delete('/recall', authMiddleware, messageController.recallMessage)
 // create a new message
 router.post('/send', upload.array("attach_files") ,authMiddleware, messageController.sendMessage)
 
+// create a new message
+router.post('/send-file', upload.array("attach_files") ,authMiddleware, messageController.sendFileMessage)
+
 // react to message with body messageId=....
 router.patch('/reaction/:messageId', authMiddleware, messageController.addReaction)
 

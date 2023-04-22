@@ -1,49 +1,93 @@
 const Message = require('../../models/Message')
 const Room = require('../../models/Room')
+const User = require('../../models/User')
 const cloudinary = require('../../configs/cloudinary.config')
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
+
+const messageDataConfig = {
+	image: {
+	  maxFiles: 10,
+	  acceptedTypes: ['image']
+	},
+	video: {
+	  maxFiles: 1,
+	  acceptedTypes: ['video']
+	},
+	audio: {
+	  maxFiles: 1,
+	  acceptedTypes: ['audio']
+	},
+	file: {
+	  maxFiles: 1,
+	  acceptedTypes: ['file']
+	}
+  };
 
 class MessageController {
 	async sendMessage(req, res) {
 		try {
 			let {roomId ,content, nanoid} = req.body
 			let messageData = {roomId, content, nanoid}
-			const attach_files = req.files
 
-			if (!attach_files) {
-				const message = new Message({
-					...messageData,
-					reaction: [],
-					seen_by: [],
-					deleted_at: null,
-					sender: req.user.id,
-				})
-				await message.save()
-				await Room.updateOne(
-					{ _id: message.roomId },
-					{ $set: { last_message: message._id } }
-				)
-				return res
-					.status(201)
-					.json({ message: 'Send message successfully' })
+			const message = new Message({ ...messageData, sender: req.user.id})
+			await message.save()
+
+			res.status(200).json({ message: 'Send message successfully' })
+		} catch (err) {
+			console.log('Send message: ', err)
+			res.status(500).json({ message: 'Error' })
+		}
+	}
+
+	async sendFileMessage(req, res) {
+		try {
+			let {roomId ,content, nanoid, type} = req.body
+			let messageData = {roomId, content, nanoid, type}
+			const req_attach_files = req.files
+
+			// check file type
+			const messageDataType = messageDataConfig[messageData.type];
+
+			if (!messageDataType) {
+			return res.status(400).json({ message: 'Invalid message type' });
 			}
+
+			const { maxFiles, acceptedTypes } = messageDataType;
+
+			const isAcceptedType = req_attach_files.every(file => acceptedTypes.includes(file.mimetype.split('/')[0]));
+
+			if (!isAcceptedType) {
+			return res.status(400).json({ message: `Type is ${messageData.type} but attach_files is not ${acceptedTypes.join('/')}` });
+			}
+
+			if (req_attach_files.length > maxFiles) {
+			return res.status(400).json({ message: `Max ${maxFiles} ${messageData.type} files` });
+			}
+
+			// upload file to cloudinary
 			let uploadData = []
-			for (let i = 0; i < attach_files.length; i++) {
+			for (let i = 0; i < req_attach_files.length; i++) {
 				const data = await addNewFile(
-					attach_files[i].path,
-					attach_files[i].mimetype.split('/')[0],
+					req_attach_files[i].path,
+					req_attach_files[i].mimetype.split('/')[0],
 					req.user.id
 				)
 				uploadData.push(data._id.toString())
 			}
 
 			// delete temp file from server after upload
-			for (let i = 0; i < attach_files.length; i++) {
-					await unlinkAsync(attach_files[i].path)
+			for (let i = 0; i < req_attach_files.length; i++) {
+					await unlinkAsync(req_attach_files[i].path)
 			}
 			messageData.attach_files = uploadData
-			const message = new Message({ ...messageData, sender: req.user.id, type: "media" })
+			const message = new Message({ ...messageData, sender: req.user.id, type })
 			await message.save()
+
+			// send message to room with socket
+			const {attach_files, created_at, seen_by, sender, reply_to} = message
+			const senderInfo = await User.findById(sender).select('fullname avatar')
+
+			global.io.to(roomId).emit('send_message', {message: attach_files[0].url, type, sender: senderInfo, reply_to})
 
 			res.status(200).json({ message: 'Send message successfully' })
 		} catch (err) {
