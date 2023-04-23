@@ -18,7 +18,11 @@ function configureSocketIO(io) {
         socket.on('send_message', async(data) => {
           console.log(data);
           const { roomId, userId, message, nanoid } = data;
-          io.to(roomId).emit('receive_message', data);
+          
+          io.to(roomId).emit('receive_message', data => {
+            console.log('receive message')
+          })
+
           const messageData = {nanoid, roomId, content: message, sender: userId}
 
           // save message to db

@@ -8,6 +8,7 @@ const path = require('path')
 const route = require('./routers')
 const db = require('./configs/db/db.config')
 const redis = require('./services/redis.service')
+const admin_firebase = require('./services/firebase.service')
 
 const app = express()
 
@@ -25,9 +26,6 @@ app.use(
 	})
 )
 
-// app.use(
-// 	cors()
-// )
 
 // log morgan
 app.use(morgan("default"))
@@ -41,6 +39,10 @@ app.use(morgan("default"))
 // } else {
 // 	app.use(morgan('dev')) //log to console on development
 // }
+
+// Firebase init
+admin_firebase.init()
+
 
 // Connect db
 db.connect()

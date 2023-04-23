@@ -1,7 +1,8 @@
 const http = require('http')
 const app = require('./app')
 const socketIo = require('socket.io');
-const configureSocketIO = require('./configs/socket.config');
+const configureSocketIO = require('./configs/socket.config')
+const {initSocket} = require('./configs/socket2.config')
 
 const normalizePort = (val) => {
 	const port = parseInt(val, 10)
@@ -39,9 +40,11 @@ const errorHandler = (error) => {
 const server = http.createServer(app)
 
 // create socket.io instance and attach it to the global object and config
-global.io = socketIo(server);
+// global._io = socketIo(server);
 
-configureSocketIO(io);
+// configureSocketIO(global._io);
+
+initSocket(server)
 
 server.on('error', errorHandler)
 server.on('listening', () => {

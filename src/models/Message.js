@@ -100,15 +100,6 @@ MessageSchema.query.byContentInRoom = function (roomId, search) {
 			
 }
 
-MessageSchema.statics.getLastMessageInRoom = function (roomId) {
-	return this.where({
-		roomId: roomId,
-	})
-		.sort({ created_at: -1 })
-		.limit(1)
-		.select('content sender type seen_by')
-		.lean()
-}
 
 const Message = mongoose.model('Message', MessageSchema)
 module.exports = Message

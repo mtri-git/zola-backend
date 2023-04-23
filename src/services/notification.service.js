@@ -1,3 +1,4 @@
+const { deleteNotification } = require('../app/controller/NotificationController')
 const Notification = require('../models/Notification')
 
 class NotificationService{
@@ -21,6 +22,14 @@ class NotificationService{
         }
     }
 
+    async readAllNotification(receiver){
+        try {
+            await Notification.updateMany({receiver: receiver}, {isRead: true})
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async getAllNotification(receiver){
         try {
             const notification = await Notification.find({receiver: receiver}).populate('author', 'username avatarUrl').populate('postId', 'content')
@@ -31,6 +40,32 @@ class NotificationService{
             return null
         }
     }
+
+    async countUnreadNotification(receiver){
+        try {
+            return await Notification.countDocuments({receiver: receiver, isRead: false})
+        } catch (error) {
+            console.log(error)
+            return 0
+        }
+    }
+
+    async deleteNotification(id){
+        try {
+            await Notification.deleteOne({_id: id})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async deleteAllNotification(receiver){
+        try {
+            await Notification.deleteMany({receiver: receiver})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
 }
 

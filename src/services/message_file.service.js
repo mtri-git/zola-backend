@@ -28,7 +28,7 @@ const fileConfig = {
     }
 }
 
-const addNewFile = async (path, type, myFormat, userId, scope, isFromPost = false) => {
+const addNewMessageFile = async (path, type, myFormat, userId, roomId) => {
 	try {
 		const config = (type, _format) => {
 			switch (type) {
@@ -65,7 +65,6 @@ const addNewFile = async (path, type, myFormat, userId, scope, isFromPost = fals
 
 		const { format, public_id, resource_type, created_at, url } =
 			data.result
-		const isPrivate = scope === 'private'
 		// console.log({ format, public_id ,resource_type, created_at, url })
 		const messageFile = new MessageFile({
             roomId: roomId,
@@ -86,4 +85,4 @@ const addNewFile = async (path, type, myFormat, userId, scope, isFromPost = fals
 
 const unlinkAsync = promisify(fs.unlink)
 
-module.exports = { addNewFile, unlinkAsync }
+module.exports = { addNewMessageFile, unlinkAsync }
