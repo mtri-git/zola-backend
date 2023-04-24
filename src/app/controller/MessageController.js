@@ -57,19 +57,19 @@ class MessageController {
 
 			const { maxFiles, acceptedTypes } = messageDataType
 
-			const isAcceptedType = req_attach_files.every((file) =>
-				acceptedTypes.includes(file.mimetype.split('/')[0])
-			)
+			// const isAcceptedType = req_attach_files.every((file) =>
+			// 	acceptedTypes.includes(file.mimetype.split('/')[0])
+			// )
 
-			if (!isAcceptedType) {
-				return res
-					.status(400)
-					.json({
-						message: `Type is ${
-							messageData.type
-						} but attach_files is not ${acceptedTypes.join('/')}`,
-					})
-			}
+			// if (!isAcceptedType) {
+			// 	return res
+			// 		.status(400)
+			// 		.json({
+			// 			message: `Type is ${
+			// 				messageData.type
+			// 			} but attach_files is not ${acceptedTypes.join('/')}`,
+			// 		})
+			// }
 
 			if (req_attach_files.length > maxFiles) {
 				return res
@@ -115,13 +115,9 @@ class MessageController {
 			.populate({
 				path: 'attach_files',
 				select: 'resource_type format url',
-			})
+			}).lean()
 
-			// send message to room with socket
-			// const {attach_files, created_at, seen_by, sender, reply_to} = message
-			// const senderInfo = await User.findById(sender).select('fullname avatar')
-
-			// global.io.to(roomId).emit('send_message', {message: attach_files[0].url, type, sender: senderInfo, reply_to})
+			result.messageType = "sender"
 
 			res.status(200).json({ data: result })
 		} catch (err) {

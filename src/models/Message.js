@@ -48,7 +48,7 @@ const MessageSchema = new mongoose.Schema({
 	attach_files: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'File',
+			ref: 'MessageFile',
 		},
 	],
 	created_at: {

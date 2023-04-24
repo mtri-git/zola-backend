@@ -1,5 +1,6 @@
 const socketIo = require('socket.io');
-
+const Message = require('../models/Message');
+const Room = require('../models/Room');
 let io;
 
 function getIo() {
