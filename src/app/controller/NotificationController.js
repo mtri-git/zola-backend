@@ -87,6 +87,7 @@ class NotificationController {
 				title: 'Push noti!',
 				body: 'A new weather warning has been issued for your location.',
 				imageUrl: 'https://picsum.photos/200',
+				postId: '123',
 			})
 
 			return res.status(200).json({ message: 'Success' })

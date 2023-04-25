@@ -1,9 +1,12 @@
 const Post = require('../../models/Post')
 const User = require('../../models/User')
 const Notification = require('../../models/Notification')
+const File = require('../../models/File')
+const Device = require('../../models/Device')
+
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
 const { default: mongoose, Mongoose } = require('mongoose')
-const File = require('../../models/File')
+const { sendPushNotification } = require('../../services/firebase.service')
 
 class PostController {
 	// get a post
@@ -14,10 +17,10 @@ class PostController {
 			post._doc.isLike = post.like_by.some(
 				(element) => element.username === _user.username
 			)
-			
+
 			post._doc.totalLike = post.like_by.length
 			post._doc.totalComment = post.comments.length
-			
+
 			res.status(200).json({ data: post.toObject() })
 		} catch (err) {
 			console.log(err.message)
@@ -216,7 +219,9 @@ class PostController {
 			const noNotification = new Set(user.not_notification)
 
 			// get list user that will receive notification
-			const notificationUser = user.follower.filter(user => !noNotification.has(user.toString()))
+			const notificationUser = user.follower.filter(
+				(user) => !noNotification.has(user.toString())
+			)
 
 			await Promise.all(
 				notificationUser.map((follower) => {
@@ -229,6 +234,20 @@ class PostController {
 					})
 				})
 			)
+
+			// send push notification to device
+			const devices = await Device.find({
+				owner: { $in: notificationUser },
+			})
+
+			const deviceTokens = devices.map((device) => device.fcm_token)
+			if(deviceTokens.length > 0)
+				await sendPushNotification({
+					tokens: deviceTokens,
+					title: `${user.username}`,
+					body: 'đã đăng bài viết mới',
+					postId: post._id.toString(),
+				})
 
 			return res.status(201).json({ message: 'Add a post successful' })
 		} catch (err) {
