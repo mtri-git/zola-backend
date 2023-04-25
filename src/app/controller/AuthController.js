@@ -1,4 +1,5 @@
 const User = require('../../models/User')
+const Device = require('../../models/Device')
 const bcrypt = require('bcrypt')
 const { sendMail } = require('../../utils/mailHandler')
 const {
@@ -79,14 +80,16 @@ class AuthController {
 					id,
 					token.refreshToken
 				)
-				
-				console.log(redisResponse);
+			
 				
 				if (redisResponse !== 'OK') {
 					return res.status(500).json({ error: 'Server error' })
 				}
 
-				
+
+				// add new device to user
+				await Device.create({name: req.body.deviceName, owner: user.id, fcm_token: req.body.fcm_token})
+
 				// console.log({ refresh: token.refreshToken })
 				return res.cookie('refreshToken', token.refreshToken, {
 					httpOnly: true,

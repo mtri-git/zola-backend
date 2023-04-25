@@ -82,7 +82,7 @@ class NotificationController {
 			await sendPushNotification({
 				tokens: [
 					'dV04mucSTSiu_wF6kCjbwo:APA91bH1TCftVlDRz97z2C4mBn3TQb6h9QQKaqbNgQcwJbjzH_99HXqmaPODjDrXBFq8sICNptGyExoxfF2JM4qjc0EnqHclj7FM9KKmY3cXItG3BxHKg5tHzi9WrIEhhJ3Zfd202eUP',
-                    'euA7ZgzVC3gCUW-l2Fbclq:APA91bEW64BOiVUphlovZpTOo8WMIPmcn3a_K7h7NhmZ5OLcl66f5rrJHa9zLzEl1JxPFSNyLjAynDqBPEggVSnkz4y_WffGiaXa8CCwFpvWLytwUFDXk_3maL592OJ0lFVRSoiAnXBi'
+                    'dZa9DuzhRiWa56RBh9g3HV:APA91bGJ7kXUaFBVAn72GxmKqStn2owIEmcof5et0NJSDZ5ri1wM_-MrGKkhr5x0Tv1AYryAaV5EeHHsvgcXWOnF8vKrdRtCyRfVb3foSeWIzTZj0x-tgb5My06ADYJX5954Amjk4A82'
 				],
 				title: 'Push noti!',
 				body: 'A new weather warning has been issued for your location.',

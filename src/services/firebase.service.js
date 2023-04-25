@@ -18,6 +18,14 @@ const sendPushNotification = async({tokens, title, body, imageUrl}) => {
         body: body,
         imageUrl: imageUrl,
         },
+        data: {
+            "click_action": "FLUTTER_NOTIFICATION_CLICK",
+            "sound": "default", 
+            "status": "done",
+            "id": "64469fad1e2dbfa92193b0be",
+            "type": "post",
+            "screen": "/notification/",
+        }
     })
 }
 

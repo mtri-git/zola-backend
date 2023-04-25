@@ -1,7 +1,7 @@
 const Room = require('../models/Room')
 const User = require('../models/User')
 
-class NotificationService {
+class RoomService {
 	async createRoom(roomData) {
 		try {
 			const room = new Room(roomData)
@@ -105,4 +105,4 @@ class NotificationService {
 	}
 }
 
-module.exports = new NotificationService()
+module.exports = new RoomService()

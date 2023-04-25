@@ -1,4 +1,3 @@
-const { deleteNotification } = require('../app/controller/NotificationController')
 const Notification = require('../models/Notification')
 
 class NotificationService{
