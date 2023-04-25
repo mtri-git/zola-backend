@@ -28,7 +28,7 @@ const notificationSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: 86400 
+    // expires: 86400 
     // expire after 2 months
   }
 });

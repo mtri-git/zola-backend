@@ -22,6 +22,14 @@ class NotificationService{
         }
     }
 
+    async countUnreadNotification(receiver){
+        try {
+            return await Notification.countDocuments({receiver: receiver, isRead: false})
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async readAllNotification(receiver){
         try {
             await Notification.updateMany({receiver: receiver}, {isRead: true})
@@ -32,7 +40,9 @@ class NotificationService{
 
     async getAllNotification(receiver){
         try {
-            const notification = await Notification.find({receiver: receiver}).populate('author', 'username avatarUrl').populate('postId', 'content')
+            const notification = await Notification.find({receiver: receiver})
+            .populate('author', 'username avatarUrl').populate('postId', 'content')
+            .sort({createdAt: -1})
             return notification
             
         } catch (error) {

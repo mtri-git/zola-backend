@@ -7,6 +7,8 @@ router.get('/', authMiddleware ,notificationController.getAllNotification)
 
 router.get('/unread', authMiddleware ,notificationController.getUnreadNotification)
 
+router.get('/count-unread', authMiddleware ,notificationController.countUnreadNotification)
+
 router.patch('/read-all', authMiddleware ,notificationController.readAllNotification)
 
 router.patch('/read/:id', authMiddleware ,notificationController.readNotification)

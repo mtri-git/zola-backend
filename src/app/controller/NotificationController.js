@@ -15,6 +15,17 @@ class NotificationController {
 		}
 	}
 
+	async countUnreadNotification(req, res) {
+		try {
+			const count = await NotificationService.countUnreadNotification(req.user.id)
+			return res.status(200).json({ data: count })
+			
+		} catch (error) {
+			console.log(error)
+			return res.status(500).json({ message: 'Error' })
+		}
+	}
+
 	async getUnreadNotification(req, res) {
 		try {
 			const count = await NotificationService.countUnreadNotification(

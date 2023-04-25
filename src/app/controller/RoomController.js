@@ -176,6 +176,18 @@ class RoomController {
 			res.status(500).json({ Error: err })
 		}
 	}
+
+	// get chat group that user is in
+	async getChatGroupByUserId(req, res) {
+		try {
+			const data = await Room.find({ users: req.user.id  , isRoom: true, deleted_at: null }, 'name users createdAt isRoom updatedAt')
+			.populate('users', 'fullname username avatarUrl')
+			return res.status(200).json({ data })
+		} catch (error) {
+			console.log(error)
+			return res.status(500).json({ message: 'Server error' })
+		}
+	}
 }
 
 module.exports = new RoomController()

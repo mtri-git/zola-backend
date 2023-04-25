@@ -9,6 +9,9 @@ router.post('/create', authMiddleware, roomController.createRoom)
 //get all chat room from a user
 router.get('/', authMiddleware, roomController.getRoomByUserById)
 
+//get all chat group that user is in
+router.get('/group', authMiddleware, roomController.getChatGroupByUserId)
+
 // get all user from a chat room with query roomId
 router.get('/user', authMiddleware, roomController.getAllUserInRoom)
 
