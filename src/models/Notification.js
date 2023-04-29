@@ -11,7 +11,8 @@ const notificationSchema = new mongoose.Schema({
   },
   postId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Post'
+    ref: 'Post',
+    required: () => this.type === 'post' || this.type === 'like'
   },
   type: {
     type: String,

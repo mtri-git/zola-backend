@@ -31,4 +31,25 @@ const sendPushNotification = async({tokens, title, body, postId}) => {
     }
 }
 
-module.exports = {init, sendPushNotification}
+const sendCallToMobile = async({tokens, data}) => {
+    try {
+        await admin.messaging().sendMulticast({
+            tokens,
+            data: {
+                "sound": "default", 
+                "type": "call",
+                ...data
+            },
+            options: {
+                "priority": "high",
+                "timeToLive": 60 * 60 * 24
+              },
+        })
+        
+    } catch (error) {
+        console.log(error);    
+    }
+
+}
+
+module.exports = {init, sendPushNotification, sendCallToMobile}
