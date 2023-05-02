@@ -17,7 +17,7 @@ router.delete('/delete-all', authMiddleware ,notificationController.deleteAllNot
 
 router.delete('/delete/:id', authMiddleware ,notificationController.deleteNotification)
 
-router.post('/call', authMiddleware ,notificationController.startVideoCallFromMobile)
+router.post('/call/:id', authMiddleware ,notificationController.startVideoCallFromMobile)
 
 router.post('/test' ,notificationController.testNotificationFirebase)
 

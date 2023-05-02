@@ -1,6 +1,12 @@
+require('dotenv/config')
+const util = require('util')
+// solution from https://github.com/node-fetch/node-fetch/blob/HEAD/docs/v3-UPGRADE-GUIDE.md
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const admin = require("firebase-admin");
+const User = require("../models/User")
 
 var serviceAccount = require("../configs/firebase/zola-firebase-firebase-adminsdk-rjq2h-87c2c684f4.json");
+const { getAgoraToken } = require('./agora.service');
 
 const init = () => {
     admin.initializeApp({
@@ -31,23 +37,37 @@ const sendPushNotification = async({tokens, title, body, postId}) => {
     }
 }
 
-const sendCallToMobile = async({tokens, data}) => {
+const sendCallToMobile = async({userId, tokens, roomId}) => {
     try {
+        console.log(userId);
+        const  userInfo = await User.findById(userId)
+
+        const callToken = getAgoraToken(roomId, 1)
+
+        const receiverToken = getAgoraToken(roomId, 2)
+
+        console.log(`${callToken} \n ${receiverToken}`);
+
         await admin.messaging().sendMulticast({
             tokens,
             data: {
                 "sound": "default", 
                 "type": "call",
-                ...data
+                "avatar": userInfo.avatarUrl,
+                "fullname": userInfo.fullname,
+                "roomName": roomId,
+                "token": receiverToken,
             },
             options: {
                 "priority": "high",
-                "timeToLive": 60 * 60 * 24
+                "timeToLive": 60 * 60 * 3
               },
         })
+        return callToken
         
     } catch (error) {
         console.log(error);    
+        return null
     }
 
 }
