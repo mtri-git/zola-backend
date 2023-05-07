@@ -20,7 +20,7 @@ class UserController {
 			const query = req.query
 			const users = await User.find({
 				$text: { $search: query.search },
-			}).select('-password -devices -deleted_at')
+			}).select('-password -devices -deleted_at -not_notification -blocked_users')
 
 			const data = users.map((user) => {
 				user._doc.isFollowing = user.follower.includes(req.user.id)

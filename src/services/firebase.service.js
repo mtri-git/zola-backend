@@ -63,7 +63,7 @@ const sendCallToMobile = async({userId, tokens, roomId}) => {
                 "timeToLive": 60 * 60 * 3
               },
         })
-        return callToken
+        return {callToken, receiverToken}
         
     } catch (error) {
         console.log(error);    
