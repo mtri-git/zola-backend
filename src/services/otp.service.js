@@ -23,7 +23,7 @@ const verifyOtp = async (OTP , data) => {
     try {
         const otp = await Otp.findOne(data)
         console.log(otp)
-        const verify = await bcrypt.compare(OTP, otp.otp.toString())
+        const verify = bcrypt.compare(OTP, otp.otp)
         return verify
     } catch (error) {
         console.log('Error', error)

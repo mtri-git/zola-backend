@@ -15,6 +15,17 @@ class OtpController {
 			const { email, phone } = req.body
 			let isExistedUser = false
 
+			// validate email or phone
+			var emailFormat = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+			if ( !(email !== '' && email.match(emailFormat))) {
+				return res.status(400).json({ message: 'Email is invalid' })
+			}
+
+			// var phoneFormat = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/
+			// if ( !( email == '' && phone !== '' && phone.match(phoneFormat))) {
+			// 	return res.status(400).json({ message: 'Phone is invalid' })
+			// }
+
 			if (email)
 				isExistedUser = await User.exists({email: email})
 
@@ -23,11 +34,11 @@ class OtpController {
 
 			if (isExistedUser) {
 				if (email) {
-					res.status(400).json({ message: 'This email is used' })
+					res.status(400).json({ message: 'This email have already used' })
 					return
 				}
 				if (phone) {
-					res.status(400).json({ message: 'This phone is used' })
+					res.status(400).json({ message: 'This phone have already used' })
 					return
 				}
 			}
@@ -75,7 +86,7 @@ class OtpController {
 				$or: [{ email }, { phone }],
 			})
 
-			const verify = await bcrypt.compare(req.body.otp, otp.otp)
+			const verify = bcrypt.compare(req.body.otp, otp.otp)
 			const verify2 = await otpService.verifyOtp(
 				req.body.otp,
 				{ email } || { phone }

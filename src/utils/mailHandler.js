@@ -3,23 +3,28 @@ const mailConfig = require('../configs/mail.config')
 require('dotenv/config')
 
 const sendMail = (to, subject, otp) => {
-	const transport = nodeMailer.createTransport({
-		host: mailConfig.HOST,
-		port: mailConfig.PORT,
-		secure: false,
-		auth: {
-			user: mailConfig.USERNAME,
-			pass: mailConfig.PASSWORD,
-		},
-	})
-
-	const options = {
-		from: mailConfig.FROM_ADDRESS,
-		to: to,
-		subject: subject,
-		html: otpTemplate('Zola', otp),
+	try {
+		const transport = nodeMailer.createTransport({
+			host: mailConfig.HOST,
+			port: mailConfig.PORT,
+			secure: false,
+			auth: {
+				user: mailConfig.USERNAME,
+				pass: mailConfig.PASSWORD,
+			},
+		})
+	
+		const options = {
+			from: mailConfig.FROM_ADDRESS,
+			to: to,
+			subject: subject,
+			html: otpTemplate('Zola', otp),
+		}
+		return transport.sendMail(options)	
+	} catch (error) {
+		throw new Error(error)
 	}
-	return transport.sendMail(options)
+	
 }
 
 const otpTemplate = (appName, OTP) => {
