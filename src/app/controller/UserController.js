@@ -19,7 +19,11 @@ class UserController {
 		try {
 			const query = req.query
 			const users = await User.find({
-				$text: { $search: query.search },
+				$search: {
+					text: {
+						query: query.search,
+					  }
+				},
 			}).select('-password -devices -deleted_at -not_notification -blocked_users')
 
 			const data = users.map((user) => {
