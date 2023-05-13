@@ -25,16 +25,16 @@ function initSocket(server) {
 			console.log(data)
 			const { roomId, userId, message, nanoid } = data
 			io.to(roomId).emit('receive_message', data)
-			const messageData = {
-				nanoid,
-				roomId,
-				content: message,
-				sender: userId,
-			}
-
+      
 			// save message to db
 			if ((type = 'text')) {
-				const _message = new Message({
+        const messageData = {
+          nanoid,
+          roomId,
+          content: message,
+          sender: userId,
+        }
+        const _message = new Message({
 					...messageData,
 					reaction: [],
 					seen_by: [],
