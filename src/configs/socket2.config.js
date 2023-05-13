@@ -23,7 +23,7 @@ function initSocket(server) {
 
 		socket.on('send_message', async (data) => {
 			console.log(data)
-			const { roomId, userId, message, nanoid } = data
+			const { roomId, userId, message, nanoid, type } = data
 			io.to(roomId).emit('receive_message', data)
       
 			// save message to db
