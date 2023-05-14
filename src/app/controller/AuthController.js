@@ -121,9 +121,16 @@ class AuthController {
 		try {
 			const response = await redis.deleteRefreshToken(req.user.id)
 			if (response) {
+				// Delete device
+				if(req.body.fcm_token)
+					await Device.deleteOne({owner: req.user.id, fcm_token: req.body.fcm_token})
+
 				res.clearCookie('refreshToken')
 				return res.status(200).json({ message: 'Log out' }).end()
 			}
+
+
+
 			return res.status(400).json({ message: 'Error' })
 		} catch (error) {
 			console.log('Log out: ', error)

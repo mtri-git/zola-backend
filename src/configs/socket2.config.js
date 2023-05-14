@@ -23,24 +23,28 @@ function initSocket(server) {
 
     
     socket.on('send_message', async(data) => {
-      console.log(data);
-      const { roomId, userId, message, nanoid } = data;
-      io.to(roomId).emit('receive_message', data);
-      const messageData = {nanoid, roomId, content: message, sender: userId}
 
+      const { roomId, userId, message, nanoid, type } = data;
+      console.log('send_message', data)
+      const messageData = {nanoid, roomId, content: message, sender: userId}
       // save message to db
-      const _message = new Message({
-        ...messageData,
-        reaction: [],
-        seen_by: [],
-        deleted_at: null,
-      })
-      await _message.save()
-      await Room.updateOne(
-        { _id: message.roomId },
-        { $set: { last_message: message._id } }
-      )
+      if (type === 'text') {
+        const _message = new Message({
+          ...messageData,
+          reaction: [],
+          seen_by: [],
+          deleted_at: null,
+        })
+        await _message.save()
+        await Room.updateOne(
+          { _id: message.roomId },
+          { $set: { last_message: message._id } }
+        )
+      }
+      io.to(roomId).emit('receive_message', data);
+      
     });
+
 
     socket.on('typing', (data) => {
       console.log('typing')
