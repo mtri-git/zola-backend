@@ -101,7 +101,7 @@ class RoomController {
 
 	async getRoomBasicInfo(req, res) {
 		try {
-			let room = await Room.findOne({ _id: req.params.roomId })
+			let room = await Room.findOne({ _id: req.params.roomId, deleted_at: null })
 			return res.status(200).json({ data: room })
 		} catch (error) {
 			console.log(error)

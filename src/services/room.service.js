@@ -95,6 +95,13 @@ class RoomService {
 			  for (let i = 0; i < room.length; i++) {
 				room[i].users = room[i].users_info
 				delete room[i].users_info
+				if (!room[i].hasOwnProperty("last_message") ) {
+					room[i].last_message = {
+						content: "Chưa có tin nhắn nào",
+						type: "message",
+						created_at: room[i].created_at
+					}
+				}
 			  }
 
 			return room
