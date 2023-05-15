@@ -86,7 +86,7 @@ class RoomService {
 							// users: 0
 						},
 					},
-					{ $sort: { "last_message.created_at": -1 } },
+					{ $sort: { updated_at: -1, } },
 					// { $skip: offset },
 					// { $limit: limit },
 			  ])

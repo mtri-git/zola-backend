@@ -26,7 +26,7 @@ const RoomSchema = new mongoose.Schema({
 	// 	ref: 'Message',
 	// },
 	created_at: { type: Date, default: Date.now },
-	updated_at: Date,
+	updated_at: { type: Date, default: Date.now },
 	deleted_at: {type: Date, default: null}
 })
 
