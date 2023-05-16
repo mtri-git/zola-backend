@@ -10,6 +10,11 @@ const CommentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    parent_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+    }
+    ,
     reply_to:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'

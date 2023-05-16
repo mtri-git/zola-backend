@@ -23,7 +23,7 @@ const RoomSchema = new mongoose.Schema({
 	],
 	// last_message: {
 	// 	type: mongoose.Schema.Types.ObjectId,
-	// 	ref: 'Message',
+	// 	ref: 'Message',`
 	// },
 	created_at: { type: Date, default: Date.now },
 	updated_at: { type: Date, default: Date.now },

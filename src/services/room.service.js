@@ -61,9 +61,16 @@ class RoomService {
 				// add sender fullname to last message
 				{
 					$addFields: {
-					"last_message.sender_fullname": {
-						$ifNull: [{$arrayElemAt: ["$sender_info.fullname", 0]}, null]
-					}
+						"last_message.sender_fullname": {
+							$ifNull: [{$arrayElemAt: ["$sender_info.fullname", 0]}, null]
+						},
+						timestamp: {
+							$cond: {
+								if: { $eq: ["$last_message", null] },
+								then: "$last_message.created_at",
+								else: "$created_at"
+							}
+						}
 					}
 				},
 					{ $unwind: { path: "$last_message", preserveNullAndEmptyArrays: true } },
@@ -76,6 +83,7 @@ class RoomService {
 							admin: 1,
 							created_at: 1,
 							updated_at: 1,
+							timestamp: 1,
 							"last_message.content": 1,
 							"last_message.type": 1,
 							"last_message.created_at": 1,
@@ -86,7 +94,7 @@ class RoomService {
 							// users: 0
 						},
 					},
-					{ $sort: { updated_at: -1, } },
+					{ $sort: {timestamp: -1}  },
 					// { $skip: offset },
 					// { $limit: limit },
 			  ])

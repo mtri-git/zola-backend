@@ -1,6 +1,7 @@
 const Post = require('../../models/Post')
 const Comment = require('../../models/Comment')
 const User = require('../../models/User')
+const { post } = require('../../routers/common.routes/comment.route')
 
 class CommentController {
 	// get a comment
@@ -20,14 +21,25 @@ class CommentController {
 	// Add a comment
 	async createComment(req, res) {
 		try {
-			const { postId, content, reply_to } = req.body
+			const { postId, content, reply_to, parent_id } = req.body
 			const isExistPost = await Post.exists({ _id: postId })
+
+			if (!content) {
+				return res.status(400).json({ message: 'Content is required' })
+			}
+
+			if( !reply_to ^ !parent_id ){ 
+				//XOR if reply_to is null then parent_id is not null is not valid
+				// if both are null or both are not null is valid for a comment (parent comment or reply comment)
+				return res.status(400).json({ message: 'reply_to and parent_id are required' })
+			}
 
 			if (isExistPost) {
 				const comment = new Comment({
 					postId,
 					content,
 					reply_to,
+					parent_id,
 					author: req.user.id,
 				})
 				await comment.save()

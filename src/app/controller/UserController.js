@@ -140,6 +140,7 @@ class UserController {
 				username: req.query.username,
 			})
 
+
 			if (isExisted)
 				return res.status(200).json({ message: 'username is existed' })
 			return res.status(200).json({ message: 'username is valid' })
