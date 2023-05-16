@@ -71,7 +71,7 @@ class RoomService {
 					$addFields: {
 						timestamp: {
 							$cond: {
-								if: { $ne: ["$last_message._id", null] },
+								if: { $eq: ["$last_message.sender_fullname", null] },
 								then: "$last_message.created_at",
 								else: "$created_at"
 							}
