@@ -17,7 +17,7 @@ class RoomService {
 		try {
 			const user = await User.findById(userId)
 			const room = await Room.aggregate([
-			    { $match: { users: user._id, deleted_at: null } },
+			    { $match: { users: user._id, deleted_at: null, created_at: { $exists: true } } },
 			    {
 			      $lookup: {
 			        from: "messages",
@@ -71,9 +71,16 @@ class RoomService {
 					$addFields: {
 						timestamp: {
 							$cond: {
-								if: { $eq: ["$last_message.sender_fullname", null] },
-								then: "$last_message.created_at",
-								else: "$created_at"
+								if: { $ne: ["$last_message", null] },
+								then: {
+								  $toDate: {
+									$ifNull: [
+									  { $arrayElemAt: ["$last_message.created_at", 0] },
+									  "$created_at"
+									]
+								  }
+								},
+								else: { $toDate: "$created_at" }
 							}
 						}
 					}
