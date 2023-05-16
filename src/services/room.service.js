@@ -64,9 +64,14 @@ class RoomService {
 						"last_message.sender_fullname": {
 							$ifNull: [{$arrayElemAt: ["$sender_info.fullname", 0]}, null]
 						},
+					}
+				},
+
+				{
+					$addFields: {
 						timestamp: {
 							$cond: {
-								if: { $eq: ["$last_message", null] },
+								if: { $ne: ["$last_message._id", null] },
 								then: "$last_message.created_at",
 								else: "$created_at"
 							}
