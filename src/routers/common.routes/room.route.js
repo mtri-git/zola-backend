@@ -21,10 +21,15 @@ router.get('/check', authMiddleware, roomController.checkRoomWithTwoUser)
 router.get('/:roomId' , authMiddleware, roomController.getRoomById)
 
 // add user to room
-router.patch('/add-user' , authMiddleware, roomController.addUserToRoom)
+router.patch('/add-user/:id' , authMiddleware, roomController.addUserToRoom)
 
 // remove user from room
-router.patch('/remove-user' , authMiddleware, roomController.removeUserFromRoom)
+router.patch('/remove-user/:id' , authMiddleware, roomController.removeUserFromRoom)
 
+// leave room
+router.patch('/leave-room/:id' , authMiddleware, roomController.leaveRoom)
+
+//delete room
+router.delete('/delete-room/:id' , authMiddleware, roomController.deleteRoom)
 
 module.exports = router

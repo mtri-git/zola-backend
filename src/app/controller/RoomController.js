@@ -126,7 +126,7 @@ class RoomController {
 
 	async addUserToRoom() {
 		// using $addToSet to void duplicated values
-		const room = await Room.findById(req.body.roomId)
+		const room = await Room.findById(req.body.id)
 		const user = await User.findOne({ username: req.body.username })
 		if (await !User.exists({ _id: req.body.userId })) {
 			res.status(401).json({ message: 'User not existed' })
@@ -172,7 +172,7 @@ class RoomController {
 			)
 			res.status(200).json({ message: 'Remove user from room complete' })
 		} catch (err) {
-			res.status(500).json({ Error: err })
+			res.status(500).json({ message: 'Server error' })
 		}
 	}
 
@@ -185,6 +185,45 @@ class RoomController {
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json({ message: 'Server error' })
+		}
+	}
+
+	// leave room
+	async leaveRoom(req, res) {
+		try {
+			const room = await Room.findOne({ _id: req.params.id })
+			if (room.users.includes(req.user.id) && room.isRoom && room.users.length > 2) {
+				await Room.updateOne(
+					{ _id: req.params.id },
+					{ $pull: { users: req.user.id } }
+				)
+				return res.status(200).json({ message: 'Leave room success' })
+			} else {
+				return res.status(401).json({ message: "Can't access this" })
+			}		
+		} catch (error) {
+			console.log(error)
+			return res.status(500).json({ message: "Server error" })
+		}
+	}
+
+	// delete room
+	async deleteRoom(req, res) {
+		try {
+			const room = await Room.findOne({ _id: req.params.id })
+			if (room.users.includes(req.user.id) && room.isRoom) {
+				await Room.updateOne(
+					{ _id: req.params.id },
+					{ deleted_at: Date.now() }
+				)
+				return res.status(200).json({ message: 'Delete room success' })
+			} else {
+				return res.status(401).json({ message: "Can't access this" })
+			}		
+		} catch (error) {
+			console.log(error);
+			return res.status(500).json({ message: "Server error" })
+			
 		}
 	}
 }
