@@ -39,7 +39,6 @@ const sendPushNotification = async({tokens, title, body, postId}) => {
 
 const sendCallToMobile = async({userId, tokens, roomId}) => {
     try {
-        console.log(userId);
         const  userInfo = await User.findById(userId)
 
         const callToken = getAgoraToken(roomId, 1)
@@ -48,7 +47,7 @@ const sendCallToMobile = async({userId, tokens, roomId}) => {
 
         console.log(`${callToken} \n ${receiverToken}`);
 
-        await admin.messaging().sendMulticast({
+        await admin.messaging().send({
             tokens,
             data: {
                 "sound": "default", 
@@ -60,7 +59,7 @@ const sendCallToMobile = async({userId, tokens, roomId}) => {
             },
             options: {
                 "priority": "high",
-                "timeToLive": 60 * 60 * 3
+                "timeToLive": 60
               },
         })
         return {callToken, receiverToken}

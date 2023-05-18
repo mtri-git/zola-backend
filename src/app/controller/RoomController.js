@@ -226,6 +226,26 @@ class RoomController {
 			
 		}
 	}
+
+	// change room name
+	async changeRoomName(req, res) {
+		try {
+			const room = await Room.findOne({ _id: req.params.id })
+			if(req.body.name === null) {
+				return res.status(400).json({ message: 'Name cannot null' })
+			}
+			if (room.users.includes(req.user.id) && room.isRoom) {
+				await Room.updateOne(
+					{ _id: req.params.id },
+					{ name: req.body.name }
+				)
+				return res.status(200).json({ message: 'Change room name success' })
+			}
+			return res.status(401).json({ message: "Can't access this" })
+		} catch (error) {
+			return res.status(500).json({ message: "Server error" })
+		}
+	}
 }
 
 module.exports = new RoomController()

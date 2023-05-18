@@ -32,4 +32,7 @@ router.patch('/leave-room/:id' , authMiddleware, roomController.leaveRoom)
 //delete room
 router.delete('/delete-room/:id' , authMiddleware, roomController.deleteRoom)
 
+// change room name
+router.patch('/change-room-name/:id' , authMiddleware, roomController.changeRoomName)
+
 module.exports = router

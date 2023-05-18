@@ -110,7 +110,10 @@ class NotificationController {
 			const devices = await Device.find({ owner: userToCall })
 			const tokens = devices.map((device) => device.fcm_token)
 
-			const token = await sendCallToMobile({userId, tokens, roomId})
+			if (tokens.length === 0)
+				return res.status(200).json({ message: 'User not found' })
+
+			const token = await sendCallToMobile({ userId, tokens, roomId })
 
 			return res.status(200).json(token)
 		} catch (error) {
