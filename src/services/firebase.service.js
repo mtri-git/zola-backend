@@ -59,7 +59,6 @@ const sendCallToMobile = async({userId, tokens, roomId}) => {
             },
             options: {
                 "priority": "high",
-                "timeToLive": 60
               },
         })
         return {callToken, receiverToken}
