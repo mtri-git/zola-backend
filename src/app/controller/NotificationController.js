@@ -4,7 +4,7 @@ const {
 	sendPushNotification,
 	sendCallToMobile,
 } = require('../../services/firebase.service')
-const { getIo } = require('../../configs/socket2.config')
+const { getIo } = require('../../configs/socket.config')
 
 const admin = require('firebase-admin')
 

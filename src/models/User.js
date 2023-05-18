@@ -35,7 +35,7 @@ const UserSchema = new Schema({
 		required: true,
 		min: 8,
 	},
-	status: { type: String, default: 'offline' },
+	status: { type: String, default: 'offline',enum: ['online', 'offline', 'busy']  },
 	blocked_users: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

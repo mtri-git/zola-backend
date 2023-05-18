@@ -1,8 +1,8 @@
 const http = require('http')
 const app = require('./app')
-const socketIo = require('socket.io');
-const configureSocketIO = require('./configs/socket.config')
-const {initSocket} = require('./configs/socket2.config')
+// const socketIo = require('socket.io');
+// const configureSocketIO = require('./configs/socket-old.config')
+const {initSocket} = require('./configs/socket.config')
 
 const normalizePort = (val) => {
 	const port = parseInt(val, 10)
