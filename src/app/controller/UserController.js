@@ -20,7 +20,8 @@ class UserController {
 			const query = req.query
 			const users = await User.find({$or: [
 				{$text: { $search: query.search }, deleted_at: null, _id: {$ne: req.user.id}},
-				{username: {$regex: query.search, $options: 'i'}, deleted_at: null, _id: {$ne: req.user.id}}
+				{username: {$regex: query.search, $options: 'i'}, deleted_at: null, _id: {$ne: req.user.id}},
+				{fullname: {$regex: query.search, $options: 'i'}, deleted_at: null, _id: {$ne: req.user.id}}
 			]}).select('-password -devices -deleted_at -not_notification -blocked_users')
 
 			const data = users.map((user) => {

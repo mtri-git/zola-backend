@@ -45,6 +45,7 @@ const sendCallToMobile = async({userId, tokens, roomId}) => {
 
         const receiverToken = getAgoraToken(roomId, 2)
 
+        tokens = tokens.filter(token => token !== undefined)
         console.log(tokens);
 
         await admin.messaging().sendMulticast({
