@@ -28,17 +28,19 @@ app.use(
 
 
 // log morgan
-// app.use(morgan("default"))
+app.use(morgan("default"))
 
-if (app.get('env') == 'production') {
-	var accessLogStream = fs.createWriteStream(
-		path.join(__dirname, '..', 'logs', 'access.log'),
-		{ flags: 'a' }
-	)
-	app.use(morgan({ stream: accessLogStream }))
-} else {
-	app.use(morgan('dev')) //log to console on development
-}
+// app.use(morgan({ stream: accessLogStream }))
+
+// if (app.get('env') == 'production') {
+// 	var accessLogStream = fs.createWriteStream(
+// 		path.join(__dirname, '..', 'logs', 'access.log'),
+// 		{ flags: 'a' }
+// 	)
+// 	app.use(morgan({ stream: accessLogStream }))
+// } else {
+// 	app.use(morgan('dev')) //log to console on development
+// }
 
 // Firebase init
 admin_firebase.init()
