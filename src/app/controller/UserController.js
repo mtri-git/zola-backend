@@ -18,11 +18,27 @@ class UserController {
 	async searchUser(req, res) {
 		try {
 			const query = req.query
-			const users = await User.find({$or: [
-				{$text: { $search: query.search }, deleted_at: null, _id: {$ne: req.user.id}},
-				{username: {$regex: query.search, $options: 'i'}, deleted_at: null, _id: {$ne: req.user.id}},
-				{fullname: {$regex: query.search, $options: 'i'}, deleted_at: null, _id: {$ne: req.user.id}}
-			]}).select('-password -devices -deleted_at -not_notification -blocked_users')
+			const users = await User.find({
+				$or: [
+					{
+						$text: { $search: query.search },
+						deleted_at: null,
+						_id: { $ne: req.user.id },
+					},
+					{
+						username: { $regex: query.search, $options: 'i' },
+						deleted_at: null,
+						_id: { $ne: req.user.id },
+					},
+					{
+						fullname: { $regex: query.search, $options: 'i' },
+						deleted_at: null,
+						_id: { $ne: req.user.id },
+					},
+				],
+			}).select(
+				'-password -devices -deleted_at -not_notification -blocked_users'
+			)
 
 			const data = users.map((user) => {
 				user._doc.isFollowing = user.follower.includes(req.user.id)
@@ -141,7 +157,6 @@ class UserController {
 				username: req.query.username,
 			})
 
-
 			if (isExisted)
 				return res.status(200).json({ message: 'username is existed' })
 			return res.status(200).json({ message: 'username is valid' })
@@ -234,7 +249,7 @@ class UserController {
 		try {
 			const user = await User.findOne({ username: req.query.username })
 			const myId = req.user.id
-			
+
 			const follower = await Promise.all(
 				user.follower.map((userId) =>
 					User.getUserWithIdLessData(userId)
@@ -242,9 +257,13 @@ class UserController {
 			)
 
 			const data = follower.map((user) => {
-				user._doc.isFollowing = user._doc.follower.includes(req.user.id)
-				delete user._doc.follower
-				return user
+				if (user != null) {
+					user._doc.isFollowing = user._doc.follower.includes(
+						req.user.id
+					)
+					delete user._doc.follower
+					return user
+				}
 			})
 
 			res.status(200).json({ data })
@@ -296,8 +315,8 @@ class UserController {
 				_id: { $ne: req.user.id },
 				follower: { $ne: req.user.id },
 			})
-			.sort({follower: -1})
-			.limit(10)
+				.sort({ follower: -1 })
+				.limit(10)
 			// for (let i = 0; i < user.friends.length; i++) {
 			// 	const friend = await User.findById(user.friends[i])
 			// 	listFriends.concat(friend.friends)
