@@ -1,6 +1,7 @@
 const Room = require('../../models/Room')
 const User = require('../../models/User')
 const roomService = require('../../services/room.service')
+const mongoose = require('mongoose')
 
 class RoomController {
 	// create new chat room need a list of member id
@@ -14,6 +15,20 @@ class RoomController {
 				const validUserList = await User.exists({
 					_id: { $in: roomData.users },
 				})
+
+				// if room is 2 user and already exist
+				if (roomData.users.length === 1) {
+					const objectIdArray = [...roomData.users, req.user.id].map(str => mongoose.Types.ObjectId(str));
+					const room = await Room.findOne({
+						users: objectIdArray, deleted_at: null
+					})
+					if (room) {
+						return res.status(200).json({
+							message: 'Room is existed. Cant create new',
+							data: room,
+						})
+					}
+				}
 
 				if (isRoom && roomData.users.length === 1) {
 					res.status(400).json({
@@ -68,14 +83,16 @@ class RoomController {
 	async getRoomById(req, res) {
 		try {
 			if (req.user) {
-				const room = await Room.findOne({_id: req.params.roomId, deleted_at: null})
+				const room = await Room.findOne({
+					_id: req.params.roomId,
+					deleted_at: null,
+				})
 
 				if (room.users.includes(req.user.id)) {
 					const roomDoc = await Room.getRoomById(req.params.roomId)
 
 					return res.status(200).json({ room: roomDoc })
-				} else 
-				{
+				} else {
 					return res.status(401).json({ error: "Can't access this." })
 				}
 			} else {
@@ -89,9 +106,13 @@ class RoomController {
 
 	async getRoomByUserById(req, res) {
 		try {
-			const {limit, offset} = req.query
-			let rooms = await roomService.getRoomByUserId(req.user.id, offset, limit)
-			
+			const { limit, offset } = req.query
+			let rooms = await roomService.getRoomByUserId(
+				req.user.id,
+				offset,
+				limit
+			)
+
 			return res.status(200).json({ Rooms: rooms })
 		} catch (err) {
 			console.log(err)
@@ -101,14 +122,16 @@ class RoomController {
 
 	async getRoomBasicInfo(req, res) {
 		try {
-			let room = await Room.findOne({ _id: req.params.roomId, deleted_at: null })
+			let room = await Room.findOne({
+				_id: req.params.roomId,
+				deleted_at: null,
+			})
 			return res.status(200).json({ data: room })
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json({ message: "Can't access this !" })
 		}
 	}
-
 
 	async getAllUserInRoom(req, res) {
 		try {
@@ -179,8 +202,10 @@ class RoomController {
 	// get chat group that user is in
 	async getChatGroupByUserId(req, res) {
 		try {
-			const data = await Room.find({ users: req.user.id  , isRoom: true, deleted_at: null }, 'name users createdAt isRoom updatedAt')
-			.populate('users', 'fullname username avatarUrl')
+			const data = await Room.find(
+				{ users: req.user.id, isRoom: true, deleted_at: null },
+				'name users createdAt isRoom updatedAt'
+			).populate('users', 'fullname username avatarUrl')
 			return res.status(200).json({ data })
 		} catch (error) {
 			console.log(error)
@@ -192,7 +217,11 @@ class RoomController {
 	async leaveRoom(req, res) {
 		try {
 			const room = await Room.findOne({ _id: req.params.id })
-			if (room.users.includes(req.user.id) && room.isRoom && room.users.length > 2) {
+			if (
+				room.users.includes(req.user.id) &&
+				room.isRoom &&
+				room.users.length > 2
+			) {
 				await Room.updateOne(
 					{ _id: req.params.id },
 					{ $pull: { users: req.user.id } }
@@ -200,10 +229,10 @@ class RoomController {
 				return res.status(200).json({ message: 'Leave room success' })
 			} else {
 				return res.status(401).json({ message: "Can't access this" })
-			}		
+			}
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: "Server error" })
+			return res.status(500).json({ message: 'Server error' })
 		}
 	}
 
@@ -219,11 +248,10 @@ class RoomController {
 				return res.status(200).json({ message: 'Delete room success' })
 			} else {
 				return res.status(401).json({ message: "Can't access this" })
-			}		
+			}
 		} catch (error) {
-			console.log(error);
-			return res.status(500).json({ message: "Server error" })
-			
+			console.log(error)
+			return res.status(500).json({ message: 'Server error' })
 		}
 	}
 
@@ -231,7 +259,7 @@ class RoomController {
 	async changeRoomName(req, res) {
 		try {
 			const room = await Room.findOne({ _id: req.params.id })
-			if(req.body.name === null) {
+			if (req.body.name === null) {
 				return res.status(400).json({ message: 'Name cannot null' })
 			}
 			if (room.users.includes(req.user.id) && room.isRoom) {
@@ -239,11 +267,13 @@ class RoomController {
 					{ _id: req.params.id },
 					{ name: req.body.name }
 				)
-				return res.status(200).json({ message: 'Change room name success' })
+				return res
+					.status(200)
+					.json({ message: 'Change room name success' })
 			}
 			return res.status(401).json({ message: "Can't access this" })
 		} catch (error) {
-			return res.status(500).json({ message: "Server error" })
+			return res.status(500).json({ message: 'Server error' })
 		}
 	}
 }
