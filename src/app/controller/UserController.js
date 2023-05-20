@@ -250,20 +250,20 @@ class UserController {
 			const user = await User.findOne({ username: req.query.username })
 			const myId = req.user.id
 
-			const follower = await Promise.all(
+			let follower = await Promise.all(
 				user.follower.map((userId) =>
 					User.getUserWithIdLessData(userId)
 				)
 			)
 
+			follower = follower.filter((user) => user != null)
+
 			const data = follower.map((user) => {
-				if (user != null) {
 					user._doc.isFollowing = user._doc.follower.includes(
 						req.user.id
 					)
 					delete user._doc.follower
 					return user
-				}
 			})
 
 			res.status(200).json({ data })
