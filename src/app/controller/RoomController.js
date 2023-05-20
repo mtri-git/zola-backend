@@ -136,9 +136,8 @@ class RoomController {
 	async getAllUserInRoom(req, res) {
 		try {
 			const room = await Room.findById(req.query.roomId)
-			console.log(room.users)
 			const users = await Promise.all(
-				room.users.map((userId) => User.getUserWithId(userId))
+				room.users.map((userId) => User.getUserWithIdLessData(userId))
 			)
 			res.status(200).json({ user: users })
 		} catch (err) {
