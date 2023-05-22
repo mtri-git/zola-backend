@@ -244,8 +244,8 @@ class PostController {
 			if(deviceTokens.length > 0)
 				await sendPushNotification({
 					tokens: deviceTokens,
-					title: `${user.username}`,
-					body: 'đã đăng bài viết mới',
+					title: `${user.fullname} đã đăng bài viết mới`,
+					body: post.content.length > 50 ? post.content.slice(0, 50) + '...' : post.content,
 					postId: post._id.toString(),
 				})
 
