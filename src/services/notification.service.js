@@ -13,6 +13,7 @@ class NotificationService{
         }
     }
 
+
     async readNotification(id){
         try {
             await Notification.findOneAndUpdate({_id: id}, {isRead: true})

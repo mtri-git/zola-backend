@@ -246,7 +246,7 @@ class PostController {
 					tokens: deviceTokens,
 					title: `${user.fullname} đã đăng bài viết mới`,
 					body: post.content.length > 50 ? post.content.slice(0, 50) + '...' : post.content,
-					postId: post._id.toString(),
+					id: post._id.toString(),
 				})
 
 			return res.status(201).json({ message: 'Add a post successful' })

@@ -14,8 +14,8 @@ const init = () => {
     });
 }
 
-const sendPushNotification = async({tokens, title, body, postId}) => {
-    console.log({tokens, title, body, postId})
+const sendPushNotification = async({tokens, title, body, id}) => {
+    console.log({tokens, title, body, postId: id})
     try {
         
         await admin.messaging().sendMulticast({
@@ -28,7 +28,7 @@ const sendPushNotification = async({tokens, title, body, postId}) => {
                 "click_action": "FLUTTER_NOTIFICATION_CLICK",
                 "sound": "default", 
                 "status": "done",
-                "id": postId,
+                "id": id,
                 "type": "post",
             }
         })
@@ -36,6 +36,8 @@ const sendPushNotification = async({tokens, title, body, postId}) => {
         console.log(error)
     }
 }
+
+
 
 const sendCallToMobile = async({userId, tokens, roomId}) => {
     try {

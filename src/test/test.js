@@ -1,4 +1,4 @@
-let reply_to =  1
-let parent_id = null
+const Device = require('../models/Device')
 
-console.log( Boolean( (reply_to && parent_id) || (!reply_to && !parent_id)))
+const room = await Room.findOne({ _id: message.roomId })
+//get user device exept sender

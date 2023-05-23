@@ -2,6 +2,9 @@ const socketIo = require('socket.io')
 const Message = require('../models/Message')
 const Room = require('../models/Room')
 const User = require('../models/User')
+const {
+	sendPushNotificationForMessage,
+} = require('../services/message.service')
 
 let io
 
@@ -39,12 +42,12 @@ function initSocket(server) {
 		})
 
 		socket.on('check_online', (data) => {
-      console.log('check_online')
-      const { username } = data
-      const isOnline = userOnline.includes(username)
-      console.log(isOnline)
-      io.to(socket.id).emit('check_online', { isOnline })
-    })
+			console.log('check_online')
+			const { username } = data
+			const isOnline = userOnline.includes(username)
+			console.log(isOnline)
+			io.to(socket.id).emit('check_online', { isOnline })
+		})
 
 		socket.on('send_message', async (data) => {
 			try {
@@ -70,6 +73,13 @@ function initSocket(server) {
 						{ $set: { last_message: message._id } }
 					)
 				}
+				await sendPushNotificationForMessage({
+					roomId,
+					type,
+					content,
+					userId,
+				}) // send push notification
+
 				io.to(roomId).emit('receive_message', data)
 			} catch (error) {
 				console.log(error)
