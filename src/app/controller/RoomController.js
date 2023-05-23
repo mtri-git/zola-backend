@@ -22,6 +22,7 @@ class RoomController {
 					const room = await Room.findOne({
 						users: objectIdArray, deleted_at: null
 					})
+					
 					if (room) {
 						return res.status(200).json({
 							message: 'Room is existed. Cant create new',
