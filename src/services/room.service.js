@@ -17,7 +17,7 @@ class RoomService {
 		try {
 			const user = await User.findById(userId)
 			const room = await Room.aggregate([
-			    { $match: { users: user._id, deleted_at: null, created_at: { $exists: true } } },
+			    { $match: { $and: [{users: user._id}, {deleted_at: null}] } },
 			    {
 			      $lookup: {
 			        from: "messages",
