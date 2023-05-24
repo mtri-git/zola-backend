@@ -73,12 +73,16 @@ function initSocket(server) {
 						{ $set: { last_message: message._id } }
 					)
 				}
-				await sendPushNotificationForMessage({
-					roomId,
-					type,
-					content: message,
-					userId,
-				}) // send push notification
+				try {
+					await sendPushNotificationForMessage({
+						roomId,
+						type,
+						content: message,
+						userId,
+					}) // send push notification
+				} catch (error) {
+					console.log(error)
+				}
 
 				io.to(roomId).emit('receive_message', data)
 			} catch (error) {
