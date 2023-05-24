@@ -76,7 +76,7 @@ function initSocket(server) {
 				await sendPushNotificationForMessage({
 					roomId,
 					type,
-					content,
+					content: message,
 					userId,
 				}) // send push notification
 
