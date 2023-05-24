@@ -195,7 +195,7 @@ class UserController {
 				  }
 				: { id: req.query.id }
 			const user = await User.getUser(query).select(
-				'-password -devices -__v -email -phone'
+				'-password -devices -__v -email -phone -deleted_at'
 			)
 			user.birthday = formatDate(user.birthday)
 
@@ -222,6 +222,7 @@ class UserController {
 						post,
 						isFollowing,
 						isFriend,
+						isMe: req.query.me === req.query.username,
 					},
 				})
 			}
