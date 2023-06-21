@@ -88,13 +88,13 @@ RoomSchema.statics.getRoomByUserId = function (id) {
 	return rooms
 }
 
-RoomSchema.pre('save', (next) => {
+RoomSchema.post('save', (next) => {
 	this.updated_at = Date.now()
 	next()
 })
 
 // If modified add update date
-RoomSchema.pre('updateOne', (next) => {
+RoomSchema.post('updateOne', (next) => {
 	this.updated_at = Date.now()
 	next()
 })
