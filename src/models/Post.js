@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const PostSchema = new Schema({
 	content: String,
+	category_by_ai: String, // category by ai
 	author: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',

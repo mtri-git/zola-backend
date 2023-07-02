@@ -311,6 +311,8 @@ class UserController {
 	async recommendFriends(req, res) {
 		try {
 			let recommend = []
+			const user = await User.findById(req.user.id)
+
 
 			recommend = await User.find({
 				_id: { $ne: req.user.id },
@@ -318,15 +320,29 @@ class UserController {
 			})
 				.sort({ follower: -1 })
 				.limit(10)
-			// for (let i = 0; i < user.friends.length; i++) {
-			// 	const friend = await User.findById(user.friends[i])
-			// 	listFriends.concat(friend.friends)
-			// }
-			// const friends = await Promise.all(
-			// 	listFriends.map((friendId) => {
-			// 		User.findById(friendId)
-			// 	})
-			// )
+			
+			let listFriends = []
+
+			for (let i = 0; i < user.friends.length; i++) {
+				const friend = await User.findById(user.friends[i])
+				listFriends.concat(friend.friends)
+			}
+			const friends = await Promise.all(
+				listFriends.map((friendId) => {
+					User.findById(friendId)
+				})
+			)
+			// merge friends and recommend if friends length < 10 and max length = 10
+			if (friends.length < 10) {
+				recommend = recommend.concat(friends)
+			}
+			// remove duplicate
+			recommend = recommend.filter(
+				(user, index, self) =>
+					index === self.findIndex((u) => u._id === user._id)
+			)
+
+
 			res.status(200).json({ data: recommend })
 		} catch (error) {
 			console.log('Error', error)

@@ -241,11 +241,14 @@ class PostController {
 			})
 
 			const deviceTokens = devices.map((device) => device.fcm_token)
-			if(deviceTokens.length > 0)
+			if (deviceTokens.length > 0)
 				await sendPushNotification({
 					tokens: deviceTokens,
 					title: `${user.fullname} đã đăng bài viết mới`,
-					body: post.content.length > 50 ? post.content.slice(0, 50) + '...' : post.content,
+					body:
+						post.content.length > 50
+							? post.content.slice(0, 50) + '...'
+							: post.content,
 					id: post._id.toString(),
 				})
 
@@ -450,6 +453,34 @@ class PostController {
 		} catch (error) {
 			console.log(error)
 			res.status(500).json({ Error: error })
+		}
+	}
+
+	async recommendPost(req, res) {
+		try {
+			const user = await User.findById(req.user.id)
+
+			// get last five post that user liked
+			const lastFivePost = await Post.find({
+				like_by: user._id,
+			})
+
+			// get author of last five post
+			const author = lastFivePost.map((post) => post.author)
+
+			// get post from author of last five post
+			const recommendPost = await Post.find({
+				author: { $in: author },
+				deleted_at: null,
+				like_by: {$ne: user._id},
+			})
+			.sort({ created_at: -1 })
+			.limit(10)
+
+			res.status(200).json({ data: recommendPost })
+		} catch (error) {
+			console.log(error)
+			res.status(500).json({ message: 'Server errors' })
 		}
 	}
 

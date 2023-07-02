@@ -1,0 +1,2476 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Zola",
+    "dateExported": "2023-07-02T15:01:33.524Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "auth",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2022-10-11T08:45:59.417Z",
+            "sortNum": 5000
+        },
+        {
+            "_id": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "User",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2022-10-17T13:38:40.303Z",
+            "sortNum": 7500
+        },
+        {
+            "_id": "1ff692df-a7ac-4a6a-a6cc-481c8282a509",
+            "name": "Message",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2022-10-17T14:42:42.871Z",
+            "sortNum": 8750
+        },
+        {
+            "_id": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Room",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2022-10-17T14:22:05.727Z",
+            "sortNum": 9375
+        },
+        {
+            "_id": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Post",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2022-10-17T21:49:48.420Z",
+            "sortNum": 9687.5
+        },
+        {
+            "_id": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "Comment",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2022-11-23T11:21:00.898Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "57b0304f-375a-4c27-af64-ba6533faea96",
+            "name": "File",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2022-12-06T05:53:58.376Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "b6760a10-f37e-4dd4-89d7-2b05d21dda36",
+            "name": "OTP",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2022-10-27T17:18:29.189Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "name": "common",
+            "containerId": "",
+            "created": "2022-12-08T15:44:23.754Z",
+            "sortNum": 85000
+        },
+        {
+            "_id": "68be5c11-49e5-4a70-8b0b-1e83879d56fd",
+            "name": "Admin",
+            "containerId": "",
+            "created": "2022-12-08T15:43:57.849Z",
+            "sortNum": 90000
+        },
+        {
+            "_id": "065cd8aa-8eb8-41a5-8d60-7df8d8dda505",
+            "name": "Auth",
+            "containerId": "68be5c11-49e5-4a70-8b0b-1e83879d56fd",
+            "created": "2022-12-15T11:52:29.312Z",
+            "sortNum": 100000
+        },
+        {
+            "_id": "c3e824db-62db-4b30-8308-9f1395701406",
+            "name": "Users",
+            "containerId": "68be5c11-49e5-4a70-8b0b-1e83879d56fd",
+            "created": "2022-12-15T11:52:41.349Z",
+            "sortNum": 110000
+        },
+        {
+            "_id": "7363247b-1db0-4577-8c00-a88083631236",
+            "name": "Post",
+            "containerId": "68be5c11-49e5-4a70-8b0b-1e83879d56fd",
+            "created": "2022-12-15T11:52:47.595Z",
+            "sortNum": 120000
+        },
+        {
+            "_id": "49d9b24e-6ce9-4cdf-9b52-b6b61dcd4339",
+            "name": "Room",
+            "containerId": "68be5c11-49e5-4a70-8b0b-1e83879d56fd",
+            "created": "2022-12-15T11:53:08.634Z",
+            "sortNum": 140000
+        },
+        {
+            "_id": "ad98b566-44d7-4559-8950-013dd2762ca7",
+            "name": "Comment",
+            "containerId": "68be5c11-49e5-4a70-8b0b-1e83879d56fd",
+            "created": "2022-12-25T18:34:04.686Z",
+            "sortNum": 150000
+        },
+        {
+            "_id": "2d89bcb7-cfb5-4849-ab49-a17d833f1eb5",
+            "name": "Statistic",
+            "containerId": "68be5c11-49e5-4a70-8b0b-1e83879d56fd",
+            "created": "2022-12-15T16:30:37.975Z",
+            "sortNum": 160000
+        },
+        {
+            "_id": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "Notification",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2023-04-17T13:06:03.837Z",
+            "sortNum": 170000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "233f875c-12b0-40bf-8562-dcec6fee8c3b",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "Get comment by id",
+            "url": "{{local_api}}/comment/63ac0a3e2f8c9a36ce17332d",
+            "method": "GET",
+            "sortNum": 5000,
+            "created": "2022-11-23T13:58:30.353Z",
+            "modified": "2023-06-21T04:20:30.490Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7d3ad416-7129-45ca-adde-43c519f07495",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "Get reply comment",
+            "url": "{{heroku_api}}/comment/reply/649d934471f28d1a0945c7b1",
+            "method": "GET",
+            "sortNum": 5625,
+            "created": "2022-12-29T05:18:18.398Z",
+            "modified": "2023-06-29T15:08:20.956Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f0409026-740c-48bf-b063-70730a2a5d83",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "Get comment by postId",
+            "url": "{{heroku_api}}/comment/post/6492bf999fafd9a4378d792f",
+            "method": "GET",
+            "sortNum": 6250,
+            "created": "2022-12-26T12:13:08.244Z",
+            "modified": "2023-06-29T15:09:12.585Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "09ebe866-5bba-4a4f-810c-e9187e4e2d15",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "Get user's comment",
+            "url": "{{back_domain}}/comment/me",
+            "method": "GET",
+            "sortNum": 7500,
+            "created": "2022-11-23T13:37:27.352Z",
+            "modified": "2022-11-23T13:58:34.235Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e0182f23-d8dd-46a0-91b6-470e92c91c71",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "Get comment by username",
+            "url": "{{back_domain}}/comment/user/thomas.muller",
+            "method": "GET",
+            "sortNum": 8750,
+            "created": "2023-01-03T07:41:04.439Z",
+            "modified": "2023-01-03T08:07:41.420Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "daa46822-4d8a-49af-99b0-e53df5ca626e",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "Create a new comment",
+            "url": "{{back_domain}}/comment/create",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2022-11-23T11:21:10.177Z",
+            "modified": "2023-06-21T04:17:51.978Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"postId\":\"63aec834ef3fa2c90b91381d\",\n  \"content\":\" ❤️\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "42a822bc-ae54-42aa-b9e3-32a3da90b888",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "57b0304f-375a-4c27-af64-ba6533faea96",
+            "name": "Get File by user",
+            "url": "{{back_domain}}/file",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2022-12-06T05:54:20.329Z",
+            "modified": "2022-12-06T06:08:38.294Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "bf4db466-24f5-4491-92db-64b4bb47e48c",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "065cd8aa-8eb8-41a5-8d60-7df8d8dda505",
+            "name": "Admin Login",
+            "url": "{{back_domain}}/admin/auth/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2022-12-15T15:03:14.226Z",
+            "modified": "2022-12-15T15:10:39.290Z",
+            "headers": [
+                {
+                    "name": "set-cookie",
+                    "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGQ2NWJkYjMxMTQ0MTFkYWEwNTA1MCIsInVzZXJuYW1lIjoidm90cmkiLCJmdWxsbmFtZSI6IlbDtSBNaW5oIFRyw60iLCJhdmF0YXJVcmwiOiJodHRwOi8vcmVzLmNsb3VkaW5hcnkuY29tL2R1M2w4dXBzZS9pbWFnZS91cGxvYWQvdjE2NjY5MjIzNTgvem9sYV9maWxlcy9pbWFnZXMvb3djanliNHhpZnZuZ2JuZG1ic3QuanBnIiwiaWF0IjoxNjY3MjkxOTI3LCJleHAiOjE2Njc4OTY3Mjd9.ThIlZWFOdNvI5uH_EIWJgOqk7WBlwepYrxhhrosXhUY; Path=/; HttpOnly; Secure; SameSite=None"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\":\"admin\",\n  \"password\":\"123\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.token",
+                    "action": "setto",
+                    "value": "{{admin_token}}"
+                },
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "_id": "2e5703ce-851d-406d-b4bd-85f1058a28fa",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "7363247b-1db0-4577-8c00-a88083631236",
+            "name": "Get Post",
+            "url": "{{back_domain}}/admin/post?offset=1",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2022-12-15T15:45:12.800Z",
+            "modified": "2022-12-15T15:52:44.406Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "offset",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "be205704-ff97-46f4-b13b-b7ad200ee45d",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "49d9b24e-6ce9-4cdf-9b52-b6b61dcd4339",
+            "name": "Get Room",
+            "url": "{{back_domain}}/admin/room?offset=1",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2022-12-15T15:45:56.808Z",
+            "modified": "2022-12-15T15:54:23.171Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "offset",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ebc22360-b36e-4119-ae4b-a82bef4f5c46",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "2d89bcb7-cfb5-4849-ab49-a17d833f1eb5",
+            "name": "Get statistic",
+            "url": "{{back_domain}}/admin/statistic/number",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2022-12-15T16:30:43.254Z",
+            "modified": "2022-12-15T16:31:03.535Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "95605873-ed64-440f-804c-02e6321ee609",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "ad98b566-44d7-4559-8950-013dd2762ca7",
+            "name": "Get Comment",
+            "url": "{{back_domain}}/admin/comment?offset=1",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2022-12-25T18:34:04.686Z",
+            "modified": "2022-12-27T15:44:52.840Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "offset",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f4c69b3e-e937-488f-a45e-7181a9f9c24c",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "Get all notification",
+            "url": "{{heroku_api}}/notification",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-04-17T13:06:29.070Z",
+            "modified": "2023-07-02T14:59:14.354Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9cd79b5f-65c1-4332-9cfa-8f27d29a59c0",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "count unread notification",
+            "url": "{{local_api}}/notification/count-unread",
+            "method": "GET",
+            "sortNum": 11250,
+            "created": "2023-04-24T15:45:29.766Z",
+            "modified": "2023-04-24T15:46:15.442Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8d408aa4-5005-4ac9-9500-db9eb047e64c",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "7363247b-1db0-4577-8c00-a88083631236",
+            "name": "Delete Post",
+            "url": "{{back_domain}}/admin/post/6391f3158dc6cb783c3ebf2e",
+            "method": "DELETE",
+            "sortNum": 12500,
+            "created": "2022-12-27T07:05:07.719Z",
+            "modified": "2022-12-27T07:05:32.130Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a732e63f-ce3d-4f82-9ef4-1245d89835c1",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "Test socket",
+            "url": "{{local_api}}/notification/test",
+            "method": "POST",
+            "sortNum": 12500,
+            "created": "2023-04-23T11:07:33.041Z",
+            "modified": "2023-04-25T01:48:30.346Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "19f1971b-c405-4472-9280-7c9f947548eb",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "7363247b-1db0-4577-8c00-a88083631236",
+            "name": "Recover",
+            "url": "{{back_domain}}/admin/post/recover/63aaa8223a8088b653cc83f5",
+            "method": "PUT",
+            "sortNum": 13750,
+            "created": "2022-12-27T16:36:50.662Z",
+            "modified": "2022-12-27T16:37:04.036Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ee7ba22d-71c9-44c9-a7b1-44b0ed21dbd4",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "Call video",
+            "url": "{{heroku_api}}/notification/call/646c74f39c47abce672af788",
+            "method": "GET",
+            "sortNum": 13750,
+            "created": "2023-04-30T15:03:52.141Z",
+            "modified": "2023-05-24T07:17:30.300Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f0812355-0f87-467d-831f-1f71f5cdc249",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "57b0304f-375a-4c27-af64-ba6533faea96",
+            "name": "Get Post by user fileId",
+            "url": "{{back_domain}}/file/post/638ed5beda091445d9185468",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2022-12-11T16:47:13.737Z",
+            "modified": "2022-12-11T16:50:07.257Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9a3d474c-ec40-470a-9a0e-9df3998018f0",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "065cd8aa-8eb8-41a5-8d60-7df8d8dda505",
+            "name": "Get infor",
+            "url": "{{back_domain}}/admin/auth/get-info",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2022-12-15T16:13:01.129Z",
+            "modified": "2022-12-15T16:18:12.814Z",
+            "headers": [
+                {
+                    "name": "set-cookie",
+                    "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGQ2NWJkYjMxMTQ0MTFkYWEwNTA1MCIsInVzZXJuYW1lIjoidm90cmkiLCJmdWxsbmFtZSI6IlbDtSBNaW5oIFRyw60iLCJhdmF0YXJVcmwiOiJodHRwOi8vcmVzLmNsb3VkaW5hcnkuY29tL2R1M2w4dXBzZS9pbWFnZS91cGxvYWQvdjE2NjY5MjIzNTgvem9sYV9maWxlcy9pbWFnZXMvb3djanliNHhpZnZuZ2JuZG1ic3QuanBnIiwiaWF0IjoxNjY3MjkxOTI3LCJleHAiOjE2Njc4OTY3Mjd9.ThIlZWFOdNvI5uH_EIWJgOqk7WBlwepYrxhhrosXhUY; Path=/; HttpOnly; Secure; SameSite=None"
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.token",
+                    "action": "setto",
+                    "value": "{{admin_token}}"
+                },
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "_id": "aae2f08f-8510-47d1-8917-56e86eaf9c70",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "7363247b-1db0-4577-8c00-a88083631236",
+            "name": "Get Post Detail",
+            "url": "{{back_domain}}/admin/post/6391f3158dc6cb783c3ebf2e",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2022-12-18T16:03:19.232Z",
+            "modified": "2022-12-19T08:01:34.878Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2ad923ab-a65d-4acb-b30d-6ca8eba7df96",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "2d89bcb7-cfb5-4849-ab49-a17d833f1eb5",
+            "name": "Get statistic user join",
+            "url": "{{back_domain}}/admin/statistic/user-join-by-mouth",
+            "method": "GET",
+            "sortNum": 15000,
+            "created": "2022-12-20T08:00:25.077Z",
+            "modified": "2022-12-20T08:02:45.593Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "3e19a38f-0d0d-4e8f-aae0-944580936da5",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "ad98b566-44d7-4559-8950-013dd2762ca7",
+            "name": "Delete comment",
+            "url": "{{back_domain}}/admin/comment/",
+            "method": "DELETE",
+            "sortNum": 15000,
+            "created": "2022-12-27T16:31:29.059Z",
+            "modified": "2022-12-27T16:31:49.293Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f5bb119a-2b49-47cc-8e56-7e4108b2a7f2",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "reply comment",
+            "url": "{{back_domain}}/comment/create",
+            "method": "POST",
+            "sortNum": 15000,
+            "created": "2022-12-28T09:35:38.008Z",
+            "modified": "2023-06-21T04:20:11.188Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"postId\":\"63ac086939c3fcd1088f603d\",\n  \"parent_id\":\"63ac0a3e2f8c9a36ce17332d\",\n  \"reply_to\": \"63ac0a3e2f8c9a36ce17332d\",\n  \"content\":\"yah\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f5ca30e0-3f6d-46bc-9feb-39310e4a1800",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "Get all notification Copy",
+            "url": "{{local_api}}/notification/test",
+            "method": "POST",
+            "sortNum": 15000,
+            "created": "2023-04-23T00:35:29.614Z",
+            "modified": "2023-04-23T00:36:16.921Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "01720237-2a4d-4ec0-9183-bb90c5ea1d4f",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "ad98b566-44d7-4559-8950-013dd2762ca7",
+            "name": "Recover",
+            "url": "{{back_domain}}/admin/comment/recover/63aaa8223a8088b653cc83f5",
+            "method": "PUT",
+            "sortNum": 17500,
+            "created": "2022-12-27T16:31:51.383Z",
+            "modified": "2022-12-27T16:55:33.588Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "3b6e460d-2eb1-447c-84de-efe2c300df1c",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "2d89bcb7-cfb5-4849-ab49-a17d833f1eb5",
+            "name": "Get statistic user join Copy",
+            "url": "{{back_domain}}/admin/statistic/post-by-mouth",
+            "method": "GET",
+            "sortNum": 17500,
+            "created": "2023-01-02T17:13:55.638Z",
+            "modified": "2023-01-02T17:13:59.549Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ca5ce785-8141-4d50-bb49-e39bda417245",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "Login",
+            "url": "{{heroku_api}}/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2022-10-11T08:46:36.743Z",
+            "modified": "2023-05-24T07:15:23.437Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"password\":\"12345\",\n  \"username\":\"votri606@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.token",
+                    "action": "setto",
+                    "value": "{{token}}"
+                },
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "header.set-cookie",
+                    "action": "setto",
+                    "value": "{{refresh-token}}"
+                }
+            ]
+        },
+        {
+            "_id": "5b9823d6-c275-4199-864f-9427d9fdf8a8",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "Like comment",
+            "url": "{{local_api}}/comment/64309cb1b1675e27839fab38/like",
+            "method": "PATCH",
+            "sortNum": 20000,
+            "created": "2022-11-23T13:26:56.496Z",
+            "modified": "2023-04-07T23:45:40.837Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6e0001c7-4756-4697-97e9-4b50fc4cef79",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "57b0304f-375a-4c27-af64-ba6533faea96",
+            "name": "Get File by user Copy",
+            "url": "{{back_domain}}/file/javascript",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2022-12-06T10:45:22.142Z",
+            "modified": "2022-12-26T07:44:50.754Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6ad2abe2-a47d-4c04-b743-b4f825e4bcbf",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "065cd8aa-8eb8-41a5-8d60-7df8d8dda505",
+            "name": "create",
+            "url": "{{back_domain}}/admin/auth/create",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2022-12-15T15:04:04.891Z",
+            "modified": "2022-12-15T15:08:26.181Z",
+            "headers": [
+                {
+                    "name": "set-cookie",
+                    "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGQ2NWJkYjMxMTQ0MTFkYWEwNTA1MCIsInVzZXJuYW1lIjoidm90cmkiLCJmdWxsbmFtZSI6IlbDtSBNaW5oIFRyw60iLCJhdmF0YXJVcmwiOiJodHRwOi8vcmVzLmNsb3VkaW5hcnkuY29tL2R1M2w4dXBzZS9pbWFnZS91cGxvYWQvdjE2NjY5MjIzNTgvem9sYV9maWxlcy9pbWFnZXMvb3djanliNHhpZnZuZ2JuZG1ic3QuanBnIiwiaWF0IjoxNjY3MjkxOTI3LCJleHAiOjE2Njc4OTY3Mjd9.ThIlZWFOdNvI5uH_EIWJgOqk7WBlwepYrxhhrosXhUY; Path=/; HttpOnly; Secure; SameSite=None"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\":\"admin\",\n  \"password\":\"123\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.token",
+                    "action": "setto",
+                    "value": "{{token}}"
+                },
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "_id": "157697c9-b0db-45da-b107-0b69c21a8534",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "7363247b-1db0-4577-8c00-a88083631236",
+            "name": "Get User last 5 post",
+            "url": "{{back_domain}}/admin/post/user-last-post?userId=634d65bdb3114411daa05050",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2022-12-18T10:34:30.992Z",
+            "modified": "2022-12-18T10:44:54.885Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "userId",
+                    "value": "634d65bdb3114411daa05050",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "fb589a85-21cf-473c-8663-feb0e4c82637",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "49d9b24e-6ce9-4cdf-9b52-b6b61dcd4339",
+            "name": "Get Room detail",
+            "url": "{{back_domain}}/admin/room/6352032386e80a09280ca51d",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2022-12-19T08:37:47.097Z",
+            "modified": "2022-12-19T08:38:05.557Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "bdf99ffb-75aa-48e6-933b-e1ebe6b55a96",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "2d89bcb7-cfb5-4849-ab49-a17d833f1eb5",
+            "name": "Get statistic room chat by mouth",
+            "url": "{{back_domain}}/admin/statistic/room-chat-by-mouth/638b09a0ae2b4797073abaa5",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2022-12-20T05:03:01.665Z",
+            "modified": "2023-01-03T10:26:19.052Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2734d2bd-fe73-4b17-8a39-037e71ed0dd3",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "ad98b566-44d7-4559-8950-013dd2762ca7",
+            "name": "Get Room detail",
+            "url": "{{back_domain}}/admin/room/6352032386e80a09280ca51d",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2022-12-25T18:34:04.687Z",
+            "modified": "2022-12-25T18:34:04.686Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7883e1b7-2e97-46af-95d7-543575333fa9",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "Read the message",
+            "url": "{{local_api}}/notification/read/:id",
+            "method": "PATCH",
+            "sortNum": 20000,
+            "created": "2023-04-17T13:09:58.370Z",
+            "modified": "2023-04-17T13:10:23.573Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "800a7cdc-70f7-409a-ba3d-e4073d1d7ba1",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "Logout",
+            "url": "{{back_domain}}/auth/logout",
+            "method": "POST",
+            "sortNum": 21250,
+            "created": "2022-12-17T06:00:16.807Z",
+            "modified": "2022-12-17T06:01:30.336Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"password\":\"12345678\",\n  \"email\":\"votri606@gmail.com\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [
+                {
+                    "type": "set-env-var",
+                    "custom": "json.token",
+                    "action": "setto",
+                    "value": "{{token}}"
+                },
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                },
+                {
+                    "type": "set-env-var",
+                    "custom": "header.set-cookie",
+                    "action": "setto",
+                    "value": "{{refresh-token}}"
+                }
+            ]
+        },
+        {
+            "_id": "1d020459-17e5-4ce7-b7a3-4abaa87f314e",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "verify account",
+            "url": "{{back_domain}}/auth/verify-user",
+            "method": "POST",
+            "sortNum": 22500,
+            "created": "2022-11-12T04:42:18.706Z",
+            "modified": "2022-11-13T08:50:45.079Z",
+            "headers": [
+                {
+                    "name": "set-cookie",
+                    "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGQ2NWJkYjMxMTQ0MTFkYWEwNTA1MCIsInVzZXJuYW1lIjoidm90cmkiLCJmdWxsbmFtZSI6IlbDtSBNaW5oIFRyw60iLCJhdmF0YXJVcmwiOiJodHRwOi8vcmVzLmNsb3VkaW5hcnkuY29tL2R1M2w4dXBzZS9pbWFnZS91cGxvYWQvdjE2NjY5MjIzNTgvem9sYV9maWxlcy9pbWFnZXMvb3djanliNHhpZnZuZ2JuZG1ic3QuanBnIiwiaWF0IjoxNjY3MjkxOTI3LCJleHAiOjE2Njc4OTY3Mjd9.ThIlZWFOdNvI5uH_EIWJgOqk7WBlwepYrxhhrosXhUY; Path=/; HttpOnly; Secure; SameSite=None"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"votri606@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "application/json"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{ \"message\": \"User valid\" }"
+                }
+            ]
+        },
+        {
+            "_id": "75398763-b0a9-4372-8f01-6473d65e8629",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "verify account fail",
+            "url": "{{back_domain}}/auth/verify-user",
+            "method": "POST",
+            "sortNum": 23750,
+            "created": "2022-11-13T08:51:34.218Z",
+            "modified": "2022-11-13T08:52:58.868Z",
+            "headers": [
+                {
+                    "name": "set-cookie",
+                    "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGQ2NWJkYjMxMTQ0MTFkYWEwNTA1MCIsInVzZXJuYW1lIjoidm90cmkiLCJmdWxsbmFtZSI6IlbDtSBNaW5oIFRyw60iLCJhdmF0YXJVcmwiOiJodHRwOi8vcmVzLmNsb3VkaW5hcnkuY29tL2R1M2w4dXBzZS9pbWFnZS91cGxvYWQvdjE2NjY5MjIzNTgvem9sYV9maWxlcy9pbWFnZXMvb3djanliNHhpZnZuZ2JuZG1ic3QuanBnIiwiaWF0IjoxNjY3MjkxOTI3LCJleHAiOjE2Njc4OTY3Mjd9.ThIlZWFOdNvI5uH_EIWJgOqk7WBlwepYrxhhrosXhUY; Path=/; HttpOnly; Secure; SameSite=None"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"votri606@gmail.com1\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "404"
+                },
+                {
+                    "type": "Content-Type",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "application/json"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": "{ \"message\": \"Not found\" }"
+                }
+            ]
+        },
+        {
+            "_id": "f5adab10-861d-47fc-8ed9-bbec165c6e59",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "Verify Email",
+            "url": "{{back_domain}}/auth/login",
+            "method": "POST",
+            "sortNum": 25000,
+            "created": "2022-10-24T22:27:55.797Z",
+            "modified": "2022-10-24T22:27:55.797Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"phone\":\"0333936899\",\n  \"password\":\"12345678\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0406ea5e-dfec-46d8-bf6e-bb173827bf76",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "2d89bcb7-cfb5-4849-ab49-a17d833f1eb5",
+            "name": "Get statistic room chat by mouth",
+            "url": "{{back_domain}}/admin/statistic/user-chat-by-mouth/634d65bdb3114411daa05050",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2023-01-03T10:25:10.446Z",
+            "modified": "2023-01-03T10:25:10.446Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0fc90fc7-0a53-423f-9079-2daa738083d4",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "Read all the notification",
+            "url": "{{local_api}}/notification/read/:id",
+            "method": "PATCH",
+            "sortNum": 25000,
+            "created": "2023-07-02T15:01:05.323Z",
+            "modified": "2023-07-02T15:01:05.323Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "48cf15c8-d974-4ce8-a7e6-a871eaece603",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "Regiser",
+            "url": "{{local_api}}/auth/register",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2022-10-12T03:36:25.960Z",
+            "modified": "2023-05-11T10:28:08.991Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"email\":\"vmtri21120@gmail.com\",\"password\":\"12345\",\"fullname\":\"Võ Minh Trí \",\"birthday\":\"25-05-2001\"}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "7157c64d-654a-4c4f-b34f-e37aefb7cddf",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "2d89bcb7-cfb5-4849-ab49-a17d833f1eb5",
+            "name": "Get statistic user by age",
+            "url": "{{back_domain}}/admin/statistic/user-by-age",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2022-12-25T17:06:14.316Z",
+            "modified": "2022-12-25T17:06:32.728Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "980cf67e-3db6-4853-b7c7-c96d26e33568",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "Delete notification",
+            "url": "{{heroku_api}}/notification/delete/646b545b2df2e2c331d0c1fa",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-07-02T14:57:44.582Z",
+            "modified": "2023-07-02T15:00:35.851Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1a50ebcf-c382-4a1d-bf90-199f6df049b2",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "Get info",
+            "url": "{{heroku_api}}/user/get-info",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2022-10-17T13:38:48.153Z",
+            "modified": "2023-05-19T05:16:11.286Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "cefd4755-57be-49a4-9b6e-208af37fcc8e",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
+            "name": "Delete comment",
+            "url": "{{back_domain}}/comment/63b3f3d9b94a28d88029783c",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2022-11-23T13:53:28.136Z",
+            "modified": "2023-01-03T09:35:01.715Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "3f7452dc-9929-4fe7-ad09-1b00ce0b2fcb",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
+            "name": "Delete all",
+            "url": "{{local_api}}/notification/delete-all",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-07-02T14:57:56.813Z",
+            "modified": "2023-07-02T14:58:54.132Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ebb2d72e-183d-446c-953b-9e213d1c49de",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Get hot post",
+            "url": "{{heroku_api}}/post/hot",
+            "method": "GET",
+            "sortNum": 45000,
+            "created": "2022-12-11T10:16:11.996Z",
+            "modified": "2023-04-23T01:05:06.482Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5b4e7a82-39d2-4778-ae51-3ce2f734b63a",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "Search",
+            "url": "{{local_api}}/user?search=Guy",
+            "method": "GET",
+            "sortNum": 45000,
+            "created": "2022-12-28T10:05:58.486Z",
+            "modified": "2023-05-19T03:05:20.952Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "search",
+                    "value": "Guy",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ec51d11f-32f8-476b-8a27-eb9cad5cf0ab",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "Get token",
+            "url": "{{heroku_api}}/auth/reset-token",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2022-10-17T14:03:50.458Z",
+            "modified": "2023-05-18T15:34:47.124Z",
+            "headers": [
+                {
+                    "name": "Cookie",
+                    "value": "{{refresh-token}}"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGQ2NWJkYjMxMTQ0MTFkYWEwNTA1MCIsInVzZXJuYW1lIjoidm90cmkiLCJmdWxsbmFtZSI6Ik1pbmggVHLDrSBWeCIsImF2YXRhclVybCI6Imh0dHA6Ly9yZXMuY2xvdWRpbmFyeS5jb20vZHUzbDh1cHNlL2ltYWdlL3VwbG9hZC92MTY3MDUwNzAyOS96b2xhX2ZpbGVzL2ltYWdlcy9jbGZwYWloeHM0ZXFnajJ6OGx2Yy5qcGciLCJpYXQiOjE2NzEyNTI5NzYsImV4cCI6MTY3MTg1Nzc3Nn0.wZ8Jd0GoZQMfxWitvmz5jrx-7oK8Kq6fdAkH2BvjCPE\"\n}",
+                "form": []
+            },
+            "tests": [],
+            "preReq": {
+                "runRequests": [
+                    {
+                        "reqId": "ca5ce785-8141-4d50-bb49-e39bda417245",
+                        "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+                        "triggerCondition": "run-always",
+                        "triggerValue": ""
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "1b51539b-6dfe-4742-a8b1-739f8573d7f5",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "get user by Id",
+            "url": "{{heroku_api}}/user/get?username=votri",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2022-10-31T05:14:50.496Z",
+            "modified": "2023-05-24T08:54:30.122Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "username",
+                    "value": "votri",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "327590c4-1bea-4d36-8a1d-b27c3d7fe7b0",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "create room",
+            "url": "{{local_api}}/room/create",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2022-10-17T14:22:12.997Z",
+            "modified": "2023-05-23T08:13:41.054Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"\",\n  \"isRoom\": false,\n  \"users\":[\"6355536111e768b93479d6a9\"]\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "84a3bfb6-e808-4851-9e2d-8217a7d2286f",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "Get Friends",
+            "url": "{{heroku_api}}/user/friends",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2022-10-24T21:18:41.293Z",
+            "modified": "2023-05-20T04:03:57.067Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "79480767-65c9-4ae6-a2eb-748691dd92d8",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "Get follower",
+            "url": "{{local_api}}/user/followers?username=niaias",
+            "method": "GET",
+            "sortNum": 65000,
+            "created": "2022-12-06T10:22:47.153Z",
+            "modified": "2023-05-20T06:07:10.383Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "username",
+                    "value": "niaias",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0ec58bc9-c903-402a-93e1-ada6370d105f",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "Get Folloiwing",
+            "url": "{{heroku_api}}/user/followings?username=63a818253b0e003e6e7cef92",
+            "method": "GET",
+            "sortNum": 67500,
+            "created": "2022-12-06T10:22:51.838Z",
+            "modified": "2023-05-20T07:31:26.595Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "username",
+                    "value": "63a818253b0e003e6e7cef92",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2bcfd915-ba09-4514-b5d8-84ee2b0d8def",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "1ff692df-a7ac-4a6a-a6cc-481c8282a509",
+            "name": "Send",
+            "url": "{{back_domain}}/message/send",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2022-10-17T14:42:48.391Z",
+            "modified": "2022-12-17T09:32:39.554Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "roomId",
+                        "value": "635526d6506fee74687ceca8"
+                    },
+                    {
+                        "name": "content",
+                        "value": "tin nhắn nanoid test"
+                    },
+                    {
+                        "name": "nanoid",
+                        "value": "{{#number}}"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "attach_files",
+                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\162335718_257334399429025_2577479868317875974_n.jpg",
+                        "isDisabled": true
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5f9cd95a-2b99-4f94-8b64-c77efb839327",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Get room by roomId",
+            "url": "{{heroku_api}}/room/63a343f85aff0901a2ad325b",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2022-10-21T02:02:46.578Z",
+            "modified": "2023-05-19T03:12:18.347Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "477bd709-ff02-4776-b8e3-32300cd17e18",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "Get Recommend Friends",
+            "url": "{{local_api}}/user/recommend-friends",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2022-11-23T14:10:47.681Z",
+            "modified": "2023-07-02T09:39:51.868Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7e39134d-d673-46be-bfe8-1d03abbec014",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "1ff692df-a7ac-4a6a-a6cc-481c8282a509",
+            "name": "Send file",
+            "url": "{{local_api}}/message/send-file",
+            "method": "POST",
+            "sortNum": 72500,
+            "created": "2023-04-21T00:42:46.360Z",
+            "modified": "2023-04-23T16:05:40.781Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "roomId",
+                        "value": "639054db864c677bc7dde070"
+                    },
+                    {
+                        "name": "nanoid",
+                        "value": "{{#number}}",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "type",
+                        "value": "video"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "attach_files",
+                        "value": "c:\\Users\\Tri\\Downloads\\y2mate.com - Kabuki YOOOO Sound Effect_480p.mp4"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6cc0809e-01b4-4483-9cf6-71ade33973cc",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Add user to room",
+            "url": "{{back_domain}}/room/remove-user/6352032386e80a09280ca51d",
+            "method": "PATCH",
+            "sortNum": 75000,
+            "created": "2022-11-01T12:54:50.831Z",
+            "modified": "2023-05-17T08:56:53.145Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"users\":[]\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "18374d86-642d-491a-8bd0-d79d419cdbef",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "1ff692df-a7ac-4a6a-a6cc-481c8282a509",
+            "name": "Recall Message",
+            "url": "{{back_domain}}/message/recall?nanoid=66257",
+            "method": "DELETE",
+            "sortNum": 75000,
+            "created": "2022-11-09T03:59:18.978Z",
+            "modified": "2022-12-17T09:33:32.746Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "id",
+                    "value": "639d8c01ad0c4b4e09e85fa4",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "nanoid",
+                    "value": "66257",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "4d718d31-cef7-4c57-ad97-37001120dfd6",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Remove user to room",
+            "url": "{{back_domain}}/room/remove-user/6352032386e80a09280ca51d",
+            "method": "PATCH",
+            "sortNum": 77500,
+            "created": "2023-05-17T08:45:17.803Z",
+            "modified": "2023-05-17T08:56:27.363Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"users\":[]\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e058f798-9154-438d-943e-33c46b1b36e8",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Change room name",
+            "url": "{{local_api}}/room/change-room-name/6463bade5e47b2316c9a5a8c",
+            "method": "PATCH",
+            "sortNum": 78750,
+            "created": "2023-05-17T09:36:03.767Z",
+            "modified": "2023-05-18T13:12:51.599Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"New one\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "34d853ac-4294-4cc6-ae19-c2f71e0c54d4",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "1ff692df-a7ac-4a6a-a6cc-481c8282a509",
+            "name": "Get message from roomId with search",
+            "url": "{{local_api}}/message/find/639054db864c677bc7dde070",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2022-10-17T14:59:54.487Z",
+            "modified": "2023-04-22T04:07:07.029Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "search",
+                    "value": "Hello",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "42e10ddb-7f7b-4dd4-894a-92ef628575be",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Leave room",
+            "url": "{{local_api}}/room/change-room-name/6463bade5e47b2316c9a5a8c",
+            "method": "PATCH",
+            "sortNum": 80000,
+            "created": "2022-10-21T02:17:23.599Z",
+            "modified": "2023-05-17T09:37:12.129Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"New name\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2f80c572-1ed4-4e0c-a2b6-33ca63c8a83b",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "Change avatar",
+            "url": "{{back_domain}}/user/change-avatar",
+            "method": "PATCH",
+            "sortNum": 80000,
+            "created": "2022-10-23T13:35:27.031Z",
+            "modified": "2023-01-01T09:50:12.300Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "file",
+                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\Memes\\541211d3d6faf98854cb9b3da2373c4e.jpg"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a8154d85-9912-46ff-a229-2f67315aee4c",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Delete room",
+            "url": "{{local_api}}/room/delete-room/6463bb6f5e47b2316c9a5af4",
+            "method": "DELETE",
+            "sortNum": 81250,
+            "created": "2023-05-17T08:51:38.223Z",
+            "modified": "2023-05-17T08:52:54.337Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "919537ac-030e-4b70-bb58-dd4ff357b76c",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Get room by userID",
+            "url": "{{heroku_api}}/room",
+            "method": "GET",
+            "sortNum": 82500,
+            "created": "2023-05-17T08:50:16.104Z",
+            "modified": "2023-05-17T08:50:16.104Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "972d8912-b572-4454-a3a2-a0869a4776bc",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "1ff692df-a7ac-4a6a-a6cc-481c8282a509",
+            "name": "Add reaction",
+            "url": "{{back_domain}}/message/reaction/63563fcb222432b9898c5632",
+            "method": "PATCH",
+            "sortNum": 85000,
+            "created": "2022-11-23T10:15:24.757Z",
+            "modified": "2022-11-23T11:03:33.715Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"value\":\"2\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "bf400fd0-77ae-420f-b7ea-2371ab24e25d",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Get chat group by UserId",
+            "url": "{{local_api}}/room/group",
+            "method": "GET",
+            "sortNum": 85000,
+            "created": "2023-04-24T06:53:28.174Z",
+            "modified": "2023-04-24T06:53:54.802Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "340831e7-3c1c-43bc-81af-1369870fa8fe",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Create post",
+            "url": "{{heroku_api}}/post/create",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2022-10-17T21:51:05.845Z",
+            "modified": "2023-05-22T11:39:07.706Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "scope",
+                        "value": "public"
+                    },
+                    {
+                        "name": "content",
+                        "value": "TÊ LIỆT!!!!!!!11"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "attach_files",
+                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\python_nlpp.png",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "attach_files",
+                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\cherry.png",
+                        "isDisabled": true
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e7a05ac1-b06c-4fe6-a98c-27cf199333af",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "1ff692df-a7ac-4a6a-a6cc-481c8282a509",
+            "name": "Get message from roomId Copy",
+            "url": "{{local_api}}/message/find/639054db864c677bc7dde070",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2022-10-24T08:26:10.140Z",
+            "modified": "2023-04-23T14:46:53.573Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a178b9bd-3073-4a98-a2a0-533abdae4e47",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Get user in room",
+            "url": "{{heroku_api}}/room/user?roomId=6468b0675d202dfab185ad3b",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2022-10-24T08:26:26.147Z",
+            "modified": "2023-05-20T14:24:00.682Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "roomId",
+                    "value": "6468b0675d202dfab185ad3b",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "94214584-4328-427d-b9cd-e6789556abfd",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "reset password",
+            "url": "{{back_domain}}/auth/reset-password",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2022-10-27T18:02:36.238Z",
+            "modified": "2023-01-03T09:38:46.158Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGQ2NWJkYjMxMTQ0MTFkYWEwNTA1MCIsIm90cCI6dHJ1ZSwiaWF0IjoxNjcyNzM4Njk0LCJleHAiOjE2NzMzNDM0OTR9.46iO8e5hiThkmsJ6zBq7Hjq1v5RPTiDkLojxIR_eMi8\",\n  \"password\":\"12345\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0467797d-1a1c-4e6a-96d5-85e6ffbfc7e6",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "Change cover image",
+            "url": "{{back_domain}}/user/change-cover",
+            "method": "PATCH",
+            "sortNum": 90000,
+            "created": "2022-12-08T13:46:21.960Z",
+            "modified": "2023-01-01T09:51:17.335Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "file",
+                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\download (2).png"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "50e467c6-bbea-4361-b8e7-b867f456daaf",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Update post",
+            "url": "{{back_domain}}/post/:id",
+            "method": "PUT",
+            "sortNum": 90312.5,
+            "created": "2023-01-03T10:32:35.541Z",
+            "modified": "2023-01-03T10:33:02.703Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "content",
+                        "value": "Calvin Harris - Feels (Official Video) ft. Pharrell Williams, Katy Perry, Big Sean"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "attach_files",
+                        "value": "c:\\Users\\Tri\\Downloads\\y2mate.com - Calvin Harris  Feels Official Video ft Pharrell Williams Katy Perry Big Sean_v720P.mp4"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9dbbd237-17d4-454d-82fe-044fd8054bb1",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Create post Copy",
+            "url": "{{local_api}}/post/create",
+            "method": "POST",
+            "sortNum": 90625,
+            "created": "2022-12-28T12:22:19.798Z",
+            "modified": "2023-05-06T01:08:07.891Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "content",
+                        "value": "mkmk"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "attach_files",
+                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\dance-dancing-duck.gif",
+                        "isDisabled": true
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "d9772111-00d0-4f59-8f55-7f4cbb4dcca4",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Share a post",
+            "url": "{{back_domain}}/post/share",
+            "method": "POST",
+            "sortNum": 91250,
+            "created": "2022-12-27T05:28:25.868Z",
+            "modified": "2022-12-28T12:23:26.208Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"content\":\"Share\",\n  \"originPost\":\"63ac2a8eab8f99e405879e71\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7ea4af35-6096-4743-80c0-8ddec8e23ea3",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Like a post",
+            "url": "{{local_api}}/post/63b2e16a426a9df9124af071/like",
+            "method": "PUT",
+            "sortNum": 95000,
+            "created": "2022-11-23T11:12:05.291Z",
+            "modified": "2023-04-05T04:00:20.679Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "19daa76c-90fa-4594-820d-2959bab017cf",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Get a post",
+            "url": "{{local_api}}/post/63aec834ef3fa2c90b91381d",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2022-10-17T22:26:33.217Z",
+            "modified": "2023-06-21T04:18:38.336Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "1f8f18b8-5f14-46ef-baa6-09aa391c237f",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "Following a user",
+            "url": "http://localhost:5000/api/v1/user/follow/python",
+            "method": "PATCH",
+            "sortNum": 100000,
+            "created": "2022-10-24T21:29:20.501Z",
+            "modified": "2023-04-24T14:47:15.924Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6abf33fd-585d-4f85-aa88-50a12951bada",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "check room with 2 people",
+            "url": "{{back_domain}}/room/check?username=vominhtri4_kce8o1671111622046",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2022-12-15T13:24:27.016Z",
+            "modified": "2022-12-15T13:40:41.683Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "username",
+                    "value": "vominhtri4_kce8o1671111622046",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5c1d7ebe-ae0b-4552-8b48-468e664fad3e",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Search post",
+            "url": "{{back_domain}}/post?search=danke&filter=hot",
+            "method": "GET",
+            "sortNum": 102500,
+            "created": "2022-12-26T12:29:29.024Z",
+            "modified": "2023-01-03T08:19:46.715Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "search",
+                    "value": "danke",
+                    "isPath": false
+                },
+                {
+                    "name": "filter",
+                    "value": "hot",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "895f3711-96e6-4bf9-a863-7ff3b87f7634",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Get all like post",
+            "url": "{{back_domain}}/post/like?username=tri_pyqxh1671503799638",
+            "method": "GET",
+            "sortNum": 105000,
+            "created": "2022-12-06T04:36:43.458Z",
+            "modified": "2023-01-03T05:29:36.123Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "username",
+                    "value": "tri_pyqxh1671503799638",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "d780a1f7-6a0b-4472-a5df-d234b7eadc00",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Get all user post",
+            "url": "{{heroku_api}}/post/profile/votri",
+            "method": "GET",
+            "sortNum": 107500,
+            "created": "2022-12-09T04:26:30.443Z",
+            "modified": "2023-05-20T07:40:38.466Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e867152f-b635-4a98-8f38-7912838af129",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Get all like user post timeline",
+            "url": "http://localhost:5000/api/v1/post/timeline/votri?offset=1",
+            "method": "GET",
+            "sortNum": 108750,
+            "created": "2022-12-09T04:30:44.126Z",
+            "modified": "2023-04-14T06:20:38.417Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "offset",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "28480029-4f5d-425f-a3fe-27a0aaa2b07c",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Get user recommend",
+            "url": "http://localhost:5000/api/v1/post/recommend",
+            "method": "GET",
+            "sortNum": 109375,
+            "created": "2023-07-02T10:15:59.824Z",
+            "modified": "2023-07-02T10:16:17.839Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9d1a64cf-c512-4a0a-ace9-d9db14a81e8d",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Delete post",
+            "url": "{{back_domain}}/post/63b3e6f10d6134f1882edb91",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2022-10-17T22:28:20.625Z",
+            "modified": "2023-01-03T08:29:02.799Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ed6b0620-a6d3-4a41-a453-d748bf5ba185",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "UnFollowing a user",
+            "url": "{{back_domain}}/user/unfollow/votri",
+            "method": "PATCH",
+            "sortNum": 110000,
+            "created": "2022-10-24T21:36:55.731Z",
+            "modified": "2022-12-12T15:39:37.567Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e849e022-99c4-4511-938f-9d0984a1d239",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "update user info",
+            "url": "{{heroku_api}}/user/update-info",
+            "method": "PATCH",
+            "sortNum": 120000,
+            "created": "2022-10-18T07:50:06.129Z",
+            "modified": "2023-05-19T05:21:24.859Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"bio\": \"Random Guy asd\",\n  \"address\":\"Việt Nam\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "400ca253-26f1-41ed-abba-189721420703",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
+            "name": "Change password",
+            "url": "{{back_domain}}/auth/token",
+            "method": "PATCH",
+            "sortNum": 130000,
+            "created": "2022-10-18T12:13:25.470Z",
+            "modified": "2022-10-18T12:13:46.918Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5544d7eb-6a06-4439-b5cb-d3a6f5562d6d",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "check username",
+            "url": "{{back_domain}}/user/check?username=votri12323",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2022-12-08T15:32:16.392Z",
+            "modified": "2022-12-08T15:33:40.949Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "username",
+                    "value": "votri12323",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f6004ab7-292b-40fc-ac98-456d7e26e92c",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b6760a10-f37e-4dd4-89d7-2b05d21dda36",
+            "name": "verify otp",
+            "url": "{{back_domain}}/otp/verify",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2022-10-27T17:18:39.712Z",
+            "modified": "2023-01-03T09:38:14.624Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"otp\":\"559603\",\n  \"email\": \"votri606@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "075265a0-eed1-4aa0-bfef-0010ad2a71da",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "change username",
+            "url": "{{back_domain}}/user/change-username",
+            "method": "PUT",
+            "sortNum": 140000,
+            "created": "2022-12-08T15:33:46.063Z",
+            "modified": "2023-04-19T09:19:20.377Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\":\"tri.vo\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "58b825ff-50ba-42e7-a5cf-2f86efed6de4",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b6760a10-f37e-4dd4-89d7-2b05d21dda36",
+            "name": "verify otp register",
+            "url": "{{local_api}}/otp/verify-register",
+            "method": "POST",
+            "sortNum": 145000,
+            "created": "2022-12-08T16:37:32.435Z",
+            "modified": "2023-05-11T09:51:01.900Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"otp\":\"873597\",\n  \"email\": \"vmtri20@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "196948ed-6c4f-4b1b-957f-50d5a357c9bd",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b6760a10-f37e-4dd4-89d7-2b05d21dda36",
+            "name": "request otp for register",
+            "url": "{{local_api}}/otp/request-otp",
+            "method": "POST",
+            "sortNum": 150000,
+            "created": "2022-10-27T17:26:26.223Z",
+            "modified": "2023-05-11T09:43:59.167Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"vmtri20@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "6789f2ff-9a9e-4d90-88bf-d83ace89e199",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b6760a10-f37e-4dd4-89d7-2b05d21dda36",
+            "name": "reset password Copy",
+            "url": "{{back_domain}}/auth/reset-password",
+            "method": "POST",
+            "sortNum": 152500,
+            "created": "2023-01-03T10:46:25.929Z",
+            "modified": "2023-01-03T10:46:31.609Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGQ2NWJkYjMxMTQ0MTFkYWEwNTA1MCIsIm90cCI6dHJ1ZSwiaWF0IjoxNjcyNzM4Njk0LCJleHAiOjE2NzMzNDM0OTR9.46iO8e5hiThkmsJ6zBq7Hjq1v5RPTiDkLojxIR_eMi8\",\n  \"password\":\"12345\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d2f87ee9-1ff3-45fe-8f8f-367c1ec9e743",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b6760a10-f37e-4dd4-89d7-2b05d21dda36",
+            "name": "request otp for register phone",
+            "url": "{{back_domain}}/otp/request-otp",
+            "method": "POST",
+            "sortNum": 155000,
+            "created": "2022-12-20T07:22:12.348Z",
+            "modified": "2022-12-20T07:29:35.349Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"phone\": \"+84826575703\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8640a86c-ea6a-401d-afc3-f5e76b9e5d4f",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b6760a10-f37e-4dd4-89d7-2b05d21dda36",
+            "name": "request otp for forget password",
+            "url": "{{back_domain}}/otp/forget-otp",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2022-12-08T16:10:43.717Z",
+            "modified": "2023-01-03T10:57:17.712Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\"email\": \"vmtri20@gmail.com\"}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "eaa8df64-ea42-4b92-b255-1aa86182b351",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "c3e824db-62db-4b30-8308-9f1395701406",
+            "name": "Get User",
+            "url": "{{back_domain}}/admin/user?offset=2",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2022-12-15T15:11:40.061Z",
+            "modified": "2022-12-25T10:10:54.185Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "offset",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "eb97c785-bc28-4b30-acc7-1fe8980722b0",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "c3e824db-62db-4b30-8308-9f1395701406",
+            "name": "Get user Detail",
+            "url": "{{back_domain}}/admin/user/63a11fb72a3edc9019c1fc54",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2022-12-18T10:02:15.106Z",
+            "modified": "2022-12-23T16:41:04.104Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b305e88d-bf5f-4c1f-ad61-e10f0cb129ae",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "c3e824db-62db-4b30-8308-9f1395701406",
+            "name": "Delete User",
+            "url": "{{back_domain}}/admin/user/63a11fb72a3edc9019c1fc54",
+            "method": "DELETE",
+            "sortNum": 190000,
+            "created": "2022-12-23T16:40:33.264Z",
+            "modified": "2022-12-23T16:40:56.318Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{admin_token}}"
+            },
+            "tests": []
+        }
+    ]
+}

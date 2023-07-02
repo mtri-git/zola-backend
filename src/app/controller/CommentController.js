@@ -8,12 +8,27 @@ class CommentController {
 
 	async getComment(req, res) {
 		try {
-			const comment = await Comment.findOne({
+
+			const commentPromise = Comment.findOne({
 				_id: req.params.commentId,
 				deleted_at: null,
-			})
-			res.status(200).json({ comment: comment })
+			  });
+			  const replyCountPromise = Comment.find({reply_to: req.params.commentId}).count();
+			  
+			  const [comment, replyCount] = await Promise.all([commentPromise, replyCountPromise]);
+
+			const commentRes = {
+				...comment._doc,
+				meta_data: {
+					reply_count: replyCount,
+					like_count: comment.like_by.length
+				}
+			}
+
+
+			res.status(200).json({ comment: commentRes })
 		} catch (err) {
+			console.log(err);
 			res.status(500).json({ Error: 'Server error.' })
 		}
 	}
@@ -152,8 +167,8 @@ class CommentController {
 					deleted_at: null,
 				})
 					.populate({ path: 'author', select: 'username fullname avatarUrl' })
-					.populate({ path: 'reply_to' })
-					.select('author postId reply_to content like_by created_at')
+					// .populate({ path: 'reply_to' })
+					.select('author postId reply_to parent_id content like_by created_at')
 
 				for (let index = 0; index < data.length; index++) {
 					data[index]._doc.totalReply = await Comment.find({

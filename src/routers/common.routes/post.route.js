@@ -16,6 +16,9 @@ router.get('/like', authMiddleware, postController.getLikedPost)
 // get user's timeline
 router.get('/timeline/:username', authMiddleware, postController.getTimelinePost)
 
+// get recommend post
+router.get('/recommend', authMiddleware, postController.recommendPost)
+
 // get user's all post 
 router.get('/profile/:username', authMiddleware, postController.getPostByUserId)
 

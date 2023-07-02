@@ -9,6 +9,7 @@ class AdminRoomController {
 			const offset = Number(paginate.offset) || 1
 
 			const rooms = await Room.find()
+				.select('-__v -updated_at')
 				.populate({
 					path: 'users',
 					select: '_id username fullname avatarUrl',
