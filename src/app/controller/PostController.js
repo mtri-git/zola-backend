@@ -3,6 +3,7 @@ const User = require('../../models/User')
 const Notification = require('../../models/Notification')
 const File = require('../../models/File')
 const Device = require('../../models/Device')
+const notificationService = require('../../services/notification.service')
 
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
 const { default: mongoose, Mongoose } = require('mongoose')
@@ -205,8 +206,14 @@ class PostController {
 
 			attach_files = [...uploadData]
 
+			// get the hashtag and mention from content
+			const hashtag = content.match(/#[a-zA-Z0-9]+/g)
+			const mention = content.match(/@[a-zA-Z0-9]+/g)
+
 			const post = new Post({
 				author: req.user.id,
+				hashtag,
+				mention,
 				content,
 				scope,
 				attach_files,
@@ -225,7 +232,7 @@ class PostController {
 
 			await Promise.all(
 				notificationUser.map((follower) => {
-					Notification.create({
+					notificationService.createNotification({
 						message: `${user.username} đã đăng bài viết mới`,
 						receiver: follower.toString(),
 						author: req.user.id,
@@ -252,7 +259,13 @@ class PostController {
 					id: post._id.toString(),
 				})
 
-			return res.status(201).json({ message: 'Add a post successful' })
+			return res.status(201).json({
+				message: 'Add a post successful',
+				data: {
+					_id: post._id,
+					content: post.content,
+				},
+			})
 		} catch (err) {
 			console.log('Add Post: ', err)
 			res.status(500).json({ message: 'Error' })
@@ -332,6 +345,23 @@ class PostController {
 
 			if (!post.like_by.includes(req.user.id) || post.like_by === []) {
 				await post.updateOne({ $addToSet: { like_by: req.user.id } })
+
+				//check is this notification is existed
+				const isExisted = await Notification.findOne({
+					postId: post._id,
+					type: 'like',
+					receiver: post.author.toString(),
+				})
+				
+				if(!isExisted)
+					await notificationService.createNotification({
+						message: `${req.user.username} thích bài viết của bạn`,
+						receiver: post.author.toString(),
+						// author: req.user.id,
+						type: 'like',
+						postId: post._id,
+					})
+
 				return res
 					.status(200)
 					.json({ message: 'The post has been liked' })
@@ -472,10 +502,10 @@ class PostController {
 			const recommendPost = await Post.find({
 				author: { $in: author },
 				deleted_at: null,
-				like_by: {$ne: user._id},
+				like_by: { $ne: user._id },
 			})
-			.sort({ created_at: -1 })
-			.limit(10)
+				.sort({ created_at: -1 })
+				.limit(10)
 
 			res.status(200).json({ data: recommendPost })
 		} catch (error) {

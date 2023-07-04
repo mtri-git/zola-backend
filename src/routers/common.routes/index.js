@@ -9,6 +9,7 @@ const commentRoute = require('./comment.route')
 const otpRoute = require('./otp.route')
 const fileRoute = require('./file.route')
 const notificationRoute = require('./notification.route')
+const hashtagRoute = require('./hashtag.route')
 
 const adminRoute = require('../admin.routes')
 
@@ -23,5 +24,6 @@ router.use('/post', postRoute)
 router.use('/comment', commentRoute)
 router.use('/otp', otpRoute)
 router.use('/file', fileRoute)
+router.use('/hashtag', hashtagRoute)
 
 module.exports = router

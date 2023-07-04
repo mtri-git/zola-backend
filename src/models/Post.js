@@ -4,6 +4,8 @@ const Schema = mongoose.Schema
 const PostSchema = new Schema({
 	content: String,
 	category_by_ai: String, // category by ai
+	hashtag: [String],
+	mention: [String],
 	author: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
