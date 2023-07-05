@@ -140,9 +140,9 @@ class AuthController {
 
 	async register(req, res) {
 		try {
-			const {fullname, email, phone, password, birthday} = req.body
+			const {fullname, email, phone, password, birthday, username} = req.body
 
-			const registerData = {fullname, email, phone, password, birthday}
+			const registerData = {fullname, email, phone, password, birthday, username}
 
 			if(!(email || phone))
 				return res.status(400).json({message: "Need email or password to register"})
@@ -158,7 +158,8 @@ class AuthController {
 			user.password = hashPassword
 			user.birthday = new Date(user.birthday)
 			// gen username
-			user.username = generateUsername(user.fullname)
+			if (!user.username)
+				user.username = generateUsername(user.fullname)
 			user.avatarUrl = DEFAULT_AVATAR
 
 			await user.save()

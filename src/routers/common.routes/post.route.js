@@ -28,6 +28,9 @@ router.get('/:postId', authMiddleware, postController.getPost)
 // create post
 router.post('/create', upload.array("attach_files"), authMiddleware, postController.createPost)
 
+// create post with json
+router.post('/create-link', authMiddleware, postController.createPostWithLink)
+
 // share a post with postId
 router.post('/share', authMiddleware, postController.sharePost)
 

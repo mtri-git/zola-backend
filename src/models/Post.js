@@ -9,6 +9,7 @@ const PostSchema = new Schema({
 	author: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
+		required: true,
 	},
 	originPost: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -19,6 +20,12 @@ const PostSchema = new Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'File',
 		},
+	],
+	files: [
+		{
+			type: String,
+			url: String,
+		}
 	],
 	scope: { type: String, default: 'public' },
 	like_by: [

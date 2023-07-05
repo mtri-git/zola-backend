@@ -5,7 +5,11 @@ const File = require('../../models/File')
 const Device = require('../../models/Device')
 const notificationService = require('../../services/notification.service')
 
-const { addNewFile, unlinkAsync } = require('../../services/file.service')
+const {
+	addNewFile,
+	unlinkAsync,
+	createFileByURL,
+} = require('../../services/file.service')
 const { default: mongoose, Mongoose } = require('mongoose')
 const { sendPushNotification } = require('../../services/firebase.service')
 
@@ -33,6 +37,12 @@ class PostController {
 	async searchPost(req, res) {
 		try {
 			const searchText = req.query.search
+			const { page, limit } = req.query
+
+			// default page = 1, limit = 10
+			const pageDefault = page || 1
+			const limitDefault = limit || 10
+
 			const filter = req.query.filter || 'new'
 			const sort = () => {
 				if (filter === 'new') return { created_at: -1 }
@@ -71,6 +81,8 @@ class PostController {
 					select: '-_id username',
 				})
 				.sort(sort())
+				.limit(Number(pageDefault))
+				.skip((Number(pageDefault) - 1) * Number(limitDefault))
 
 			let data = post.map((p) => {
 				p._doc.totalLike = p.like_by.length
@@ -166,6 +178,57 @@ class PostController {
 		}
 	}
 
+	async createPostWithLink(req, res){
+		try {
+			// link = {
+			// 	url: ['https://www.youtube.com/watch?v=3AtDnEC4zak'],
+			// 	type: 'image',
+			// }
+
+			const { content, scope, link, created_at } = req.body
+
+			const hashtag = content.match(/#[a-zA-Z0-9]+/g)
+			const mention = content.match(/@[a-zA-Z0-9]+/g)
+
+			console.log(hashtag, mention)
+
+			let post = new Post({
+				author: req.user.id,
+				content: content,
+				scope: scope,
+				hashtag,
+				mention,
+				created_at: created_at,
+			})
+
+			// create File Model by link and type
+			let listFile = []
+			if (link) {
+				// check link.url is array
+				if (!Array.isArray(link.url)) {
+					return res.status(400).json({ Error: 'Link is not array' })
+				}
+
+				for (let i = 0; i < link.url.length; i++) {
+					const file = await createFileByURL(
+						req.user.id,
+						post._id,
+						link.url[i],
+						link.type
+					)
+					listFile.push(file._id)
+				}
+
+				post.attach_files = listFile
+			}
+			await post.save()
+			return res.status(201).json({ message: 'Post successfully' })
+		} catch (error) {
+			console.log(error)
+			return res.status(500).json({ Error: "There's an error." })
+		}
+	}
+
 	// Add a post
 	async createPost(req, res) {
 		try {
@@ -176,10 +239,14 @@ class PostController {
 
 			// check scope later
 			if (!attach_files) {
+				const hashtag = content.match(/#[a-zA-Z0-9]+/g)
+				const mention = content.match(/@[a-zA-Z0-9]+/g)
 				const post = new Post({
 					content: content,
 					scope: scope,
 					author: req.user.id,
+					hashtag,
+					mention,
 				})
 				await post.save()
 				return res.status(201).json({ message: 'Post successfully' })
@@ -352,8 +419,8 @@ class PostController {
 					type: 'like',
 					receiver: post.author.toString(),
 				})
-				
-				if(!isExisted)
+
+				if (!isExisted)
 					await notificationService.createNotification({
 						message: `${req.user.username} thích bài viết của bạn`,
 						receiver: post.author.toString(),

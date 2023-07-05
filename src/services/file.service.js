@@ -86,6 +86,24 @@ const addNewFile = async (
 	}
 }
 
+const createFileByURL = async (owner_id ,post_id ,url, type) => {
+	try {
+		const file = await File.create({
+			owner: owner_id,
+			post_id: post_id,
+			url: url,
+			resource_type: type,
+			isPrivate: false,
+			isFromPost: true,
+		})
+		return file
+		
+	} catch (error) {
+		console.log(error.message)
+		throw new Error(error.message)
+	}
+}
+
 const unlinkAsync = promisify(fs.unlink)
 
-module.exports = { addNewFile, unlinkAsync }
+module.exports = { addNewFile, unlinkAsync, createFileByURL }

@@ -6,6 +6,10 @@ const FileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    post_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    },
     public_id: {type: String, default: ""},
     isFromPost: {type: Boolean, default: false},
     isPrivate: {type: Boolean, default: false},
