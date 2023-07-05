@@ -14,19 +14,23 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-
 app.use(cookieParser())
 app.use(compression())
 app.use(
 	cors({
-		origin: ["http://localhost:5173", "http://localhost:5175", "https://zola-admin.vercel.app", "http://localhost:50101"],
+		origin: [
+			'http://localhost:5173',
+			'http://localhost:5175',
+			'https://zola-social.netlify.app/',
+			'https://zola-admin.vercel.app',
+			'http://localhost:50101',
+		],
 		credentials: true,
 	})
 )
 
-
 // log morgan
-app.use(morgan("default"))
+app.use(morgan('default'))
 
 // app.use(morgan({ stream: accessLogStream }))
 
@@ -42,7 +46,6 @@ app.use(morgan("default"))
 
 // Firebase init
 admin_firebase.init()
-
 
 // Connect db
 db.connect()
