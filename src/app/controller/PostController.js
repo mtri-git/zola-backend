@@ -81,7 +81,7 @@ class PostController {
 					select: '-_id username',
 				})
 				.sort(sort())
-				.limit(Number(pageDefault))
+				.limit(Number(limitDefault))
 				.skip((Number(pageDefault) - 1) * Number(limitDefault))
 
 			let data = post.map((p) => {
@@ -420,11 +420,11 @@ class PostController {
 					receiver: post.author.toString(),
 				})
 
-				if (!isExisted)
+				if (!isExisted && post.author.toString() !== req.user.id)
 					await notificationService.createNotification({
 						message: `${req.user.username} thích bài viết của bạn`,
 						receiver: post.author.toString(),
-						// author: req.user.id,
+						author: req.user.id,
 						type: 'like',
 						postId: post._id,
 					})
