@@ -17,11 +17,20 @@ class PostController {
 	// get a post
 	async getPost(req, res) {
 		try {
-			const _user = await User.findById(req.user.id)
+
 			let post = await Post.getPostWithId(req.params.postId)
-			post._doc.isLike = post.like_by.some(
-				(element) => element.username === _user.username
-			)
+						
+			if(req.user)
+			{
+				const _user = await User.findById(req.user.id)
+				post._doc.isLike = post.like_by.some(
+					(element) => element.username === _user.username
+				)
+			}
+			else
+			{
+				post._doc.isLike = false
+			}
 
 			post._doc.totalLike = post.like_by.length
 			post._doc.totalComment = post.comments.length

@@ -22,8 +22,7 @@ app.use(
 			'http://localhost:5173',
 			'http://localhost:5175',
 			'https://zola-social.netlify.app',
-			'https://zola-admin.vercel.app',
-			'http://localhost:50101',
+			'https://zola-admin.vercel.app'
 		],
 		credentials: true,
 	})

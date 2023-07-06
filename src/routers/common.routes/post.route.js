@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const postController = require('../../app/controller/PostController')
 const authMiddleware = require('../../middleware/auth.middleware')
+const verifyMiddleware = require('../../middleware/verify.middleware')
 const upload = require('../../configs/upload')
 
 // search post
@@ -23,7 +24,7 @@ router.get('/recommend', authMiddleware, postController.recommendPost)
 router.get('/profile/:username', authMiddleware, postController.getPostByUserId)
 
 // get post by Id
-router.get('/:postId', authMiddleware, postController.getPost)
+router.get('/:postId', verifyMiddleware, postController.getPost)
 
 // create post
 router.post('/create', upload.array("attach_files"), authMiddleware, postController.createPost)
