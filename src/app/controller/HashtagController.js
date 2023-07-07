@@ -3,7 +3,7 @@ const Post = require('../../models/Post');
 
 class HashtagController{
     async getTrendingHashtags(req, res){
-        const {limit} = req.query;
+        let {limit} = req.query;
         //if limit is not provided, set default limit to 10
         if(!limit) limit = 5;
 
