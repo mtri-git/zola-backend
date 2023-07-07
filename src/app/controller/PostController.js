@@ -426,7 +426,7 @@ class PostController {
 				const isExisted = await Notification.findOne({
 					postId: post._id,
 					type: 'like',
-					receiver: post.author.toString(),
+					author: post.author.toString(),
 				})
 
 				if (!isExisted && post.author.toString() !== req.user.id)

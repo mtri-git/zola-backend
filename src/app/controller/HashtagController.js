@@ -3,13 +3,17 @@ const Post = require('../../models/Post');
 
 class HashtagController{
     async getTrendingHashtags(req, res){
+        const {limit} = req.query;
+        //if limit is not provided, set default limit to 10
+        if(!limit) limit = 5;
+
         try {
             const data = await Post.aggregate([
                 {$match: {deleted_at: null}},
                 {$unwind: '$hashtag'},
                 {$group: {_id: '$hashtag', count: {$sum: 1}}},
                 {$sort: {count: -1}},
-                {$limit: 10},
+                {$limit: limit},
                 {$project: {_id: 0, hashtag: '$_id', count: 1}}
             ]);
             return res.status(201).json({data});
