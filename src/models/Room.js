@@ -90,13 +90,13 @@ RoomSchema.statics.getRoomByUserId = function (id) {
 
 RoomSchema.post('save', (next) => {
 	this.updated_at = Date.now()
-	next()
+	// next()
 })
 
 // If modified add update date
 RoomSchema.post('updateOne', (next) => {
 	this.updated_at = Date.now()
-	next()
+	// next()
 })
 
 const Room = mongoose.model('Room', RoomSchema)
