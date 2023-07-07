@@ -1,5 +1,6 @@
 const Room = require('../models/Room')
 const Device = require('../models/Device')
+const User = require('../models/User')
 const { sendPushNotification } = require('./firebase.service')
 
 const sendPushNotificationForMessage = async ({roomId, type, content, userId}) => {
@@ -7,6 +8,8 @@ const sendPushNotificationForMessage = async ({roomId, type, content, userId}) =
     //get user device exept sender
 	const device = await Device.find().where('owner').in(room.users).ne('owner', userId)
 	const tokens = device.map((d) => d.fcm_token)
+
+	const user = await User.findOne({ _id: userId })
 
 	let messageContent = content
 
@@ -32,7 +35,7 @@ const sendPushNotificationForMessage = async ({roomId, type, content, userId}) =
 
 	await sendPushNotification({
 		tokens,
-		title: `${message.name} đã nhắn tin`,
+		title: `${user.fullname} đã nhắn tin`,
 		body: messageContent,
 		id: message.roomId,
 	})
