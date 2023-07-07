@@ -16,9 +16,9 @@ const sendPushNotificationForMessage = async ({roomId, type, content, userId}) =
 	switch (type) {
 		case 'text':
 			messageContent =
-				message.content.length > 20
-					? message.content.slice(0, 20) + '...'
-					: message.content
+			content.content.length > 20
+					? content.slice(0, 20) + '...'
+					: content
 			break
 		case 'image':
 			messageContent = 'Đã gửi ảnh 📷'
