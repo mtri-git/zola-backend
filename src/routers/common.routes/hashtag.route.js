@@ -6,5 +6,6 @@ const hashtagController = require('../../app/controller/HashtagController')
 
 router.get('/trending', authMiddleware, hashtagController.getTrendingHashtags)
 router.get('/trending-by-time', authMiddleware, hashtagController.getTrendingByTheTime)
+router.get('/post', authMiddleware, hashtagController.getPostByHashtag)
 
 module.exports = router

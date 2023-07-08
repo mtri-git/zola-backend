@@ -59,6 +59,35 @@ class HashtagController{
         }
     }
 
+    async getPostByHashtag(req, res){
+        try {
+            const {hashtag} = req.query;
+            const {limit=1, page=10} = req.query;
+            const skip = (page - 1) * limit;
+
+            console.log(hashtag);
+
+            const data = await Post.find({hashtag: `#${hashtag}`, deleted_at: null})
+            .select('-deleted_at -__v -updated_at')
+            .populate('author', 'username avatar fullname')
+            .populate('attach_files')
+            .sort({created_at: -1})
+
+
+            for (let i = 0; i < data.length; i++) {
+                data[i]._doc.totalLike = data[i].like_by.length;
+                data[i]._doc.totalComment = data[i].comments.length;
+                data[i]._doc.isLike = data[i].like_by.includes(req.user._id);
+            }
+
+            return res.status(200).json({data});
+        }
+        catch (error) {
+            console.log(error);
+            return res.status(500).json({message: 'Server error.'});
+        }
+
+    }
 
 
 }
