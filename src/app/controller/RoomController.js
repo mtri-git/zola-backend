@@ -107,7 +107,11 @@ class RoomController {
 
 	async getRoomByUserById(req, res) {
 		try {
-			const { limit=1, page=10 } = req.query
+			let { limit=1, page=10 } = req.query
+
+			limit = parseInt(limit)
+			page = parseInt(page)
+
 			let rooms = await roomService.getRoomByUserId(
 				req.user.id,
 				page,
@@ -122,7 +126,8 @@ class RoomController {
 			const pagination = {
 				total,
 				limit,
-				offset: page,
+				page,
+				totalPage: Math.ceil(total / limit),
 			}
 
 
