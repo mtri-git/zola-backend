@@ -7,6 +7,7 @@ function route(app){
 
     app.use(ROOT_ROUTE + '/admin', adminRoute)
     app.use(ROOT_ROUTE, commonRoute)
+    
 
 }
 module.exports = route

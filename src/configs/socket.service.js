@@ -1,23 +1,12 @@
-const socketIo = require('socket.io')
-const Message = require('../models/Message')
-const Room = require('../models/Room')
-const User = require('../models/User')
-const {
-	sendPushNotificationForMessage,
-} = require('../services/message.service')
+const socketIo = require('socket.io');
 
-let io
+class SocketService {
+    io
+    userOnline = []
 
-let userOnline = []
-
-function getIo() {
-	return io
-}
-
-function initSocket(server) {
-	io = socketIo(server)
-
-	io.on('connection', async (socket) => {
+   constructor(server) {
+     this.io = socketIo(server);
+     this.io.on('connection', async (socket) => {
 		console.log('A user connected.')
 		console.log('A user connected:', socket.handshake.query.username)
 		try {
@@ -124,9 +113,13 @@ function initSocket(server) {
 			}
 		})
 	})
+ } 
+
+  emiter(event, body) {
+    if(body)
+      this.io.emit(event, body);
+    console.log('emiter')
+  }
 }
 
-module.exports = {
-	initSocket,
-	getIo,
-}
+module.exports = SocketService;

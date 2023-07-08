@@ -21,4 +21,6 @@ router.get('/call/:id', authMiddleware ,notificationController.startVideoCallFro
 
 router.post('/test' ,notificationController.testNotificationFirebase)
 
+router.post('/test-io' ,notificationController.testIo)
+
 module.exports = router

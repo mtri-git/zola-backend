@@ -135,6 +135,18 @@ class NotificationController {
 		}
 	}
 
+	 testIo(req, res) {
+		try {
+			const io = getIo()
+			io.emit('test', { message: req.body.message })
+
+			return res.status(200).json({ message: 'OK' })
+		} catch (error) {
+			console.log(error)
+			return res.status(500).json({ message: 'Error' })
+		}
+	}
+
 	async testNotificationFirebase(req, res) {
 		try {
 			await admin.messaging().sendMulticast({
