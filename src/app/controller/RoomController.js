@@ -107,7 +107,12 @@ class RoomController {
 
 	async getRoomByUserById(req, res) {
 		try {
-			let { limit=1, page=10 } = req.query
+			let { limit, page } = req.query
+
+			if (!limit) limit = 10 
+			else limit = parseInt(limit)
+			if (!page) page = 1
+			else page = parseInt(page)
 
 			limit = parseInt(limit)
 			page = parseInt(page)
