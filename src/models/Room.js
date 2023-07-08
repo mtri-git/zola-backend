@@ -45,7 +45,7 @@ RoomSchema.virtual('last_message', {
 
 // statics
 RoomSchema.statics.getRoomById = function (id) {
-	const room = this.where({ _id: id, deleted_at: null })
+	const room = this.findOne({ _id: id, deleted_at: null })
 		.populate({
 			path: 'users',
 			select: 'contact_info username fullname status avatarUrl',
