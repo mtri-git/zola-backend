@@ -105,7 +105,17 @@ class UserController {
 		try {
 			if (req.user) {
 				const file = req.file
+				
+				//check if file is png or jpg
+				console.log(file.mimetype);
+				if (!file.mimetype.includes('image') || file.mimetype.includes('svg') ) {
+
+					return res.status(400).json({ message: 'File is not image' })
+				}
+
 				const data = await addNewFile(file.path, 'image', req.user.id)
+
+				
 
 				// delete temp file after upload with multer
 				await unlinkAsync(file.path)

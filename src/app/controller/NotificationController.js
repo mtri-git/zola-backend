@@ -20,10 +20,23 @@ const init = () => {
 class NotificationController {
 	async getAllNotification(req, res) {
 		try {
-			const notifications = await NotificationService.getAllNotification(
-				req.user.id
-			)
-			res.status(200).json({ data: notifications })
+			const { page = 1, limit = 10 } = req.query
+
+			const { notifications, pages, total } =
+				await NotificationService.getAllNotification(
+					req.user.id,
+					page,
+					limit
+				)
+
+			const pagination = {
+				total,
+				limit,
+				page,
+				pages,
+			}
+
+			res.status(200).json({ data: notifications, pagination })
 		} catch (error) {
 			console.log(error)
 			res.status(500).json({ message: 'Error' })

@@ -18,7 +18,8 @@ router.patch('/update-info',authMiddleware, userController.updateInfo)
 // get user by id, or username
 router.get('/get', userController.getUserById)
 
-//change user avatar
+//change user avatar 
+// only file type is image
 router.patch('/change-avatar', upload.single("file"), authMiddleware, userController.changeAvatar)
 
 //change user cover image

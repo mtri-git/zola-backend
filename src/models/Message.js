@@ -58,7 +58,7 @@ const MessageSchema = new mongoose.Schema({
 	deleted_at: {type: Date, default: null},
 })
 
-MessageSchema.query.byContentInRoom = function (roomId, search) {
+MessageSchema.query.byContentInRoom = function (roomId, search, limit, page) {
 	if (search)
 		return this.where({
 			roomId: roomId,
@@ -78,6 +78,8 @@ MessageSchema.query.byContentInRoom = function (roomId, search) {
 				path: 'attach_files',
 				select: 'resource_type format url',
 			})
+			.limit(limit)
+			.skip(limit * page)
 	else
 		return this.where({
 			roomId: roomId,

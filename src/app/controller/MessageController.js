@@ -72,11 +72,9 @@ class MessageController {
 			// }
 
 			if (req_attach_files.length > maxFiles) {
-				return res
-					.status(400)
-					.json({
-						message: `Max ${maxFiles} ${messageData.type} files`,
-					})
+				return res.status(400).json({
+					message: `Max ${maxFiles} ${messageData.type} files`,
+				})
 			}
 
 			// upload file to cloudinary
@@ -103,21 +101,24 @@ class MessageController {
 			await message.save()
 
 			const result = await Message.findOne({ _id: message._id })
-			.select('content type created_at seen_by sender reply_to attach_files')
-			.populate({
-				path: 'sender',
-				select: 'username fullname avatarUrl -_id',
-			})
-			.populate({
-				path: 'seen_by',
-				select: 'username status contact_info avatarUrl last_online',
-			})
-			.populate({
-				path: 'attach_files',
-				select: 'resource_type format url',
-			}).lean()
+				.select(
+					'content type created_at seen_by sender reply_to attach_files'
+				)
+				.populate({
+					path: 'sender',
+					select: 'username fullname avatarUrl -_id',
+				})
+				.populate({
+					path: 'seen_by',
+					select: 'username status contact_info avatarUrl last_online',
+				})
+				.populate({
+					path: 'attach_files',
+					select: 'resource_type format url',
+				})
+				.lean()
 
-			result.messageType = "sender"
+			result.messageType = 'sender'
 
 			res.status(200).json({ data: result })
 		} catch (err) {
@@ -165,10 +166,23 @@ class MessageController {
 
 	async getMessageByRoomId(req, res) {
 		try {
+			let { limit, page } = req.query
+			
+			if (!limit) limit = 20
+			else limit = parseInt(limit)
+
+			if (!page) page = 1
+			else page = parseInt(page)
+
 			const room = await Room.findById(req.params.roomId)
 			if (room.users.includes(req.user.id) && room) {
 				const messages = await Message.where()
-					.byContentInRoom(req.params.roomId, req.query.search)
+					.byContentInRoom(
+						req.params.roomId,
+						req.query.search,
+						limit,
+						page
+					)
 					.lean()
 
 				// each message in messages will have messageType property to identify type of message
@@ -178,7 +192,18 @@ class MessageController {
 					else message.messageType = 'receiver'
 				})
 
-				res.status(200).json({ messages: messages })
+				// pagination data
+				const total = await Message.where()
+					.byContentInRoom(req.params.roomId, req.query.search)
+					.countDocuments()
+				const pagination = {
+					total: total,
+					limit: limit,
+					page: page,
+					pages: Math.ceil(total / limit),
+				}
+
+				res.status(200).json({ messages: messages, pagination })
 			} else {
 				res.status(401).json({ message: "You can't access this room" })
 			}
