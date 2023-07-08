@@ -13,11 +13,13 @@ class RoomService {
 		}
 	}
 
-	async getRoomByUserId(userId, offset = 1, limit = 10) {
+	async getRoomByUserId(userId, page = 1, limit = 10) {
 		try {
 			const user = await User.findById(userId)
 			const room = await Room.aggregate([
-			    { $match: { $and: [{users: user._id}, {deleted_at: null}] } },
+			   	{ $match: { $and: [{users: user._id}, {deleted_at: null}] } },
+				{$skip: (page - 1) * limit},
+				{$limit: limit},
 			    {
 			      $lookup: {
 			        from: "messages",
@@ -107,8 +109,6 @@ class RoomService {
 						},
 					},
 					{ $sort: {timestamp: -1}  },
-					// { $skip: offset },
-					// { $limit: limit },
 			  ])
 			  
 			  // change users_info to users

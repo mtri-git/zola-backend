@@ -107,14 +107,26 @@ class RoomController {
 
 	async getRoomByUserById(req, res) {
 		try {
-			const { limit, offset } = req.query
+			const { limit=1, page=10 } = req.query
 			let rooms = await roomService.getRoomByUserId(
 				req.user.id,
-				offset,
+				page,
 				limit
 			)
 
-			return res.status(200).json({ Rooms: rooms })
+			const total = await Room.countDocuments({
+				users: req.user.id,
+				deleted_at: null,
+			})
+
+			const pagination = {
+				total,
+				limit,
+				offset: page,
+			}
+
+
+			return res.status(200).json({ Rooms: rooms, pagination })
 		} catch (err) {
 			console.log(err)
 			return res.status(500).json('Fail')
