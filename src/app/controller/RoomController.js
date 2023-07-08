@@ -18,6 +18,7 @@ class RoomController {
 
 				// if room is 2 user and already exist
 				if (roomData.users.length === 1) {
+					isRoom = false
 					const objectIdArray = [...roomData.users, req.user.id].map(str => mongoose.Types.ObjectId(str));
 					const room = await Room.findOne({
 						users: objectIdArray, deleted_at: null
