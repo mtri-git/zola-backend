@@ -25,6 +25,9 @@ router.get('/check', authMiddleware, roomController.checkRoomWithTwoUser)
 // get chat room from roomId
 router.get('/:roomId' , authMiddleware, roomController.getRoomById)
 
+// check user is admin of room
+router.get('/is-admin/:id' , authMiddleware, roomController.checkUserIsAdmin)
+
 // add user to room
 router.patch('/add-user/:id' , authMiddleware, roomController.addUserToRoom)
 

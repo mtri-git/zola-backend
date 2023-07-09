@@ -175,8 +175,13 @@ class RoomController {
 
 	async addUserToRoom(req, res) {
 		try {
-		// using $addToSet to void duplicated values
+			
+			// using $addToSet to void duplicated values
 			const room = await Room.findById(req.params.id)
+			// check user is admin of room
+			if (!room.admins.includes(req.user.id)) {
+				res.status(401).json({ message: 'You are not admin of room' })
+			}
 			const userList = req.body.users
 			console.log(userList);
 			//check list user is valid
@@ -216,6 +221,10 @@ class RoomController {
 	async removeUserFromRoom(req, res) {
 		// using $addToSet to void duplicated values
 		const room = await Room.findById(req.params.id)
+		if (!room.admins.includes(req.user.id)) {
+			res.status(401).json({ message: 'You are not admin of room' })
+		}
+
 		if (await !User.exists({ _id: req.body.userId })) {
 			return res.status(401).json({ message: 'User not existed' })
 			
@@ -271,10 +280,26 @@ class RoomController {
 		}
 	}
 
+	async checkUserIsAdmin(req, res) {
+		try {
+			const room = await Room.findOne({ _id: req.params.id })
+			if (room.admins.includes(req.query.userId)) {
+				return res.status(200).json({ message: 'User is admin' })
+			}
+			return res.status(200).json({ message: 'User is not admin' })
+
+		} catch (error) {
+			return  res.status(500).json({ message: 'Server error' })
+		}
+	}
+
 	// delete room
 	async deleteRoom(req, res) {
 		try {
 			const room = await Room.findOne({ _id: req.params.id })
+			if (!room.admins.includes(req.user.id)) {
+				res.status(401).json({ message: 'You are not admin of room' })
+			}
 			if (room.users.includes(req.user.id) && room.isRoom) {
 				await Room.updateOne(
 					{ _id: req.params.id },
