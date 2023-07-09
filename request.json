@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Zola",
-    "dateExported": "2023-07-02T15:01:33.524Z",
+    "dateExported": "2023-07-09T09:44:18.985Z",
     "version": "1.1",
     "folders": [
         {
@@ -122,6 +122,13 @@
             "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
             "created": "2023-04-17T13:06:03.837Z",
             "sortNum": 170000
+        },
+        {
+            "_id": "171db935-e286-4a39-b8bc-d8a3336c0955",
+            "name": "Hashtag",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2023-07-03T03:41:55.489Z",
+            "sortNum": 190000
         }
     ],
     "requests": [
@@ -130,11 +137,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
             "name": "Get comment by id",
-            "url": "{{local_api}}/comment/63ac0a3e2f8c9a36ce17332d",
+            "url": "{{heroku_api}}/comment/63ac0a3e2f8c9a36ce17332d",
             "method": "GET",
             "sortNum": 5000,
             "created": "2022-11-23T13:58:30.353Z",
-            "modified": "2023-06-21T04:20:30.490Z",
+            "modified": "2023-07-07T00:41:30.823Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -394,11 +401,29 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
             "name": "Get all notification",
-            "url": "{{heroku_api}}/notification",
+            "url": "{{local_api}}/notification",
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-04-17T13:06:29.070Z",
-            "modified": "2023-07-02T14:59:14.354Z",
+            "modified": "2023-07-08T03:40:46.667Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7966c815-1a7e-4967-8514-588331d8368f",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "171db935-e286-4a39-b8bc-d8a3336c0955",
+            "name": "Get the hashtag",
+            "url": "{{heroku_api}}/hashtag/trending",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-07-03T03:41:55.491Z",
+            "modified": "2023-07-07T10:05:04.505Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -448,13 +473,18 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
             "name": "Test socket",
-            "url": "{{local_api}}/notification/test",
+            "url": "{{local_api}}/notification/test-io",
             "method": "POST",
             "sortNum": 12500,
             "created": "2023-04-23T11:07:33.041Z",
-            "modified": "2023-04-25T01:48:30.346Z",
+            "modified": "2023-07-08T14:55:44.964Z",
             "headers": [],
             "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\": \"ok h m\"\n}",
+                "form": []
+            },
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -689,16 +719,16 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
             "name": "Login",
-            "url": "{{heroku_api}}/auth/login",
+            "url": "{{local_api}}/auth/login",
             "method": "POST",
             "sortNum": 20000,
             "created": "2022-10-11T08:46:36.743Z",
-            "modified": "2023-05-24T07:15:23.437Z",
+            "modified": "2023-07-08T03:41:41.991Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"password\":\"12345\",\n  \"username\":\"votri606@gmail.com\"\n}",
+                "raw": "{\n  \"password\":\"12345\",\n  \"username\":\"votri\"\n}",
                 "form": []
             },
             "tests": [
@@ -733,11 +763,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "3e194f7e-b92c-46fc-9d37-fbdf0fd45835",
             "name": "Like comment",
-            "url": "{{local_api}}/comment/64309cb1b1675e27839fab38/like",
+            "url": "{{heroku_api}}/comment/6492bf999fafd9a4378d792f/like",
             "method": "PATCH",
             "sortNum": 20000,
             "created": "2022-11-23T13:26:56.496Z",
-            "modified": "2023-04-07T23:45:40.837Z",
+            "modified": "2023-07-07T00:42:03.759Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -897,6 +927,30 @@
             "modified": "2023-04-17T13:10:23.573Z",
             "headers": [],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "10cf700e-735f-448f-a230-2e4387efcc34",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "171db935-e286-4a39-b8bc-d8a3336c0955",
+            "name": "Get the hashtag by time",
+            "url": "{{local_api}}/hashtag/trending-by-time?time=week",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-07-04T03:11:48.039Z",
+            "modified": "2023-07-04T03:12:24.094Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "time",
+                    "value": "week",
+                    "isPath": false
+                }
+            ],
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -1101,12 +1155,12 @@
             "method": "POST",
             "sortNum": 30000,
             "created": "2022-10-12T03:36:25.960Z",
-            "modified": "2023-05-11T10:28:08.991Z",
+            "modified": "2023-07-05T12:04:38.391Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\"email\":\"vmtri21120@gmail.com\",\"password\":\"12345\",\"fullname\":\"Võ Minh Trí \",\"birthday\":\"25-05-2001\"}",
+                "raw": "{\n  \"email\": \"reactjs@gmail.com\",\n  \"password\": \"12345678\",\n  \"fullname\": \"React\",\n  \"birthday\": \"21-05-1999\",\n  \"username\": \"react\"\n}",
                 "form": []
             },
             "tests": []
@@ -1141,6 +1195,30 @@
             "modified": "2023-07-02T15:00:35.851Z",
             "headers": [],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c487fe92-7103-4af8-8028-3b9c514a6db0",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "171db935-e286-4a39-b8bc-d8a3336c0955",
+            "name": "Get the hashtag post",
+            "url": "{{local_api}}/hashtag/post?hashtag=vue",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-07-08T19:07:45.108Z",
+            "modified": "2023-07-08T19:17:50.392Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "hashtag",
+                    "value": "vue",
+                    "isPath": false
+                }
+            ],
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -1206,13 +1284,24 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
             "name": "Get hot post",
-            "url": "{{heroku_api}}/post/hot",
+            "url": "{{local_api}}/post/hot?pageSize=1&offset=5",
             "method": "GET",
             "sortNum": 45000,
             "created": "2022-12-11T10:16:11.996Z",
-            "modified": "2023-04-23T01:05:06.482Z",
+            "modified": "2023-07-07T10:03:27.972Z",
             "headers": [],
-            "params": [],
+            "params": [
+                {
+                    "name": "pageSize",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "offset",
+                    "value": "5",
+                    "isPath": false
+                }
+            ],
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -1224,16 +1313,16 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
             "name": "Search",
-            "url": "{{local_api}}/user?search=Guy",
+            "url": "{{local_api}}/user?search=meme",
             "method": "GET",
             "sortNum": 45000,
             "created": "2022-12-28T10:05:58.486Z",
-            "modified": "2023-05-19T03:05:20.952Z",
+            "modified": "2023-07-05T12:59:51.201Z",
             "headers": [],
             "params": [
                 {
                     "name": "search",
-                    "value": "Guy",
+                    "value": "meme",
                     "isPath": false
                 }
             ],
@@ -1434,11 +1523,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
             "name": "Get room by roomId",
-            "url": "{{heroku_api}}/room/63a343f85aff0901a2ad325b",
+            "url": "{{heroku_api}}/room/64a9bcbe364dcf8902450618",
             "method": "GET",
             "sortNum": 70000,
             "created": "2022-10-21T02:02:46.578Z",
-            "modified": "2023-05-19T03:12:18.347Z",
+            "modified": "2023-07-09T00:16:34.970Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -1474,7 +1563,7 @@
             "method": "POST",
             "sortNum": 72500,
             "created": "2023-04-21T00:42:46.360Z",
-            "modified": "2023-04-23T16:05:40.781Z",
+            "modified": "2023-07-09T08:00:03.041Z",
             "headers": [],
             "params": [],
             "body": {
@@ -1483,7 +1572,7 @@
                 "form": [
                     {
                         "name": "roomId",
-                        "value": "639054db864c677bc7dde070"
+                        "value": "64a9bcbe364dcf8902450618"
                     },
                     {
                         "name": "nanoid",
@@ -1509,20 +1598,73 @@
             "tests": []
         },
         {
+            "_id": "df97aabc-2168-43c2-b946-02d5ec3d947e",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Check User In room",
+            "url": "{{local_api}}/room/check-user?roomId=64a9bcbe364dcf8902450618&userId=63a0552a5e937730e63be0f8",
+            "method": "GET",
+            "sortNum": 72500,
+            "created": "2023-07-09T00:08:07.691Z",
+            "modified": "2023-07-09T00:16:41.414Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "roomId",
+                    "value": "64a9bcbe364dcf8902450618",
+                    "isPath": false
+                },
+                {
+                    "name": "userId",
+                    "value": "63a0552a5e937730e63be0f8",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "78526b66-c869-45a8-b5b1-00da004eb4b4",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
+            "name": "Check User is Admin",
+            "url": "{{local_api}}/room/is-admin/64a9bcbe364dcf8902450618?userId=63a0552a5e937730e63be0f8",
+            "method": "GET",
+            "sortNum": 73750,
+            "created": "2023-07-09T03:26:05.847Z",
+            "modified": "2023-07-09T03:27:17.835Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "userId",
+                    "value": "63a0552a5e937730e63be0f8",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
             "_id": "6cc0809e-01b4-4483-9cf6-71ade33973cc",
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
             "name": "Add user to room",
-            "url": "{{back_domain}}/room/remove-user/6352032386e80a09280ca51d",
+            "url": "{{local_api}}/room/add-user/64a9bcbe364dcf8902450618",
             "method": "PATCH",
             "sortNum": 75000,
             "created": "2022-11-01T12:54:50.831Z",
-            "modified": "2023-05-17T08:56:53.145Z",
+            "modified": "2023-07-09T00:21:35.707Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"users\":[]\n}",
+                "raw": "{\n  \"users\":[\n    \"63a948b781178b4c4af8c6f5\"\n    ]\n}",
                 "form": []
             },
             "auth": {
@@ -1566,16 +1708,16 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
             "name": "Remove user to room",
-            "url": "{{back_domain}}/room/remove-user/6352032386e80a09280ca51d",
+            "url": "{{local_api}}/room/remove-user/64a9bcbe364dcf8902450618",
             "method": "PATCH",
             "sortNum": 77500,
             "created": "2023-05-17T08:45:17.803Z",
-            "modified": "2023-05-17T08:56:27.363Z",
+            "modified": "2023-07-09T00:39:15.983Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"users\":[]\n}",
+                "raw": "{\n  \"userId\": \"63a948b781178b4c4af8c6f5\"\n}",
                 "form": []
             },
             "auth": {
@@ -1612,11 +1754,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "1ff692df-a7ac-4a6a-a6cc-481c8282a509",
             "name": "Get message from roomId with search",
-            "url": "{{local_api}}/message/find/639054db864c677bc7dde070",
+            "url": "{{heroku_api}}/message/find/64a5466c00a244baca00f333",
             "method": "GET",
             "sortNum": 80000,
             "created": "2022-10-17T14:59:54.487Z",
-            "modified": "2023-04-22T04:07:07.029Z",
+            "modified": "2023-07-07T00:35:07.828Z",
             "headers": [],
             "params": [
                 {
@@ -1637,18 +1779,13 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
             "name": "Leave room",
-            "url": "{{local_api}}/room/change-room-name/6463bade5e47b2316c9a5a8c",
+            "url": "{{local_api}}/room/leave-room/64a5466c00a244baca00f333",
             "method": "PATCH",
             "sortNum": 80000,
             "created": "2022-10-21T02:17:23.599Z",
-            "modified": "2023-05-17T09:37:12.129Z",
+            "modified": "2023-07-08T23:58:38.046Z",
             "headers": [],
             "params": [],
-            "body": {
-                "type": "json",
-                "raw": "{\n  \"name\":\"New name\"\n}",
-                "form": []
-            },
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -1660,11 +1797,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
             "name": "Change avatar",
-            "url": "{{back_domain}}/user/change-avatar",
+            "url": "{{local_api}}/user/change-avatar",
             "method": "PATCH",
             "sortNum": 80000,
             "created": "2022-10-23T13:35:27.031Z",
-            "modified": "2023-01-01T09:50:12.300Z",
+            "modified": "2023-07-07T11:34:45.949Z",
             "headers": [],
             "params": [],
             "body": {
@@ -1674,7 +1811,7 @@
                 "files": [
                     {
                         "name": "file",
-                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\Memes\\541211d3d6faf98854cb9b3da2373c4e.jpg"
+                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\laravel.jpg"
                     }
                 ]
             },
@@ -1711,7 +1848,7 @@
             "method": "GET",
             "sortNum": 82500,
             "created": "2023-05-17T08:50:16.104Z",
-            "modified": "2023-05-17T08:50:16.104Z",
+            "modified": "2023-07-08T23:31:51.742Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -1766,11 +1903,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
             "name": "Create post",
-            "url": "{{heroku_api}}/post/create",
+            "url": "{{local_api}}/post/create",
             "method": "POST",
             "sortNum": 90000,
             "created": "2022-10-17T21:51:05.845Z",
-            "modified": "2023-05-22T11:39:07.706Z",
+            "modified": "2023-07-09T07:29:27.952Z",
             "headers": [],
             "params": [],
             "body": {
@@ -1783,13 +1920,13 @@
                     },
                     {
                         "name": "content",
-                        "value": "TÊ LIỆT!!!!!!!11"
+                        "value": "ASP.NET là một nền tảng ứng dụng web được phát triển và cung cấp bởi Microsoft, cho phép những người lập trình tạo ra những trang web động, những ứng dụng web và những dịch vụ web."
                     }
                 ],
                 "files": [
                     {
                         "name": "attach_files",
-                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\python_nlpp.png",
+                        "value": "c:\\Users\\Tri\\Downloads\\Microsoft_.NET_logo.svg.png",
                         "isDisabled": true
                     },
                     {
@@ -1810,13 +1947,24 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "1ff692df-a7ac-4a6a-a6cc-481c8282a509",
             "name": "Get message from roomId Copy",
-            "url": "{{local_api}}/message/find/639054db864c677bc7dde070",
+            "url": "{{local_api}}/message/find/64a7e8b511a1472e75c9d603?page=2&limit=5",
             "method": "GET",
             "sortNum": 90000,
             "created": "2022-10-24T08:26:10.140Z",
-            "modified": "2023-04-23T14:46:53.573Z",
+            "modified": "2023-07-08T03:32:59.261Z",
             "headers": [],
-            "params": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "5",
+                    "isPath": false
+                }
+            ],
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -1828,11 +1976,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
             "name": "Get user in room",
-            "url": "{{heroku_api}}/room/user?roomId=6468b0675d202dfab185ad3b",
+            "url": "{{local_api}}/room/user?roomId=6468b0675d202dfab185ad3b",
             "method": "GET",
             "sortNum": 90000,
             "created": "2022-10-24T08:26:26.147Z",
-            "modified": "2023-05-20T14:24:00.682Z",
+            "modified": "2023-07-09T03:21:19.308Z",
             "headers": [],
             "params": [
                 {
@@ -1871,11 +2019,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
             "name": "Change cover image",
-            "url": "{{back_domain}}/user/change-cover",
+            "url": "{{local_api}}/user/change-cover",
             "method": "PATCH",
             "sortNum": 90000,
             "created": "2022-12-08T13:46:21.960Z",
-            "modified": "2023-01-01T09:51:17.335Z",
+            "modified": "2023-07-05T03:17:59.234Z",
             "headers": [],
             "params": [],
             "body": {
@@ -1885,9 +2033,32 @@
                 "files": [
                     {
                         "name": "file",
-                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\download (2).png"
+                        "value": "c:\\Users\\Tri\\Downloads\\343446617_612696297424692_5203837334127317068_n.jpg"
                     }
                 ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8a023f87-20e7-4b1f-8f80-cb10588e5199",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Test post classifier",
+            "url": "{{local_api}}/post/classifierac",
+            "method": "POST",
+            "sortNum": 90156.3,
+            "created": "2023-07-09T07:55:29.131Z",
+            "modified": "2023-07-09T08:40:58.662Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"content\": \"Ca khúc 'Em Ơi Tai Sao' với giai điệu vui tươi và ca từ như một lời động viên tinh thần được Nguyễn Minh Xuân Ái gửi đến khán giả cho dù là những ngày chúng ta ổn hay bất ổn, ngày mai chắc chắn sẽ tốt hơn!\"\n}",
+                "form": []
             },
             "auth": {
                 "type": "bearer",
@@ -1938,25 +2109,31 @@
             "method": "POST",
             "sortNum": 90625,
             "created": "2022-12-28T12:22:19.798Z",
-            "modified": "2023-05-06T01:08:07.891Z",
+            "modified": "2023-07-05T10:27:52.000Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "39a610be-ff7e-4c20-b0bd-d980aee2f935",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
+            "name": "Create With Link",
+            "url": "{{local_api}}/post/create-link",
+            "method": "POST",
+            "sortNum": 90937.5,
+            "created": "2023-07-05T07:22:11.560Z",
+            "modified": "2023-07-05T10:29:36.437Z",
             "headers": [],
             "params": [],
             "body": {
-                "type": "formdata",
-                "raw": "",
-                "form": [
-                    {
-                        "name": "content",
-                        "value": "mkmk"
-                    }
-                ],
-                "files": [
-                    {
-                        "name": "attach_files",
-                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\dance-dancing-duck.gif",
-                        "isDisabled": true
-                    }
-                ]
+                "type": "json",
+                "raw": "{\n  \"content\": \"#thehashtag Chuối Java\",\n  \"created_at\": \"7/4/2023 1:27\",\n  \"link\": {\n    \"url\": [\"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Hawaiian_Banana.jpg/330px-Hawaiian_Banana.jpg\", \"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Ice_Cream_Banana_%28Blue_Java%29.jpg/375px-Ice_Cream_Banana_%28Blue_Java%29.jpg\"],\n    \"type\": \"image\"\n  }\n}\n",
+                "form": []
             },
             "auth": {
                 "type": "bearer",
@@ -1996,7 +2173,7 @@
             "method": "PUT",
             "sortNum": 95000,
             "created": "2022-11-23T11:12:05.291Z",
-            "modified": "2023-04-05T04:00:20.679Z",
+            "modified": "2023-07-07T00:44:21.496Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -2010,16 +2187,16 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
             "name": "Get a post",
-            "url": "{{local_api}}/post/63aec834ef3fa2c90b91381d",
+            "url": "{{local_api}}/post/63b2e16a426a9df9124af071",
             "method": "GET",
             "sortNum": 100000,
             "created": "2022-10-17T22:26:33.217Z",
-            "modified": "2023-06-21T04:18:38.336Z",
+            "modified": "2023-07-07T00:47:09.419Z",
             "headers": [],
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "{{token}}"
+                "bearer": "{{token}}{{token}}"
             },
             "tests": []
         },
@@ -2046,11 +2223,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5913a12b-8208-4b5e-920b-d8baba2401fd",
             "name": "check room with 2 people",
-            "url": "{{back_domain}}/room/check?username=vominhtri4_kce8o1671111622046",
+            "url": "{{local_api}}/room/check?username=vominhtri4_kce8o1671111622046",
             "method": "GET",
             "sortNum": 100000,
             "created": "2022-12-15T13:24:27.016Z",
-            "modified": "2022-12-15T13:40:41.683Z",
+            "modified": "2023-07-09T00:15:35.428Z",
             "headers": [],
             "params": [
                 {
@@ -2070,16 +2247,16 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
             "name": "Search post",
-            "url": "{{back_domain}}/post?search=danke&filter=hot",
+            "url": "{{local_api}}/post?search=a&filter=hot",
             "method": "GET",
             "sortNum": 102500,
             "created": "2022-12-26T12:29:29.024Z",
-            "modified": "2023-01-03T08:19:46.715Z",
+            "modified": "2023-07-05T10:37:01.362Z",
             "headers": [],
             "params": [
                 {
                     "name": "search",
-                    "value": "danke",
+                    "value": "a",
                     "isPath": false
                 },
                 {
@@ -2123,11 +2300,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
             "name": "Get all user post",
-            "url": "{{heroku_api}}/post/profile/votri",
+            "url": "{{heroku_api}}/post/profile/yeuusuk",
             "method": "GET",
             "sortNum": 107500,
             "created": "2022-12-09T04:26:30.443Z",
-            "modified": "2023-05-20T07:40:38.466Z",
+            "modified": "2023-07-05T09:06:26.277Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -2219,16 +2396,16 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
             "name": "update user info",
-            "url": "{{heroku_api}}/user/update-info",
+            "url": "{{local_api}}/user/update-info",
             "method": "PATCH",
             "sortNum": 120000,
             "created": "2022-10-18T07:50:06.129Z",
-            "modified": "2023-05-19T05:21:24.859Z",
+            "modified": "2023-07-05T10:47:53.999Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"bio\": \"Random Guy asd\",\n  \"address\":\"Việt Nam\"\n}",
+                "raw": "{\n  \"fullname\": \"Mê phim ảnh\",\n  \"bio\": \"Mê phim ảnh\",\n  \"address\":\"Việt Nam\"\n}",
                 "form": []
             },
             "auth": {
