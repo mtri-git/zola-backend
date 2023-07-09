@@ -160,9 +160,12 @@ class RoomController {
 	async getAllUserInRoom(req, res) {
 		try {
 			const room = await Room.findById(req.query.roomId)
-			const users = await Promise.all(
-				room.users.map((userId) => User.getUserWithIdLessData(userId))
-			)
+			// const users = await Promise.all(
+			// 	room.users.map((userId) => User.getUserWithIdLessData(userId))
+			// )
+			const users = await User.find({ _id: { $in: room.users } })
+			.select('fullname username contact_info status avatarUrl last_online')
+			
 			for (let i = 0; i < users.length; i++) {
 				users[i]._doc.role = room.admins.includes(users[i]._id) ? 'admin' : 'member'
 			}
