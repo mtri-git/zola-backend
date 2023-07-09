@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const PostSchema = new Schema({
-	content: String,
+	content: { type: String, default: ""},
 	category_by_ai: String, // category by ai
 	hashtag: [String],
 	mention: [String],

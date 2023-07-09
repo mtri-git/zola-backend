@@ -12,6 +12,7 @@ const {
 } = require('../../services/file.service')
 const { default: mongoose, Mongoose } = require('mongoose')
 const { sendPushNotification } = require('../../services/firebase.service')
+const {classifyPostText} = require('../../services/classifier.service')
 
 class PostController {
 	// get a post
@@ -187,6 +188,20 @@ class PostController {
 		}
 	}
 
+	async checkContentClassify(req, res) {
+		try {
+			
+			// fetch data from api from placeholder with fetch and return data
+			const data = await classifyPostText(req.body.content)
+			res.status(200).json({ data: data })
+			
+			
+		} catch (error) {
+			console.log(error);
+			return res.status(500).json({ Error: "There's an error." })
+		}
+	}
+
 	async createPostWithLink(req, res){
 		try {
 			// link = {
@@ -247,22 +262,28 @@ class PostController {
 			if (!scope) scope = 'public'
 
 			// check scope later
-			if (!attach_files) {
+			if (attach_files.length === 0) {
 				const hashtag = content.match(/#[a-zA-Z0-9]+/g)
 				const mention = content.match(/@[a-zA-Z0-9]+/g)
+				const {category} = await classifyPostText(content)
+
 				const post = new Post({
 					content: content,
+					category_by_ai: category,
 					scope: scope,
 					author: req.user.id,
 					hashtag,
 					mention,
 				})
+
+				
 				await post.save()
 				return res.status(201).json({ message: 'Post successfully' })
 			}
-
+			
 			let uploadData = []
-
+			
+			
 			for (let i = 0; i < attach_files.length; i++) {
 				const data = await addNewFile(
 					attach_files[i].path,
@@ -286,8 +307,10 @@ class PostController {
 			const hashtag = content.match(/#[a-zA-Z0-9]+/g)
 			const mention = content.match(/@[a-zA-Z0-9]+/g)
 
+			const {category} = await classifyPostText(content)
 			const post = new Post({
 				author: req.user.id,
+				category_by_ai: category,
 				hashtag,
 				mention,
 				content,
@@ -297,7 +320,6 @@ class PostController {
 			await post.save()
 
 			// send notification to followers
-
 			const user = await User.findById(req.user.id)
 			const noNotification = new Set(user.not_notification)
 

@@ -26,6 +26,9 @@ router.get('/profile/:username', authMiddleware, postController.getPostByUserId)
 // get post by Id
 router.get('/:postId', verifyMiddleware, postController.getPost)
 
+// check post classifier for testing
+router.post('/classifierac', postController.checkContentClassify)
+
 // create post
 router.post('/create', upload.array("attach_files"), authMiddleware, postController.createPost)
 
