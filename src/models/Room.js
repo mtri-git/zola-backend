@@ -15,7 +15,7 @@ const RoomSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false,
 	},
-	admin: [
+	admins: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',

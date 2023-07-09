@@ -163,6 +163,9 @@ class RoomController {
 			const users = await Promise.all(
 				room.users.map((userId) => User.getUserWithIdLessData(userId))
 			)
+			for (let i = 0; i < users.length; i++) {
+				users[i]._doc.role = room.admins.includes(users[i]._id) ? 'admin' : 'member'
+			}
 			res.status(200).json({ user: users })
 		} catch (err) {
 			console.error('Get all User In Room: ', err)
