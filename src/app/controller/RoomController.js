@@ -12,7 +12,7 @@ class RoomController {
 				const roomData = { name, users, isRoom }
 				roomData.created_by = req.user.id
 				roomData.admins = [req.user.id]
-				// Check user add to room is exist\
+				// Check user add to room is exist
 				const validUserList = await User.exists({
 					_id: { $in: roomData.users },
 				})
