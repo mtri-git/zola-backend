@@ -210,20 +210,19 @@ class RoomController {
 		}
 	}
 
-	async removeUserFromRoom() {
+	async removeUserFromRoom(req, res) {
 		// using $addToSet to void duplicated values
-		const room = await Room.findById(req.body.roomId)
+		const room = await Room.findById(req.params.id)
 		if (await !User.exists({ _id: req.body.userId })) {
-			res.status(401).json({ message: 'User not existed' })
-			return
+			return res.status(401).json({ message: 'User not existed' })
+			
 		}
 		if (!room.users.includes(req.user.id)) {
-			res.status(401).json({ message: 'Not authorization' })
-			return
+			return res.status(401).json({ message: 'Not authorization' })
 		}
 		try {
 			await Room.updateOne(
-				{ _id: req.body.roomId },
+				{ _id: req.params.id },
 				{ $pull: { users: req.body.userId } }
 			)
 			res.status(200).json({ message: 'Remove user from room complete' })
