@@ -170,33 +170,43 @@ class RoomController {
 		}
 	}
 
-	async addUserToRoom() {
-		// using $addToSet to void duplicated values
-		const room = await Room.findById(req.body.id)
-		const user = await User.findOne({ username: req.body.username })
-		if (await !User.exists({ _id: req.body.userId })) {
-			res.status(401).json({ message: 'User not existed' })
-			return
-		}
-		if (!room.users.includes(req.user.id)) {
-			res.status(401).json({ message: 'Not authorization' })
-			return
-		}
+	async addUserToRoom(req, res) {
 		try {
-			if (req.body.userId)
-				await Room.updateOne(
-					{ _id: req.body.roomId },
-					{ $addToSet: { users: req.body.userId } }
-				)
-			else if (req.body.username)
-				await Room.updateOne(
-					{ _id: req.body.roomId },
-					{ $addToSet: { users: user._id } }
-				)
+		// using $addToSet to void duplicated values
+			const room = await Room.findById(req.params.id)
+			const userList = req.body.users
+			console.log(userList);
+			//check list user is valid
+			for (let i = 0; i < userList.length; i++) {
+				// check userList[i] is ObjectId valid
+				const isValid = await User.exists({ _id: userList[i] })
+				if (!isValid) {
+					res.status(400).json({ message: 'Invalid list of user' })
+				}
+			}
+
+			room.users.addToSet(...userList)
+			room.save()
 
 			res.status(200).json({ message: 'Add user to room complete' })
 		} catch (err) {
 			res.status(500).json({ Error: err })
+		}
+	}
+
+	async checkUserIsInRoom(req, res) {
+		try {
+			const { roomId, userId } = req.query
+			console.log(roomId, userId)
+			const room = await Room.findOne({ _id: roomId })
+			if (room.users.includes(userId)) {
+				res.status(200).json({ message: 'User is in room' })
+			} else {
+				res.status(200).json({ message: 'User is not in room' })
+			}
+		}
+		catch (err) {
+			res.status(500).json({ message: "Server error" })
 		}
 	}
 

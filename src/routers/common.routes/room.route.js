@@ -15,6 +15,11 @@ router.get('/group', authMiddleware, roomController.getChatGroupByUserId)
 // get all user from a chat room with query roomId
 router.get('/user', authMiddleware, roomController.getAllUserInRoom)
 
+
+// check user in room
+router.get('/check-user' , authMiddleware, roomController.checkUserIsInRoom)
+
+// check room with two user
 router.get('/check', authMiddleware, roomController.checkRoomWithTwoUser)
 
 // get chat room from roomId
@@ -34,5 +39,6 @@ router.delete('/delete-room/:id' , authMiddleware, roomController.deleteRoom)
 
 // change room name
 router.patch('/change-room-name/:id' , authMiddleware, roomController.changeRoomName)
+
 
 module.exports = router
