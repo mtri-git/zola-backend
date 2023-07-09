@@ -262,7 +262,7 @@ class PostController {
 			if (!scope) scope = 'public'
 
 			// check scope later
-			if (!attach_files.length) {
+			if (!attach_files) {
 				const hashtag = content.match(/#[a-zA-Z0-9]+/g)
 				const mention = content.match(/@[a-zA-Z0-9]+/g)
 				const {category} = await classifyPostText(content)

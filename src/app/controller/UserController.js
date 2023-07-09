@@ -112,11 +112,7 @@ class UserController {
 
 					return res.status(400).json({ message: 'File is not image' })
 				}
-
 				const data = await addNewFile(file.path, 'image', req.user.id)
-
-				
-
 				// delete temp file after upload with multer
 				await unlinkAsync(file.path)
 
