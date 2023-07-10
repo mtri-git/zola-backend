@@ -20,13 +20,14 @@ const init = () => {
 class NotificationController {
 	async getAllNotification(req, res) {
 		try {
-			const { page = 1, limit = 10 } = req.query
+			const { page = 1, limit = 10, filter = 'all' } = req.query
 
 			const { notifications, pages, total } =
 				await NotificationService.getAllNotification(
 					req.user.id,
 					page,
-					limit
+					limit,
+					filter
 				)
 
 			const pagination = {

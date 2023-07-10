@@ -41,7 +41,6 @@ const PostSchema = new Schema({
 		},
 	],
 	shared: { type: Number, default: 0 },
-	updated_at: { type: Date, default: null },
 	deleted_at: { type: Date, default: null },
 	created_at: {
 		type: Date,

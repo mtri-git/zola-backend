@@ -42,9 +42,19 @@ class NotificationService {
 		}
 	}
 
-	async getAllNotification(receiver, page, limit) {
+	async getAllNotification(receiver, page, limit, filter) {
 		try {
-			const notifications = await Notification.find({ receiver: receiver })
+			// filter is all, unread, read
+
+			const notifications = await Notification.find({
+				receiver: receiver,
+				isRead:
+					filter === 'all'
+						? { $in: [true, false] }
+						: filter === 'read'
+						? true
+						: false,
+			})
 				.populate('author', 'username avatarUrl')
 				.populate('postId', 'content')
 				.sort({ createdAt: -1 })
