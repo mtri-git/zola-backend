@@ -26,7 +26,7 @@ function initSocket(server) {
 			if (socket.handshake.query.id) {
 				createAnInstance(`socket:${socket.handshake.query.id}`, socket.id)
 				await User.updateOne(
-					{ username: socket.handshake.query.username },
+					{ _id: socket.handshake.query.id },
 					{ $set: { status: 'online' } }
 				)
 			}
