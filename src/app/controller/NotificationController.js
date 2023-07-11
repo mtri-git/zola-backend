@@ -139,7 +139,7 @@ class NotificationController {
 	 testIo(req, res) {
 		try {
 			const io = getIo()
-			io.emit('test', { message: req.body.message })
+			io.to(req.body.id).emit('new_notification', { message: req.body.message })
 
 			return res.status(200).json({ message: 'OK' })
 		} catch (error) {

@@ -3,22 +3,18 @@ const mongoose = require('mongoose');
 const searchHistorySchema = new mongoose.Schema({
   searchText: {
     type: String,
-    validate: {
-      validator: function(v) {
-        return !(v && this.searchUser);
-      },
-      message: 'Only one of searchText or searchUser is allowed',
-    },
+    //required if searchUser is not present
+    required: function () {
+      return !this.searchUser;
+    }
   },
   searchUser: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    validate: {
-      validator: function(v) {
-        return !(v && this.searchText);
-      },
-      message: 'Only one of searchText or searchUser is allowed',
-    },
+    //required if searchText is not present
+    required: function () {
+      return !this.searchText;
+    }
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -26,7 +22,7 @@ const searchHistorySchema = new mongoose.Schema({
     required: true,
   },
   timestamp: {
-    type: Date,
+  type: Date,
     default: Date.now,
   },
 });

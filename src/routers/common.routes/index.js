@@ -10,10 +10,8 @@ const otpRoute = require('./otp.route')
 const fileRoute = require('./file.route')
 const notificationRoute = require('./notification.route')
 const hashtagRoute = require('./hashtag.route')
+const searchHistoryRoute = require('./search.history.route')
 
-const adminRoute = require('../admin.routes')
-
-const ROOT_ROUTE = '/api/v1'
 
 router.use('/notification', notificationRoute)
 router.use('/user', userRouter)
@@ -25,5 +23,6 @@ router.use('/comment', commentRoute)
 router.use('/otp', otpRoute)
 router.use('/file', fileRoute)
 router.use('/hashtag', hashtagRoute)
+router.use('/search-history', searchHistoryRoute)
 
 module.exports = router

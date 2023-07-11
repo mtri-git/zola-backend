@@ -5,10 +5,12 @@ const User = require('../models/User')
 const {
 	sendPushNotificationForMessage,
 } = require('../services/message.service')
+const {
+	createAnInstance,
+	deleteAnInstance,
+} = require('../services/redis.service')
 
 let io
-
-let userOnline = []
 
 function getIo() {
 	return io
@@ -18,11 +20,11 @@ function initSocket(server) {
 	io = socketIo(server)
 
 	io.on('connection', async (socket) => {
-		console.log('A user connected.')
-		console.log('A user connected:', socket.handshake.query.username)
+		console.log('A user connected.', socket.id)
+		console.log('A user connected:', socket.handshake.query.id)
 		try {
-			if (socket.handshake.query.username) {
-				userOnline.push(socket.handshake.query.username)
+			if (socket.handshake.query.id) {
+				createAnInstance(`socket:${socket.handshake.query.id}`, socket.id)
 				await User.updateOne(
 					{ username: socket.handshake.query.username },
 					{ $set: { status: 'online' } }
@@ -112,7 +114,7 @@ function initSocket(server) {
 		})
 		socket.on('disconnect', async () => {
 			try {
-				delete userOnline[socket.handshake.query.username]
+				deleteAnInstance(`socket:${socket.handshake.query.id}`)
 				await User.updateOne(
 					{ username: socket.handshake.query.username },
 					{ $set: { status: 'offline', last_online: Date.now() } }

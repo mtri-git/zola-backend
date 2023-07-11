@@ -9,6 +9,11 @@ const notificationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: () => this.type === 'follow'
+  },
   postId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post',
@@ -17,7 +22,7 @@ const notificationSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ['post', 'like', 'comment', 'share']
+    enum: ['post', 'like', 'comment', 'share', 'follow']
   },
   message: {
     type: String,

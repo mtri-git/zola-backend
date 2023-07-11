@@ -1,10 +1,26 @@
 const Notification = require('../models/Notification')
+const { getIo } = require('../configs/socket.config')
+const { getAnInstance } = require('../services/redis.service')
 
 class NotificationService {
-	async createNotification(notificationData) {
+	constructor() {
+		this.io = getIo()
+	}
+
+	async createNotification({ message, receiver, author, type, postId }) {
 		try {
-			const notification = new Notification(notificationData)
+			const notification = new Notification({
+				message,
+				receiver,
+				author,
+				type,
+				postId,
+			})
 			await notification.save()
+			const socketId = await getAnInstance(`socket:${receiver}`)
+			if (socketId) {
+				this.io.to(socketId).emit('new_notification', notification)
+			}
 			return notification
 		} catch (error) {
 			console.log(error)

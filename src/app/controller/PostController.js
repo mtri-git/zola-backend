@@ -13,9 +13,12 @@ const {
 const { default: mongoose, Mongoose } = require('mongoose')
 const { sendPushNotification } = require('../../services/firebase.service')
 const {classifyPostText} = require('../../services/classifier.service')
+const {getIo} = require('../../configs/socket.config')
 
 class PostController {
 	// get a post
+	io = getIo();
+
 	async getPost(req, res) {
 		try {
 
@@ -275,8 +278,6 @@ class PostController {
 					hashtag,
 					mention,
 				})
-
-				
 				await post.save()
 				return res.status(201).json({ message: 'Post successfully' })
 			}

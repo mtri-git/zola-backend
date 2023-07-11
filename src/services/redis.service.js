@@ -81,60 +81,42 @@ const verifyRefreshToken = async (userId, refreshToken, forAdmin = false) => {
 	}
 }
 
+const createAnInstance = async (key, value) => {
+	try {
+		return await client.set(key, value)
+	} catch (error) {
+		console.error('Redis: ', error)
+		throw new Error("Create an instance error")
+	}	
+}
 
-// const setRefreshToken = async (userId, refreshToken, forAdmin = false) => {
-// 	try {
-// 		const tokenKey = forAdmin
-// 			? type.adminRefreshToken(userId)
-// 			: type.refreshToken(userId)
+const getAnInstance = async (key) => {
+	try {
+		return await client.get(key)
+	} catch (error) {
+		console.error('Redis: ', error)
+		throw new Error("Get an instance error")
+	}
+}
 
-// 		await client.setEx(tokenKey, 60 * 60 * 24 * 2, refreshToken)
-// 		return CODE_SUCCESS
-// 	} catch (error) {
-// 		console.error('Redis: ', error)
-// 		return CODE_ERROR
-// 	}
-// }
+const modifyAnInstance = async (key, value) => {
+	try {
+		return await client.set(key, value)
+	} catch (error) {
+		console.error('Redis: ', error)
+		throw new Error("Modify an instance error")
+	}
+}
 
-// const getRefreshToken = async (userId, forAdmin = false) => {
-// 	try {
-// 		const tokenKey = forAdmin
-// 			? type.adminRefreshToken(userId)
-// 			: type.refreshToken(userId)
-
-// 		return await client.get(tokenKey)
-// 	} catch (error) {
-// 		console.error('Redis: ', error)
-// 		return CODE_ERROR
-// 	}
-// }
-
-// const deleteRefreshToken = async (userId, forAdmin = false) => {
-// 	try {
-// 		const tokenKey = forAdmin
-// 			? type.adminRefreshToken(userId)
-// 			: type.refreshToken(userId)
-
-// 		const res = await client.del(tokenKey)
-// 		if (res === 1 || res === 0) return CODE_SUCCESS
-// 	} catch (error) {
-// 		console.error('Redis: ', error)
-// 		return CODE_ERROR
-// 	}
-// }
-
-// const verifyRefreshToken = async (userId, refreshToken, forAdmin = false) => {
-// 	try {
-// 		const tokenKey = forAdmin
-// 			? type.adminRefreshToken(userId)
-// 			: type.refreshToken(userId)
-// 		const refreshRedis = await client.get(tokenKey)
-// 		return refreshRedis === refreshToken ? CODE_SUCCESS : CODE_FAIL
-// 	} catch (error) {
-// 		console.error('Redis: ', error)
-// 		return CODE_ERROR
-// 	}
-// }
+const deleteAnInstance = async (key) => {
+	try {
+		const res = await client.del(key)
+		if (res === 1 || res === 0) return true
+	} catch (error) {
+		console.error('Redis: ', error)
+		throw new Error("Delete an instance error")
+	}
+}
 
 module.exports = {
 	connect,
@@ -142,4 +124,8 @@ module.exports = {
 	getRefreshToken,
 	verifyRefreshToken,
 	deleteRefreshToken,
+	createAnInstance,
+	getAnInstance,
+	modifyAnInstance,
+	deleteAnInstance,
 }
