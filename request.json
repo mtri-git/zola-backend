@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Zola",
-    "dateExported": "2023-07-09T09:44:18.985Z",
+    "dateExported": "2023-07-12T13:20:25.695Z",
     "version": "1.1",
     "folders": [
         {
@@ -129,6 +129,13 @@
             "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
             "created": "2023-07-03T03:41:55.489Z",
             "sortNum": 190000
+        },
+        {
+            "_id": "5600d57b-ca4f-4cbd-9e1b-e9efe653ab07",
+            "name": "Search History",
+            "containerId": "7151856e-a780-4dee-aa07-d04bfc6fbd6a",
+            "created": "2023-07-10T16:31:52.970Z",
+            "sortNum": 195000
         }
     ],
     "requests": [
@@ -401,13 +408,19 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
             "name": "Get all notification",
-            "url": "{{local_api}}/notification",
+            "url": "{{local_api}}/notification?filter=read",
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-04-17T13:06:29.070Z",
-            "modified": "2023-07-08T03:40:46.667Z",
+            "modified": "2023-07-10T16:21:00.933Z",
             "headers": [],
-            "params": [],
+            "params": [
+                {
+                    "name": "filter",
+                    "value": "read",
+                    "isPath": false
+                }
+            ],
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -424,6 +437,24 @@
             "sortNum": 10000,
             "created": "2023-07-03T03:41:55.491Z",
             "modified": "2023-07-07T10:05:04.505Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7265e755-b7ab-4c33-ae4c-82763ab197fc",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5600d57b-ca4f-4cbd-9e1b-e9efe653ab07",
+            "name": "Get search text history",
+            "url": "{{local_api}}/search-history/text",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-07-10T16:31:52.970Z",
+            "modified": "2023-07-11T03:17:31.743Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -477,12 +508,12 @@
             "method": "POST",
             "sortNum": 12500,
             "created": "2023-04-23T11:07:33.041Z",
-            "modified": "2023-07-08T14:55:44.964Z",
+            "modified": "2023-07-10T17:29:14.982Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"message\": \"ok h m\"\n}",
+                "raw": "{\n  \"id\": \"yBHlh2ss4Fqk94OZAAAB\",\n  \"message\": \"123\"\n}",
                 "form": []
             },
             "auth": {
@@ -669,13 +700,17 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
             "name": "Get all notification Copy",
-            "url": "{{local_api}}/notification/test",
-            "method": "POST",
+            "url": "{{local_api}}/notification/unread",
+            "method": "GET",
             "sortNum": 15000,
             "created": "2023-04-23T00:35:29.614Z",
-            "modified": "2023-04-23T00:36:16.921Z",
+            "modified": "2023-07-10T16:00:46.792Z",
             "headers": [],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
             "tests": []
         },
         {
@@ -938,19 +973,37 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "171db935-e286-4a39-b8bc-d8a3336c0955",
             "name": "Get the hashtag by time",
-            "url": "{{local_api}}/hashtag/trending-by-time?time=week",
+            "url": "{{local_api}}/hashtag/trending-by-time?time=year",
             "method": "GET",
             "sortNum": 20000,
             "created": "2023-07-04T03:11:48.039Z",
-            "modified": "2023-07-04T03:12:24.094Z",
+            "modified": "2023-07-12T04:39:44.179Z",
             "headers": [],
             "params": [
                 {
                     "name": "time",
-                    "value": "week",
+                    "value": "year",
                     "isPath": false
                 }
             ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "57a5148e-82aa-41a7-a042-bd63645a4677",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5600d57b-ca4f-4cbd-9e1b-e9efe653ab07",
+            "name": "Get the search user history",
+            "url": "{{local_api}}/search-history/user",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-07-10T16:31:52.971Z",
+            "modified": "2023-07-11T03:17:43.676Z",
+            "headers": [],
+            "params": [],
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -1133,11 +1186,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "48a92f4b-1fa2-4225-be33-e1fe89203657",
             "name": "Read all the notification",
-            "url": "{{local_api}}/notification/read/:id",
+            "url": "{{local_api}}/notification/read-all",
             "method": "PATCH",
             "sortNum": 25000,
             "created": "2023-07-02T15:01:05.323Z",
-            "modified": "2023-07-02T15:01:05.323Z",
+            "modified": "2023-07-10T16:35:27.288Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -1226,6 +1279,47 @@
             "tests": []
         },
         {
+            "_id": "742eccd0-7c32-40da-b90f-fe35728072f0",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5600d57b-ca4f-4cbd-9e1b-e9efe653ab07",
+            "name": "Create search text",
+            "url": "{{local_api}}/search-history/text",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-07-10T16:31:52.972Z",
+            "modified": "2023-07-11T05:43:56.726Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"keyword\": \"mới\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "4b682979-9ad0-40a9-9e6c-28e41e45b121",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5600d57b-ca4f-4cbd-9e1b-e9efe653ab07",
+            "name": "Delete search text",
+            "url": "{{local_api}}/search-history/64acec30d78ed482d3c4d05e",
+            "method": "DELETE",
+            "sortNum": 35000,
+            "created": "2023-07-11T05:42:09.113Z",
+            "modified": "2023-07-11T05:44:27.664Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
             "_id": "1a50ebcf-c382-4a1d-bf90-199f6df049b2",
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
@@ -1273,6 +1367,29 @@
             "modified": "2023-07-02T14:58:54.132Z",
             "headers": [],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ce23f572-8678-4e9c-8b90-5abf08f76e4a",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "5600d57b-ca4f-4cbd-9e1b-e9efe653ab07",
+            "name": "Create search user",
+            "url": "{{local_api}}/search-history/user",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-07-11T03:21:59.759Z",
+            "modified": "2023-07-11T03:23:12.021Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\": \"634682636cc4f8c15895d085\"\n}",
+                "form": []
+            },
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -1381,6 +1498,31 @@
                 {
                     "name": "username",
                     "value": "votri",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "30fb4caa-e631-4b52-b4c0-1348f10b6256",
+            "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
+            "containerId": "b94fa1cf-216f-4464-9545-f4bb1f4dfa99",
+            "name": "get user by username",
+            "url": "{{heroku_api}}/user/get?username=chimpa_q5yit1689093523633&me=php",
+            "method": "GET",
+            "sortNum": 55000,
+            "created": "2023-07-11T16:45:47.298Z",
+            "modified": "2023-07-11T16:47:10.706Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "username",
+                    "value": "chimpa_q5yit1689093523633",
+                    "isPath": false
+                },
+                {
+                    "name": "me",
+                    "value": "php",
                     "isPath": false
                 }
             ],
@@ -1903,11 +2045,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
             "name": "Create post",
-            "url": "{{local_api}}/post/create",
+            "url": "{{heroku_api}}/post/create",
             "method": "POST",
             "sortNum": 90000,
             "created": "2022-10-17T21:51:05.845Z",
-            "modified": "2023-07-09T07:29:27.952Z",
+            "modified": "2023-07-09T14:35:49.690Z",
             "headers": [],
             "params": [],
             "body": {
@@ -1920,13 +2062,13 @@
                     },
                     {
                         "name": "content",
-                        "value": "ASP.NET là một nền tảng ứng dụng web được phát triển và cung cấp bởi Microsoft, cho phép những người lập trình tạo ra những trang web động, những ứng dụng web và những dịch vụ web."
+                        "value": "Ngày xưa Borland làm ra C Compiler bán với giá 99$. Microsoft mua một bản, sau đó sửa vài thứ rồi bán với giá 89$. Khi Borland phá sản, MS lập tức tăng giá phần mềm này lên 799$ Chiến thuật này ổn khum??"
                     }
                 ],
                 "files": [
                     {
                         "name": "attach_files",
-                        "value": "c:\\Users\\Tri\\Downloads\\Microsoft_.NET_logo.svg.png",
+                        "value": "c:\\Users\\Tri\\OneDrive\\Pictures\\flask-app.png",
                         "isDisabled": true
                     },
                     {
@@ -2276,16 +2418,26 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
             "name": "Get all like post",
-            "url": "{{back_domain}}/post/like?username=tri_pyqxh1671503799638",
+            "url": "{{local_api}}/post/like?username=php&page=2&offset=1",
             "method": "GET",
             "sortNum": 105000,
             "created": "2022-12-06T04:36:43.458Z",
-            "modified": "2023-01-03T05:29:36.123Z",
+            "modified": "2023-07-11T12:39:19.377Z",
             "headers": [],
             "params": [
                 {
                     "name": "username",
-                    "value": "tri_pyqxh1671503799638",
+                    "value": "php",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "offset",
+                    "value": "1",
                     "isPath": false
                 }
             ],
@@ -2342,11 +2494,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
             "name": "Get user recommend",
-            "url": "http://localhost:5000/api/v1/post/recommend",
+            "url": "{{heroku_api}}/post/recommend",
             "method": "GET",
             "sortNum": 109375,
             "created": "2023-07-02T10:15:59.824Z",
-            "modified": "2023-07-02T10:16:17.839Z",
+            "modified": "2023-07-12T12:04:57.916Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -2419,11 +2571,11 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
             "name": "Change password",
-            "url": "{{back_domain}}/auth/token",
+            "url": "{{heroku_api}}/auth/token",
             "method": "PATCH",
             "sortNum": 130000,
             "created": "2022-10-18T12:13:25.470Z",
-            "modified": "2022-10-18T12:13:46.918Z",
+            "modified": "2023-07-12T12:01:43.471Z",
             "headers": [],
             "params": [],
             "tests": []

@@ -588,8 +588,9 @@ class PostController {
 
 	async recommendPost(req, res) {
 		try {
+			const limit = Number(req.query.limit) || 10
 			const user = await User.findById(req.user.id)
-			const recommendPost = await getRecommendPost(user._id)
+			const recommendPost = await getRecommendPost(user._id, limit)
 			res.status(200).json({ data: recommendPost })
 		} catch (error) {
 			console.log(error)

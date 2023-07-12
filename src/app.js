@@ -4,7 +4,8 @@ const cors = require('cors')
 const morgan = require('morgan')
 const compression = require('compression')
 const route = require('./routers')
-const db = require('./configs/db/db.config')
+const mongoDb = require('./configs/db/db.config')
+const neo4j = require('./configs/db/neo4j.config')
 const redis = require('./services/redis.service')
 const admin_firebase = require('./services/firebase.service')
 
@@ -47,8 +48,9 @@ app.use(morgan('default'))
 admin_firebase.init()
 
 // Connect db
-db.connect()
+mongoDb.connect()
 redis.connect()
+neo4j.init()
 
 // socket
 

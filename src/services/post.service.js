@@ -1,6 +1,6 @@
 const Post = require('../models/Post')
 
-const getRecommendPost = async (userId) => {
+const getRecommendPost = async (userId, limit) => {
 	try {
 		// get last five post that user liked
 		const lastFivePost = await Post.find({
@@ -83,17 +83,6 @@ const getRecommendPost = async (userId) => {
                 },
             }
           ]);
-        // await Post.find({
-		// 	category_by_ai: { $in: category },
-		// 	author: { $in: author },
-		// 	deleted_at: null,
-		// 	like_by: { $ne: userId },
-		// })
-		// 	.sort({ created_at: -1 })
-		// 	.limit(15)
-		// 	.populate('author', 'username fullname avatarUrl')
-		// 	.populate('attach_files', 'resource_type format url')
-
 		return recommendPost
 	} catch (error) {
 		console.log('Error: ', error)
