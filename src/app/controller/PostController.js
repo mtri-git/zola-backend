@@ -4,6 +4,7 @@ const Notification = require('../../models/Notification')
 const File = require('../../models/File')
 const Device = require('../../models/Device')
 const notificationService = require('../../services/notification.service')
+const {getRecommendPost} = require('../../services/post.service')
 
 const {
 	addNewFile,
@@ -588,24 +589,7 @@ class PostController {
 	async recommendPost(req, res) {
 		try {
 			const user = await User.findById(req.user.id)
-
-			// get last five post that user liked
-			const lastFivePost = await Post.find({
-				like_by: user._id,
-			})
-
-			// get author of last five post
-			const author = lastFivePost.map((post) => post.author)
-
-			// get post from author of last five post
-			const recommendPost = await Post.find({
-				author: { $in: author },
-				deleted_at: null,
-				like_by: { $ne: user._id },
-			})
-				.sort({ created_at: -1 })
-				.limit(10)
-
+			const recommendPost = await getRecommendPost(user._id)
 			res.status(200).json({ data: recommendPost })
 		} catch (error) {
 			console.log(error)

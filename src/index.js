@@ -1,6 +1,5 @@
 const http = require('http')
 const app = require('./app')
-
 const {initSocket} = require('./configs/socket.config')
 
 const normalizePort = (val) => {
