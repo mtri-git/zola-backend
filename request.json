@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Zola",
-    "dateExported": "2023-07-12T13:20:25.695Z",
+    "dateExported": "2023-07-12T15:39:58.154Z",
     "version": "1.1",
     "folders": [
         {
@@ -758,12 +758,12 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2022-10-11T08:46:36.743Z",
-            "modified": "2023-07-08T03:41:41.991Z",
+            "modified": "2023-07-12T15:36:17.888Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"password\":\"12345\",\n  \"username\":\"votri\"\n}",
+                "raw": "{\n  \"password\":\"123451\",\n  \"username\":\"votri\"\n}",
                 "form": []
             },
             "tests": [
@@ -2494,13 +2494,19 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "5218b81e-40dc-4cac-894a-149754bbb0c3",
             "name": "Get user recommend",
-            "url": "{{heroku_api}}/post/recommend",
+            "url": "{{local_api}}/post/recommend?limit=10",
             "method": "GET",
             "sortNum": 109375,
             "created": "2023-07-02T10:15:59.824Z",
-            "modified": "2023-07-12T12:04:57.916Z",
+            "modified": "2023-07-12T15:13:09.746Z",
             "headers": [],
-            "params": [],
+            "params": [
+                {
+                    "name": "limit",
+                    "value": "10",
+                    "isPath": false
+                }
+            ],
             "auth": {
                 "type": "bearer",
                 "bearer": "{{token}}"
@@ -2571,13 +2577,22 @@
             "colId": "44d135c3-d0ed-47dd-b82a-13ee104da81d",
             "containerId": "b3b689fd-69a7-454f-a366-65ceaacb702f",
             "name": "Change password",
-            "url": "{{heroku_api}}/auth/token",
-            "method": "PATCH",
+            "url": "{{heroku_api}}/auth/change-password",
+            "method": "POST",
             "sortNum": 130000,
             "created": "2022-10-18T12:13:25.470Z",
-            "modified": "2023-07-12T12:01:43.471Z",
+            "modified": "2023-07-12T15:38:34.279Z",
             "headers": [],
             "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"oldPassword\": \"123451\",\n  \"password\": \"12345\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
             "tests": []
         },
         {
