@@ -120,6 +120,7 @@ class AdminPostController {
 	async deletePost(req, res) {
 		try {
 			await Post.deleteOne({ _id: req.params.id })
+			await Comment.deleteMany({ postId: req.params.id })
 			return res
 				.status(200)
 				.json({ message: 'Delete post completely successful' })

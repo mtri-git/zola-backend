@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 const PostSchema = new Schema({
 	content: { type: String, default: ""},
 	category_by_ai: String, // category by ai
+	//default hastag = []
 	hashtag: [String],
 	mention: [String],
 	author: {
