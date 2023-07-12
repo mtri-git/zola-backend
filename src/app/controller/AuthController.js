@@ -7,7 +7,7 @@ const {
 	verifyToken,
 	generateAccessToken,
 } = require('../../utils/jwtHandle')
-const {DEFAULT_AVATAR} = require('../../utils/image.helper')
+const { DEFAULT_AVATAR } = require('../../utils/image.helper')
 const { generateUsername } = require('../../utils/genarateUsername')
 const redis = require('../../services/redis.service')
 const passport = require('../../services/google.service')
@@ -31,7 +31,7 @@ class AuthController {
 				res.status(200).json({ message: 'User valid' })
 			else res.status(404).json({ message: 'Not found' })
 		} catch (error) {
-			console.log(error);
+			console.log(error)
 			res.status(400).json({ message: 'Error' })
 		}
 	}
@@ -56,9 +56,10 @@ class AuthController {
 				})
 			}
 
-			if(user.deleted_at)
-				return res.status(400).json({message: "This account has been deleted"})
-
+			if (user.deleted_at)
+				return res
+					.status(400)
+					.json({ message: 'This account has been deleted' })
 
 			const { id, fullname, username, avatarUrl, coverUrl } = user
 			const validPassword = await bcrypt.compare(
@@ -80,26 +81,31 @@ class AuthController {
 					id,
 					token.refreshToken
 				)
-			
-				
+
 				if (redisResponse !== 'OK') {
 					return res.status(500).json({ error: 'Server error' })
 				}
 
-
 				// add new device to user
-				await Device.create({name: req.body.deviceName, owner: user.id, fcm_token: req.body.fcm_token})
+				await Device.create({
+					name: req.body.deviceName,
+					owner: user.id,
+					fcm_token: req.body.fcm_token,
+				})
 
 				// console.log({ refresh: token.refreshToken })
-				return res.cookie('refreshToken', token.refreshToken, {
-					httpOnly: true,
-					sameSite: 'none',
-					// process.env.NODE_ENV === 'development' ? true : 'none',
-					secure:
-						process.env.NODE_ENV === 'development' ? false : true,
-					// maxAge: 36000
-					maxAge:  1000 * 60 * 60 * 24 * 365,
-				})
+				return res
+					.cookie('refreshToken', token.refreshToken, {
+						httpOnly: true,
+						sameSite: 'none',
+						// process.env.NODE_ENV === 'development' ? true : 'none',
+						secure:
+							process.env.NODE_ENV === 'development'
+								? false
+								: true,
+						// maxAge: 36000
+						maxAge: 1000 * 60 * 60 * 24 * 365,
+					})
 					.status(200)
 					.json({
 						token: token.accessToken,
@@ -122,30 +128,41 @@ class AuthController {
 			const response = await redis.deleteRefreshToken(req.user.id)
 			if (response) {
 				// Delete device
-				if(req.body.fcm_token)
-					await Device.deleteOne({owner: req.user.id, fcm_token: req.body.fcm_token})
+				if (req.body.fcm_token)
+					await Device.deleteOne({
+						owner: req.user.id,
+						fcm_token: req.body.fcm_token,
+					})
 
 				res.clearCookie('refreshToken')
 				return res.status(200).json({ message: 'Log out' }).end()
 			}
 
-
-
 			return res.status(400).json({ message: 'Error' })
 		} catch (error) {
 			console.log('Log out: ', error)
-			res.status(500).json({message:"Error"})
+			res.status(500).json({ message: 'Error' })
 		}
 	}
 
 	async register(req, res) {
 		try {
-			const {fullname, email, phone, password, birthday, username} = req.body
+			const { fullname, email, phone, password, birthday, username } =
+				req.body
 
-			const registerData = {fullname, email, phone, password, birthday, username}
+			const registerData = {
+				fullname,
+				email,
+				phone,
+				password,
+				birthday,
+				username,
+			}
 
-			if(!(email || phone))
-				return res.status(400).json({message: "Need email or password to register"})
+			if (!(email || phone))
+				return res
+					.status(400)
+					.json({ message: 'Need email or password to register' })
 
 			// const currentUser = User.find({email: registerData.email})
 			// if(!currentUser)
@@ -158,8 +175,7 @@ class AuthController {
 			user.password = hashPassword
 			user.birthday = new Date(user.birthday)
 			// gen username
-			if (!user.username)
-				user.username = generateUsername(user.fullname)
+			if (!user.username) user.username = generateUsername(user.fullname)
 			user.avatarUrl = DEFAULT_AVATAR
 
 			await user.save()
@@ -189,21 +205,28 @@ class AuthController {
 	async changePassword(req, res) {
 		try {
 			// check accessToken
-			const userData = req.user
-			if (!userData) {
-				//hash password
-				const salt = await bcrypt.genSalt(10)
-				const hashPassword = await bcrypt.hash(req.body.password, salt)
 
-				const user = await new User.find(
-					{ username: userData.username },
-					{ $set: { password: hashPassword } }
-				)
-				await user.save()
-				res.json({ message: 'Change password successfully' })
-			} else {
-				res.status(401).json({ message: 'Authentication' })
-			}
+			// check old password
+			const user = await User.findById(req.user.id)
+			console.log(user)
+			const { oldPassword, password } = req.body
+
+			const validPassword = await bcrypt.compare(
+				oldPassword,
+				user.password
+			)
+
+			if (!validPassword)
+				return res.status(400).json({ message: 'Wrong password' })
+
+			const salt = await bcrypt.genSalt(10)
+			const hashPassword = await bcrypt.hash(password, salt)
+
+			await User.findByIdAndUpdate(
+				{ _id: req.user.id },
+				{ $set: { password: hashPassword } }
+			)
+			res.json({ message: 'Change password successfully' })
 		} catch (error) {
 			console.log('Change Password: ', error.message)
 			res.status(500).json({ message: 'Change password fail' })
@@ -289,14 +312,14 @@ class AuthController {
 	}
 
 	googleLoginCallback(req, res) {
-		return passport.authenticate('google', { failureRedirect: '/login' }),
-		function(req, res) {
-			// Successful authentication, redirect home.
-			res.redirect('/');
-		}
+		return (
+			passport.authenticate('google', { failureRedirect: '/login' }),
+			function (req, res) {
+				// Successful authentication, redirect home.
+				res.redirect('/')
+			}
+		)
 	}
-
-
 }
 
 module.exports = new AuthController()

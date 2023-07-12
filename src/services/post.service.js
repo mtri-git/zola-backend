@@ -38,7 +38,7 @@ const getRecommendPost = async (userId, limit) => {
               },
             },
             {
-              $limit: 15,
+              $limit: limit,
             },
             {
               $lookup: {
