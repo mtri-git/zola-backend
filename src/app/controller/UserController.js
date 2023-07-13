@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const User = require('../../models/User')
 const Post = require('../../models/Post')
+const File = require('../../models/File')
 const Comment = require('../../models/Comment')
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
 const { formatDate } = require('../../utils/format')

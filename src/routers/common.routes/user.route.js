@@ -52,5 +52,6 @@ router.get('/check', authMiddleware, userController.checkUsername)
 // check username is valid
 router.put('/change-username', authMiddleware, userController.updateUsername)
 
+router.delete('/destroy', authMiddleware, userController.destroy)
 
 module.exports = router
