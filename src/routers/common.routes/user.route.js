@@ -25,9 +25,6 @@ router.patch('/change-avatar', upload.single("file"), authMiddleware, userContro
 //change user cover image
 router.patch('/change-cover', upload.single("file"), authMiddleware, userController.changeCoverImage)
 
-//delete user
-// router.delete('/:id', userController.deleteById)
-
 //get friends
 router.get('/friends', authMiddleware ,userController.getFriendsByUserId)
 
@@ -40,6 +37,9 @@ router.get('/followings', authMiddleware, userController.getFollowing)
 //get friends
 router.get('/recommend-friends', authMiddleware, userController.recommendFriends)
 
+// delete user
+router.delete('/destroy', authMiddleware, userController.destroy)
+
 // follow a user
 router.patch('/follow/:username', authMiddleware, userController.follow)
 
@@ -51,7 +51,5 @@ router.get('/check', authMiddleware, userController.checkUsername)
 
 // check username is valid
 router.put('/change-username', authMiddleware, userController.updateUsername)
-
-router.delete('/destroy', authMiddleware, userController.destroy)
 
 module.exports = router

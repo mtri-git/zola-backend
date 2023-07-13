@@ -447,6 +447,11 @@ class UserController {
 	}
 
 	async destroy(req, res) {
+
+		// check if user is existed
+		const user = await User.findById(req.user.id)
+		if (!user) return res.status(400).json({ message: 'User not found' })
+
 		const session = await mongoose.startSession()
 		session.startTransaction()
 		try {
