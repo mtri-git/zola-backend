@@ -26,8 +26,13 @@ const RoomSchema = new mongoose.Schema({
 	deleted_at: {type: Date, default: null, index: {expires: 604800}}
 })
 
-//virtual
+// before remove room => remove all message in room
+RoomSchema.pre('remove', async function (next) {
+	await this.model('Message').deleteMany({ roomId: this._id })
+	next()
+})
 
+//virtual
 RoomSchema.virtual('last_message', {
 	ref: 'Message',
 	localField: '_id',

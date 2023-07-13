@@ -55,7 +55,6 @@ class AdminRoomController {
 		try {
 			const response = await Room.updateOne({_id: req.params.id}, {deleted_at: Date.now()})
 			// update deleted_at for all message in room
-			await Message.updateMany({room_id: req.params.id}, {deleted_at: Date.now()})
 			console.log(response);
 			return res.status(200).json({ message: 'Delete room successful' })
 		} catch (error) {

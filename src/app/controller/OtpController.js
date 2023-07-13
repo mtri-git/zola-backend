@@ -112,14 +112,12 @@ class OtpController {
 	async requestOtpForPassword(req, res) {
 		try {
 			const { email, phone } = req.body
-			const identify = { email, phone }
+			// const identify = { email, phone }
 			// check if email or phone is already exist
 			const user = await User.findOne({email: email})
 			if(!user) return res.status(400).json({message: "Email or phone not register yet"})
 
-			const OTP = await otpService.addNewOtp({ email } || { phone })
-
-
+			const OTP = await otpService.addNewOtp({ email })
 			if (email) {
 				sendMail(email, 'Mã xác thực OTP', OTP)
 				return res.status(200).json({
@@ -141,20 +139,16 @@ class OtpController {
 			const { email, phone } = req.body
 
 			const otp = await Otp.findOne({
-				$or: [{ email }, { phone }],
+				email: email,
+				value: req.body.otp,
 			})
 
-			const verify = await bcrypt.compare(req.body.otp, otp.otp)
-			const verify2 = await otpService.verifyOtp(
-				req.body.otp,
-				{ email } || { phone }
-			)
-			console.log(req.body.otp, verify2)
+			console.log(otp);
 
-			if (verify) {
+			if (otp) {
 				// opt for verify if change password
 				const user = await User.findOne({
-					$or: [{ email: req.body.email }, { phone: req.body.phone }],
+					$or: [{ email: req.body.email }],
 				}).lean()
 				const { _id } = user
 				const token = generateAccessToken({

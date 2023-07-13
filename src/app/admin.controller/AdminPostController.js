@@ -110,6 +110,7 @@ class AdminPostController {
 			const post = await Post.findById(req.params.id)
 			await Post.updateOne({ _id: req.params.id }, { deleted_at: null })
 			await File.updateMany({_id: { $in: post.attach_files}}, {deleted_at: null})
+			await Comment.updateMany({postId: req.params.id}, {deleted_at: null})
 			return res.status(200).json({ message: 'Recover post successful' })
 		} catch (error) {
 			res.status(500).json({ message: 'Server error' })

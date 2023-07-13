@@ -38,6 +38,15 @@ const CommentSchema = new mongoose.Schema({
     },
 })
 
+// before remove delete all child comment
+CommentSchema.pre('remove', async function(next) {
+    try {
+        await this.model('Comment').deleteMany({ parent_id: this._id })
+        next()
+    } catch (error) {
+        next(error)
+    }
+})
 
 const Comment = mongoose.model('Comment', CommentSchema)
 module.exports = Comment

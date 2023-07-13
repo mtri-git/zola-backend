@@ -52,6 +52,12 @@ redis.connect()
 // socket
 
 route(app)
+
+app.use((err, req, res, next) => {
+	console.log('Error: ', err)
+	next(err)
+})	
+
 app.get('/*', (req, res) => {
 	res.send('GET request to the homepage')
 })

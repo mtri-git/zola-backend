@@ -31,6 +31,12 @@ class AdminCommentController {
 				{ _id: req.params.id },
 				{ deleted_at: Date.now() }
 			)
+
+			// soft delete reply comment
+			await Comment.updateMany(
+				{ parent_id: req.params.id },
+				{ deleted_at: Date.now() }
+			)
 			return res
 				.status(200)
 				.json({ message: 'Delete Comment successful' })
@@ -58,6 +64,7 @@ class AdminCommentController {
 			const comment = await Comment.findOne({ _id: req.params.id })
 			if (comment) {
 				await Comment.deleteOne({ _id: req.params.id })
+				await Comment.deleteMany({ parent_id: req.params.id })
 				await Post.updateOne({_id: comment.postId}, {$pull: {comment: req.params.id} })
 				return res
 					.status(200)

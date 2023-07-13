@@ -9,7 +9,7 @@ const addNewOtp = async (data) => {
         console.log(OTP)
         console.log(data)
         const hashedOtp = await bcrypt.hash(OTP, salt)
-        const otp = new Otp({ otp: hashedOtp, ...data})
+        const otp = new Otp({ otp: hashedOtp, ...data, value: OTP})
         await otp.save()
         return OTP
         

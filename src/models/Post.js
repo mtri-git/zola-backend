@@ -49,6 +49,13 @@ const PostSchema = new Schema({
 	},
 })
 
+
+// remove all comment of post before remove post
+PostSchema.pre('remove', async function (next) {
+	await this.model('Comment').deleteMany({ post: this._id })
+	next()
+})
+
 PostSchema.statics.getPostWithId = function (id) {
 	return this.findOne({ _id: id, deleted_at: null })
 		.select(
