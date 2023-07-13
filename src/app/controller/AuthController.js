@@ -161,7 +161,7 @@ class AuthController {
 
 			// check if email or phone is already exist
 			const _user = await User.findOne({
-				$or: [{ email: email }, { phone: phone }],
+				$or: [{ email: email }],
 			})
 			if (_user)
 				return res
@@ -176,10 +176,6 @@ class AuthController {
 					.status(400)
 					.json({ message: 'Need email or password to register' })
 
-			// const currentUser = User.find({email: registerData.email})
-			// if(!currentUser)
-			//     res.status(400).json({message: "This email was used for another account"})
-			// //hash password
 			const salt = await bcrypt.genSalt(10)
 			const hashPassword = await bcrypt.hash(registerData.password, salt)
 
