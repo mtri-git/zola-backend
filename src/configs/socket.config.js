@@ -22,13 +22,19 @@ function initSocket(server) {
 	io.on('connection', async (socket) => {
 		console.log('A user connected.', socket.id)
 		console.log('A user connected:', socket.handshake.query.id)
+		
 		try {
 			if (socket.handshake.query.id) {
-				createAnInstance(`socket:${socket.handshake.query.id}`, socket.id)
-				await User.updateOne(
-					{ _id: socket.handshake.query.id },
-					{ $set: { status: 'online' } }
+				createAnInstance(
+					`socket:${socket.handshake.query.id}`,
+					socket.id
 				)
+				// check if id is valid as a ObjectId
+				if (socket.handshake.query.id.match(/^[0-9a-fA-F]{24}$/))
+					await User.updateOne(
+						{ _id: socket.handshake.query.id },
+						{ $set: { status: 'online' } }
+					)
 			}
 		} catch (error) {
 			console.log(error)
