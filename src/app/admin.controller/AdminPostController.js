@@ -19,6 +19,7 @@ class AdminPostController {
 				.sort({ created_at: -1 })
 				.skip((offset - 1) * pageSize)
 				.limit(pageSize)
+				.sort({ created_at: -1 })
 
 			const totalPost = await Post.find().count()
 			const totalPage = Math.ceil(totalPost / pageSize)

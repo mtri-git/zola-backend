@@ -17,6 +17,7 @@ class AdminUserController {
 				.select('-password')
 				.skip((offset - 1) * pageSize)
 				.limit(pageSize)
+				.sort({ created_date: -1 })
 			const totalUser = await User.find().count()
 			const totalPage = Math.ceil(totalUser / pageSize)
 
