@@ -13,7 +13,7 @@ class CommentController {
 				_id: req.params.commentId,
 				deleted_at: null,
 			  });
-			  const replyCountPromise = Comment.find({reply_to: req.params.commentId}).count();
+			  const replyCountPromise = Comment.find({parent_id: req.params.commentId}).count();
 			  
 			  const [comment, replyCount] = await Promise.all([commentPromise, replyCountPromise]);
 
@@ -43,10 +43,20 @@ class CommentController {
 				return res.status(400).json({ message: 'Content is required' })
 			}
 
-			if( !reply_to ^ !parent_id ){ 
-				//XOR if reply_to is null then parent_id is not null is not valid
-				// if both are null or both are not null is valid for a comment (parent comment or reply comment)
-				return res.status(400).json({ message: 'reply_to and parent_id are required' })
+			// check is reply_to  a user
+			if (reply_to) {
+				const isExistComment = await Comment.exists({ _id: parent_id })
+				if (!isExistComment) {
+					return res.status(404).json({ message: 'Comment is not exist' })
+				}
+			}
+
+			// check is parent_id a comment
+			if (parent_id) {
+				const isExistComment = await Comment.exists({ _id: parent_id })
+				if (!isExistComment) {
+					return res.status(404).json({ message: 'Comment is not exist' })
+				}
 			}
 
 			if (isExistPost) {
@@ -131,15 +141,15 @@ class CommentController {
 				let data = await Comment.find({
 					postId: currentPost._id,
 					deleted_at: null,
-					reply_to: null,
+					parent_id: null,
 				})
 					.populate({ path: 'author', select: 'username fullname avatarUrl' })
-					.populate({ path: 'reply_to' })
+					.populate({ path: 'reply_to', select: 'username fullname avatarUrl' })
 					.select('author postId reply_to content like_by created_at')
 
 				for (let index = 0; index < data.length; index++) {
 					data[index]._doc.totalReply = await Comment.find({
-						reply_to: data[index]._id,
+						parent_id: data[index]._id,
 					}).count()
 					data[index]._doc.totalLike = data[index].like_by.length
 					data[index]._doc.isLike = data[index].like_by.includes(
@@ -163,7 +173,7 @@ class CommentController {
 			})
 			if (currentComment) {
 				let data = await Comment.find({
-					reply_to: currentComment._id,
+					parent_id: currentComment._id,
 					deleted_at: null,
 				})
 					.populate({ path: 'author', select: 'username fullname avatarUrl' })
@@ -172,12 +182,15 @@ class CommentController {
 
 				for (let index = 0; index < data.length; index++) {
 					data[index]._doc.totalReply = await Comment.find({
-						reply_to: data[index]._id,
+						parent_id: data[index]._id,
 					}).count()
 					data[index]._doc.totalLike = data[index].like_by.length
 					data[index]._doc.isLike = data[index].like_by.includes(
 						req.user.id
 					)
+
+					//drop like_by
+					delete data[index]._doc.like_by
 				}
 
 				res.status(200).json({ data })
@@ -208,7 +221,7 @@ class CommentController {
 
 			for (let index = 0; index < data.length; index++) {
 				data[index]._doc.totalReply = await Comment.find({
-					reply_to: data[index]._id,
+					parent_id: data[index]._id,
 				}).count()
 				data[index]._doc.totalLike = data[index].like_by.length
 				data[index]._doc.isLike = data[index].like_by.includes(
@@ -240,7 +253,7 @@ class CommentController {
 
 			for (let index = 0; index < data.length; index++) {
 				data[index]._doc.totalReply = await Comment.find({
-					reply_to: data[index]._id,
+					parent_id: data[index]._id,
 				}).count()
 				data[index]._doc.totalLike = data[index].like_by.length
 				data[index]._doc.isLike = data[index].like_by.includes(

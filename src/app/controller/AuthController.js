@@ -113,7 +113,7 @@ class AuthController {
 					})
 					.end()
 			} else {
-				return res.status(400).json({
+				return res.status(401).json({
 					message: 'Invalid Phone, Email, Username or Password',
 				})
 			}
@@ -187,21 +187,6 @@ class AuthController {
 		}
 	}
 
-	// logout(req, res) {
-	// 	const refreshToken = req.cookies.refreshToken
-	// 	if (refreshToken == null) return res.sendStatus(401)
-	// 	try {
-	// 		// verify if this is a refresh token
-	// 		const user = verifyToken('refresh', refreshToken)
-	// 		if (user) {
-	// 		}
-	// 		res.clearCookie('refreshToken')
-	// 		res.status(200).json({ message: 'logout success' })
-	// 		res.end()
-	// 	} catch (err) {
-	// 		res.sendStatus(500)
-	// 	}
-	// }
 	async changePassword(req, res) {
 		try {
 			// check accessToken
@@ -235,11 +220,6 @@ class AuthController {
 
 	getAccessToken(req, res) {
 		const refreshToken = req.cookies.refreshToken
-		// const token = req.headers['cookie'][0].split(';')[0].replace('refreshToken=', '')
-		// const refreshToken = req.body.refreshToken
-
-		// console.log(token)
-
 		if (refreshToken == null) return res.sendStatus(401)
 		try {
 			// verify if this is a refresh token

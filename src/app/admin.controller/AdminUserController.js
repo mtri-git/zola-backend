@@ -1,4 +1,8 @@
+const mongoose = require('mongoose')
 const User = require('../../models/User')
+const Post = require('../../models/Post')
+const Comment = require('../../models/Comment')
+const File = require('../../models/File')
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
 
 class AdminUserController {
@@ -16,12 +20,10 @@ class AdminUserController {
 			const totalUser = await User.find().count()
 			const totalPage = Math.ceil(totalUser / pageSize)
 
-			return res
-				.status(200)
-				.json({
-					data: users,
-					paginate: { offset, pageSize, totalPage },
-				})
+			return res.status(200).json({
+				data: users,
+				paginate: { offset, pageSize, totalPage },
+			})
 		} catch (error) {
 			res.status(500).json({ message: 'Server error' })
 		}
@@ -94,11 +96,20 @@ class AdminUserController {
 	}
 
 	async deleteUser(req, res) {
+		const session = await mongoose.startSession()
+		session.startTransaction()
 		try {
-			await User.deleteOne({ _id: req.params.id })
-			return res.status(200).json({ message: 'Create user successful' })
+			await User.deleteOne({ _id: req.params.id }).session(session)
+			await Post.deleteMany({ author: req.params.id }).session(session)
+			await Comment.deleteMany({ author: req.params.id }).session(session)
+			await File.deleteMany({ owner: req.params.id }).session(session)
+			await session.commitTransaction()
+			return res.status(200).json({ message: 'Delete user successful' })
 		} catch (error) {
-			res.status(500).json({ message: 'Server error' })
+			await session.abortTransaction()
+			return res.status(500).json({ message: 'Server error' })
+		} finally {
+			session.endSession()
 		}
 	}
 }

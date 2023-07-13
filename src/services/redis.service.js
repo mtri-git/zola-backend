@@ -14,9 +14,11 @@ const type = {
 
 const connect = async () => {
 	try {
-		console.log('Redis connecting...')
+		if (process.env.NODE_ENV !== 'test')
+			console.log('Redis connecting...')
 		await client.connect()
-		console.log('Redis connected!')
+		if (process.env.NODE_ENV !== 'test')
+			console.log('Redis connected!')
 	} catch (error) {
         console.error('Redis: ', error)
     }

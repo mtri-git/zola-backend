@@ -1,5 +1,7 @@
+const mongoose = require('mongoose')
 const User = require('../../models/User')
 const Post = require('../../models/Post')
+const Comment = require('../../models/Comment')
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
 const { formatDate } = require('../../utils/format')
 
@@ -430,6 +432,24 @@ class UserController {
 		} catch (err) {
 			console.log('Follow Error: ', err.message)
 			res.status(500).json({ message: 'Error' })
+		}
+	}
+
+	async destroy(req, res) {
+		const session = await mongoose.startSession()
+		session.startTransaction()
+		try {
+			await User.deleteOne({ _id: req.user.id }).session(session)
+			await Post.deleteMany({ author: req.user.id }).session(session)
+			await Comment.deleteMany({ author: req.user.id }).session(session)
+			await File.deleteMany({ owner: req.user.id }).session(session)
+			await session.commitTransaction()
+			return res.status(200).json({ message: 'Account deleted successful' })
+		} catch (error) {
+			await session.abortTransaction()
+			return res.status(500).json({ message: 'Server error' })
+		} finally {
+			session.endSession()
 		}
 	}
 }

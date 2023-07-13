@@ -17,7 +17,7 @@ const CommentSchema = new mongoose.Schema({
     ,
     reply_to:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
+        ref: 'User'
     },
     like_by: [{
         type: mongoose.Schema.Types.ObjectId,
