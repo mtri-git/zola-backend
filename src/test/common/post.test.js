@@ -58,6 +58,15 @@ describe('Login to get the accessToken', () => {
         })
     });
 
+    describe('Like or unlike a post', () => {
+        it('should return 200 OK', async () => {
+            const response = await request(app)
+                .put('/api/v1/post/64afc3a0eb59062fcfb01168/like')
+                .set('Authorization', `Bearer ${accessToken}`)
+                .expect(200)
+        })
+    })
+
     describe('Get hot post ', ()=>{
         it('should return 200 OK', async () => {
             const response = await request(app)
@@ -69,6 +78,16 @@ describe('Login to get the accessToken', () => {
 
         })
     })
+
+    describe('Get recommend post ', ()=>{
+        it('should return 200 OK', async () => {
+            const response = await request(app)
+            .get('/api/v1/post/recommend?limit=5')
+            .set('Authorization', `Bearer ${accessToken}`)
+            .expect(200)
+            expect(response.body).toBeDefined();
+    }
+    )});
 
     describe('Search post with text', ()=>{
         it('should return 200 OK', async () => {
@@ -90,4 +109,3 @@ describe('Login to get the accessToken', () => {
     })
 
 })
-

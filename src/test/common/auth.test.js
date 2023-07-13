@@ -18,12 +18,14 @@ describe('Register new user', () => {
 });
 
 describe('POST Login', () => {
+  let accessToken;
+
   it('should return a JWT token if the credentials are correct', async () => {
     const response = await request(app)
       .post('/api/v1/auth/login')
       .send({ username: 'votri', password: '12345' })
       .expect(200);
-
+    accessToken = response.body.token;
     expect(response.body.token).toBeDefined();
   });
 
@@ -35,4 +37,33 @@ describe('POST Login', () => {
 
     expect(response.body.message).toBe("This account has not registered yet");
   });
+
+  describe('Change password', () => {
+    it('should return 200 OK', async () => {
+      const response = await request(app)
+        .post('/api/v1/auth/change-password')
+        .set('Authorization', `Bearer ${accessToken}`)
+        .send({
+          oldPassword: '12345',
+          password: '123456',
+        })
+        .expect(200);
+      expect(response.body.message).toBe('Change password successfully');
+    });
+  });
+
+  describe('Change password again', () => {
+    it('should return 200 OK', async () => {
+      const response = await request(app)
+        .post('/api/v1/auth/change-password')
+        .set('Authorization', `Bearer ${accessToken}`)
+        .send({
+          oldPassword: '123456',
+          password: '12345',
+        })
+        .expect(200);
+      expect(response.body.message).toBe('Change password successfully');
+    });
+  });
+  
 });
