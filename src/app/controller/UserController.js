@@ -9,9 +9,18 @@ class UserController {
 	async getInfo(req, res) {
 		try {
 			const user = await User.findById(req.user.id).select(
-				'-password -devices'
+				'username fullname avatarUrl coverUrl contact_info following follower'
 			)
-			res.status(200).json({ data: user })
+			// drop follower and following turn to count in metadata and count post
+			const follower = user.follower.length
+			const following = user.following.length
+			const post = await Post.find({ author: user._id }).count()
+			
+			// drop follower and following in user
+			delete user._doc.follower
+			delete user._doc.following
+
+			res.status(200).json({ data: user, metadata: { follower, following, post } })
 		} catch (err) {
 			res.status(500).json({ error: "There's an error" })
 		}
