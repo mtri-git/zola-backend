@@ -60,7 +60,7 @@ const getRecommendPost = async (userId, limit) => {
                 $project: {
                   "author.username": { $arrayElemAt: ["$authorInfo.username", 0] },
                   "author.fullname": { $arrayElemAt: ["$authorInfo.fullname", 0] },
-                  "author.avatar": { $arrayElemAt: ["$authorInfo.avatar", 0] },
+                  "author.avatarUrl": { $arrayElemAt: ["$authorInfo.avatarUrl", 0] },
                   "author.contact_info": { $arrayElemAt: ["$authorInfo.contact_info", 0] },
                   attach_files: {
                     $map: {
