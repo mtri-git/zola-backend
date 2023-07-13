@@ -45,7 +45,7 @@ class CommentController {
 
 			// check is reply_to  a user
 			if (reply_to) {
-				const isExistComment = await Comment.exists({ _id: parent_id })
+				const isExistComment = await Comment.exists({ _id: parent_id, parent_id: null })
 				if (!isExistComment) {
 					return res.status(404).json({ message: 'Comment is not exist' })
 				}
