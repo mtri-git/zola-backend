@@ -21,11 +21,6 @@ class OtpController {
 				return res.status(400).json({ message: 'Email is invalid' })
 			}
 
-			// var phoneFormat = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/
-			// if ( !( email == '' && phone !== '' && phone.match(phoneFormat))) {
-			// 	return res.status(400).json({ message: 'Phone is invalid' })
-			// }
-
 			if (email)
 				isExistedUser = await User.exists({email: email})
 
@@ -49,6 +44,7 @@ class OtpController {
 					const otp = new Otp({
 						email: email,
 						otp: hashedOtp,
+						value: OTP,
 					})
 					await otp.save()
 					console.log(OTP)
@@ -63,6 +59,7 @@ class OtpController {
 					const otp = new Otp({
 						phone: phone,
 						otp: hashedOtp,
+						value: OTP,
 					})
 					await otp.save()
 					console.log(OTP)
@@ -82,20 +79,28 @@ class OtpController {
 		try {
 			const { email, phone } = req.body
 
+			//check if otp is 6 digits
+			if (req.body.otp.length !== 6) {
+				return res.status(400).json({ message: 'OTP is invalid' })
+			}
+
 			const otp = await Otp.findOne({
 				$or: [{ email }, { phone }],
+				value: req.body.otp,
 			})
 
+			if (!otp) {
+				return res.status(400).json({ message: 'OTP is invalid' })
+			}
+
+			console.log(otp)
+
 			const verify = bcrypt.compare(req.body.otp, otp.otp)
-			const verify2 = await otpService.verifyOtp(
-				req.body.otp,
-				{ email } || { phone }
-			)
-			console.log(req.body.otp, verify2)
 
 			if (verify) {
 				// opt for verify if change password
 				const token = generateAccessToken({ email } || { phone })
+				await Otp.deleteOne({ _id: otp._id })
 				res.status(200).json(token)
 			} else res.status(401).json({ message: 'Invalid OTP' })
 		} catch (error) {

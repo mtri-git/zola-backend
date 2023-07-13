@@ -4,6 +4,7 @@ const OtpSchema = new mongoose.Schema({
     email: String,
     phone: String,
     otp: String,
+    value: String,
     time: {type: Date, default: Date.now, }
 })
 
