@@ -11,7 +11,7 @@ class UserController {
 	async getInfo(req, res) {
 		try {
 			const user = await User.findById(req.user.id).select(
-				'username fullname avatarUrl coverUrl contact_info following follower created_date'
+				'username fullname email phone avatarUrl coverUrl contact_info following follower created_date'
 			)
 			// drop follower and following turn to count in metadata and count post
 			const follower = user.follower.length

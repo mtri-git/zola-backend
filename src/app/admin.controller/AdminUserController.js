@@ -3,7 +3,7 @@ const User = require('../../models/User')
 const Post = require('../../models/Post')
 const Comment = require('../../models/Comment')
 const File = require('../../models/File')
-
+const { softDeleteUser } = require('../../services/user.service')
 
 class AdminUserController {
 	async getUser(req, res) {

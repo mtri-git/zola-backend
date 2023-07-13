@@ -113,7 +113,8 @@ class OtpController {
 		try {
 			const { email, phone } = req.body
 			const identify = { email, phone }
-			const user = await User.findOne(identify)
+			// check if email or phone is already exist
+			const user = await User.findOne({email: email})
 			if(!user) return res.status(400).json({message: "Email or phone not register yet"})
 
 			const OTP = await otpService.addNewOtp({ email } || { phone })
