@@ -159,6 +159,18 @@ class AuthController {
 				username,
 			}
 
+			// check if email or phone is already exist
+			const _user = await User.findOne({
+				$or: [{ email: email }, { phone: phone }],
+			})
+			if (_user)
+				return res
+					.status(400)
+					.json({
+						message:
+							'This email or phone was used for another account',
+					})
+
 			if (!(email || phone))
 				return res
 					.status(400)
