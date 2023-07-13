@@ -102,7 +102,7 @@ class UserController {
 				}
 
 				// console.log(data)
-				res.status(201).json({ message: 'Change  info successful.' })
+				res.status(201).json({ message: 'Change info successful.' })
 			} else {
 				res.status(401).json({ message: 'Not authorize' })
 			}
@@ -119,7 +119,8 @@ class UserController {
 				
 				//check if file is png or jpg
 				console.log(file.mimetype);
-				if (!file.mimetype.includes('image') || file.mimetype.includes('svg') ) {
+				// allow binary file and image but not svg
+				if (file.mimetype.includes('svg') ) {
 
 					return res.status(400).json({ message: 'File is not image' })
 				}
