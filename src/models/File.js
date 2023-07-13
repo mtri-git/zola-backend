@@ -17,8 +17,17 @@ const FileSchema = new mongoose.Schema({
     format: {type: String, default: ""},
     url: {type: String, default: ""},
     created_at: {type: Date, default: Date.now()},
-    deleted_at: {type: Date, default: null}
+    deleted_at: {type: Date, default: null, index: {expires: 604800}}
 })
+
+FileSchema.pre('remove',async function(next) {
+    try {
+        await cloudinary.uploader.destroy(this.public_id)
+        next()
+    } catch (error) {
+        next(error)
+    }
+  });
 
 FileSchema.pre('deleteOne', async function(next) {
     try {

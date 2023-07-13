@@ -3,6 +3,7 @@ const User = require('../../models/User')
 const Notification = require('../../models/Notification')
 const File = require('../../models/File')
 const Device = require('../../models/Device')
+const Comment = require('../../models/Comment')
 const notificationService = require('../../services/notification.service')
 const {getRecommendPost} = require('../../services/post.service')
 
@@ -428,12 +429,17 @@ class PostController {
 					{ _id: { $in: post.attach_files } },
 					{ deleted_at: Date.now() }
 				)
+				Comment.updateMany(
+					{ postId: post._id },
+					{ deleted_at: Date.now() }
+				)
 				return res
 					.status(200)
 					.json({ message: 'The post has been deleted' })
 			}
 			return res.status(401).json({ message: 'Not authorize' })
 		} catch (err) {
+			console.log(err)
 			res.status(500).json({ Error: 'There a error' })
 		}
 	}

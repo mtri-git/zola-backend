@@ -1,4 +1,5 @@
 const Room = require('../../models/Room')
+const Message = require('../../models/Message')
 
 class AdminRoomController {
 	async getRoom(req, res) {
@@ -53,6 +54,8 @@ class AdminRoomController {
 	async deleteRoom(req, res) {
 		try {
 			const response = await Room.updateOne({_id: req.params.id}, {deleted_at: Date.now()})
+			// update deleted_at for all message in room
+			await Message.updateMany({room_id: req.params.id}, {deleted_at: Date.now()})
 			console.log(response);
 			return res.status(200).json({ message: 'Delete room successful' })
 		} catch (error) {
@@ -63,6 +66,7 @@ class AdminRoomController {
 	async hardDeleteRoom(req, res) {
 		try {
 			await Room.deleteOne({_id: req.params.id})
+			await Message.deleteMany({room_id: req.params.id})
 			return res.status(200).json({ message: 'Delete room successful' })
 		} catch (error) {
 			res.status(500).json({ message: 'Server error' })

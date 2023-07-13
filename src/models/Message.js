@@ -4,8 +4,7 @@ const MessageSchema = new mongoose.Schema({
 	nanoid: {
 		type: String,
 		unique: true,
-		default: null
-		
+		default: null,
 	},
 	roomId: {
 		type: mongoose.Schema.Types.ObjectId,
@@ -21,8 +20,8 @@ const MessageSchema = new mongoose.Schema({
 			},
 			created_at: {
 				type: Date,
-				default: Date.now()
-			}
+				default: Date.now(),
+			},
 		},
 	],
 	sender: {
@@ -30,21 +29,27 @@ const MessageSchema = new mongoose.Schema({
 		ref: 'User',
 		required: true,
 	},
-	content: { type: String, required: function() {
-		return !this.attach_files || (this.attach_files && this.attach_files.length === 0);
-	  }  },
+	content: {
+		type: String,
+		required: function () {
+			return (
+				!this.attach_files ||
+				(this.attach_files && this.attach_files.length === 0)
+			)
+		},
+	},
 	reply_to: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Message',
-		default: null
+		default: null,
 	},
 	seen_by: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
-		}
+		},
 	],
-	type: {type: String, default: "message"}, // text, image, video, file
+	type: { type: String, default: 'message' }, // text, image, video, file
 	attach_files: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
@@ -55,7 +60,16 @@ const MessageSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
-	deleted_at: {type: Date, default: null},
+	deleted_at: { type: Date, default: null, index: {expires: 604800} },
+})
+
+MessageSchema.pre('remove', async function (next) {
+	// delete all attach files
+	await Promise.all(
+		this.attach_files.map(async (file) => {
+			await file.remove()
+		})
+	)
 })
 
 MessageSchema.query.byContentInRoom = function (roomId, search, limit, page) {
@@ -99,9 +113,7 @@ MessageSchema.query.byContentInRoom = function (roomId, search, limit, page) {
 				path: 'attach_files',
 				select: 'resource_type format url',
 			})
-			
 }
-
 
 const Message = mongoose.model('Message', MessageSchema)
 module.exports = Message

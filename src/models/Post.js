@@ -42,7 +42,7 @@ const PostSchema = new Schema({
 		},
 	],
 	shared: { type: Number, default: 0 },
-	deleted_at: { type: Date, default: null },
+	deleted_at: { type: Date, default: null, index: {expires: 604800} },
 	created_at: {
 		type: Date,
 		default: Date.now,

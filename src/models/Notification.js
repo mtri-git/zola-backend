@@ -35,6 +35,7 @@ const notificationSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+	deleted_at: {type: Date, default: null, index: {expires: 2592000  }}
     // expires: 86400 
     // expire after 2 months
   }

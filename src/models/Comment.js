@@ -33,7 +33,8 @@ const CommentSchema = new mongoose.Schema({
     },
     deleted_at: { 
         type: Date, 
-        default: null
+        default: null,
+        index: {expires: 604800}
     },
 })
 

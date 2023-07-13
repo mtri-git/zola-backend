@@ -1,7 +1,8 @@
-const { RoomContext } = require('twilio/lib/rest/insights/v1/room')
 const Comment = require('../../models/Comment')
 const File = require('../../models/File')
 const Post = require('../../models/Post')
+const {softDeletePost} = require('../../services/post.service')
+
 
 class AdminPostController {
 	async getPost(req, res) {
@@ -93,10 +94,7 @@ class AdminPostController {
 		try {
 			const post = await Post.findById(req.params.id)
 			if (post) {
-				post.deleted_at = Date.now()
-				await post.save()
-				await File.updateMany({_id: { $in: post.attach_files}}, {deleted_at: Date.now()})
-				return res.status(200).json({ message: 'The post has been deleted' })
+				await softDeletePost(post._id)
 			}
 			else{
 				return res.status(400).json({message: 'Post not exist'})

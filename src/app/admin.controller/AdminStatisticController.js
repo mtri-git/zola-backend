@@ -42,7 +42,7 @@ class AdminStatisticController {
 		}
 	}
 
-	async getUserJoinByMouth(req, res) {
+	async getUserJoinByMonth(req, res) {
 		try {
 			const today = new Date(Date.now())
 			
@@ -162,7 +162,7 @@ class AdminStatisticController {
 		}
 	}
 
-	async getUserChatByMouth(req, res) {
+	async getUserChatByMonth(req, res) {
 		try {
 			const lastMonth = []
 			const today = new Date(Date.now())
@@ -206,7 +206,7 @@ class AdminStatisticController {
 		}
 	}
 
-	async getRoomChatByMouth(req, res) {
+	async getRoomChatByMonth(req, res) {
 		try {
 			const lastMonth = []
 			const today = new Date(Date.now())
@@ -233,13 +233,11 @@ class AdminStatisticController {
 				},
 			]).sort({ _id: 1 })
 
-			
 			let data = queries.map(q => {
 				q.name = `${q._id.month}/${q._id.year}`
 				delete q._id
 				return q
 			})
-			
 
 			data = transform(data, lastMonth).reverse()
 

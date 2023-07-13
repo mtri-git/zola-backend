@@ -89,6 +89,7 @@ const UserSchema = new Schema({
 	deleted_at: {
 		type: Date,
 		default: null,
+		index: {expires: 2592000 }
 	},
 },)
 

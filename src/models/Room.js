@@ -21,13 +21,9 @@ const RoomSchema = new mongoose.Schema({
 			ref: 'User',
 		},
 	],
-	// last_message: {
-	// 	type: mongoose.Schema.Types.ObjectId,
-	// 	ref: 'Message',`
-	// },
 	created_at: { type: Date, default: Date.now },
 	updated_at: { type: Date, default: Date.now },
-	deleted_at: {type: Date, default: null}
+	deleted_at: {type: Date, default: null, index: {expires: 604800}}
 })
 
 //virtual

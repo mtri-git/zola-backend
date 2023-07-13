@@ -1,4 +1,6 @@
 const Post = require('../models/Post')
+const File = require('../models/File')
+const Comment = require('../models/Comment')
 
 const getRecommendPost = async (userId, limit) => {
 	try {
@@ -90,4 +92,26 @@ const getRecommendPost = async (userId, limit) => {
 	}
 }
 
-module.exports = { getRecommendPost }
+const softDeletePost = async (postId) => {
+  try {
+    const post = await Post.findByIdAndUpdate(postId, {
+      deleted_at: Date.now(),
+    })
+    await Promise.all([
+      File.updateMany(
+        { _id: { $in: post.attach_files } },
+        { deleted_at: Date.now() }
+      ),
+      Comment.updateMany(
+        { postId: post._id },
+        { deleted_at: Date.now() }
+      )
+    ])
+    return post
+  } catch (error) {
+    console.log('Error: ', error)
+    throw error
+  }
+}
+
+module.exports = { getRecommendPost, softDeletePost }

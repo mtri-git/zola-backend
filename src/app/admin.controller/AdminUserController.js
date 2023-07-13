@@ -3,7 +3,6 @@ const User = require('../../models/User')
 const Post = require('../../models/Post')
 const Comment = require('../../models/Comment')
 const File = require('../../models/File')
-const { addNewFile, unlinkAsync } = require('../../services/file.service')
 
 class AdminUserController {
 	async getUser(req, res) {
@@ -40,14 +39,6 @@ class AdminUserController {
 		}
 	}
 
-	async createUser(req, res) {
-		try {
-			return res.status(200).json({ message: 'Create user successful' })
-		} catch (error) {
-			res.status(500).json({ message: 'Server error' })
-		}
-	}
-
 	async updateUser(req, res) {
 		try {
 			return res.status(200).json({ message: 'update user successful' })
@@ -63,7 +54,7 @@ class AdminUserController {
 					{ _id: req.params.id },
 					{ deleted_at: Date.now() }
 				)
-				console.log(response.matchedCount)
+				
 				if (response.matchedCount)
 					return res
 						.status(200)

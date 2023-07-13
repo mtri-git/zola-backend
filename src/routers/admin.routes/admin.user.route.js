@@ -4,9 +4,6 @@ const AdminUserController = require('../../app/admin.controller/AdminUserControl
 const authMiddleware = require('../../middleware/admin.auth.middleware')
 
 router.get('/', authMiddleware ,AdminUserController.getUser)
-// router.post('/create', authAdminController.createAdmin)
-// router.post('/change-password', authMiddleware, authAdminController.changePassword)
-// router.post('/logout', authAdminController.logout)
 router.get('/:id', authMiddleware ,AdminUserController.getUserDetail)
 router.delete('/:id', authMiddleware ,AdminUserController.softDeleteUser)
 router.delete('/hard-delete/:id', authMiddleware ,AdminUserController.deleteUser)
