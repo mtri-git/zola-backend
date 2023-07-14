@@ -31,7 +31,7 @@ describe('Login to get the accessToken', () => {
     describe('GET post detail /api/post/:id', () => {
         it('should return 200 OK', async () => {
             const response = await request(app)
-                .get('/api/v1/post/64afc3a0eb59062fcfb01168')
+                .get('/api/v1/post/64b0f8a47fe22dd34976fcb6')
                 .set('Authorization', `Bearer ${accessToken}`)
                 .expect(200)
         })
@@ -61,7 +61,7 @@ describe('Login to get the accessToken', () => {
     describe('Like or unlike a post', () => {
         it('should return 200 OK', async () => {
             const response = await request(app)
-                .put('/api/v1/post/64afc3a0eb59062fcfb01168/like')
+                .put('/api/v1/post/64b0f8a47fe22dd34976fcb6/like')
                 .set('Authorization', `Bearer ${accessToken}`)
                 .expect(200)
         })

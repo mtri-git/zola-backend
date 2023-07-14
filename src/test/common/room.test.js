@@ -22,7 +22,7 @@ describe('Login to get the accessToken', () => {
                 .send({
                     name: 'Test room',
                     isRoom: true,
-                    users: ["64afcc49e6dd52128ca621a8", "64afcc02499f7a06f0bba864", "64afcdd81afb580dcd4a6b15"]
+                    users: ["64b0f6272a5cc5d721f0ee1b", "64b0f60cfc5c5332aa86acb2"]
                 })
                 .expect(201)
         })
@@ -44,7 +44,7 @@ describe('Login to get the accessToken', () => {
     describe('Get user in room', () => {
         it('should return 200 OK', async () => {
             const response = await request(app)
-                .get('/api/v1/room/64afcfa452bc4e7142b3a929')
+                .get('/api/v1/room/64b0fd79a930301778587e77')
                 .set('Authorization', `Bearer ${accessToken}`)
                 .expect(200)
             expect(response.body).toBeDefined();

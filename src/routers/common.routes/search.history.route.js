@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const SearchHistoryController = require('../../app/controller/SearchHistoryController')
 const authMiddleware = require('../../middleware/auth.middleware')
+const idCheckerMiddleware = require('../../middleware/idcheck.auth.middleware')
 
 router.get('/text', authMiddleware, SearchHistoryController.getSearchTextHistory)
 
@@ -11,7 +12,7 @@ router.post('/text', authMiddleware, SearchHistoryController.createSearchTextHis
 
 router.post('/user', authMiddleware, SearchHistoryController.createSearchUserHistory)
 
-router.delete('/:id', authMiddleware, SearchHistoryController.deleteSearchHistory)
+router.delete('/:id',idCheckerMiddleware, authMiddleware, SearchHistoryController.deleteSearchHistory)
 
 module.exports = router
 

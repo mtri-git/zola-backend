@@ -21,6 +21,21 @@ const softDeleteUser = async (userId) => {
 				{ owner: user._id },
 				{ $set: { deleted_at: Date.now() } }
 			),
+			// delete follower and following
+			User.updateMany(
+				{ $or: [{ follow: user._id }, { following: user._id }] },
+				{ $pull: { follow: user._id, following: user._id } }
+			),
+			// delete like post
+			Post.updateMany(
+				{ like_by: user._id },
+				{ $pull: { like_by: user._id } }
+			),
+			// delete like comment
+			Comment.updateMany(
+				{ like_by: user._id },
+				{ $pull: { like_by: user._id } }
+			),
 		])
 
 		return user

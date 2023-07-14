@@ -4,6 +4,7 @@ const postController = require('../../app/controller/PostController')
 const authMiddleware = require('../../middleware/auth.middleware')
 const verifyMiddleware = require('../../middleware/verify.middleware')
 const upload = require('../../configs/upload')
+const idCheckerMiddleware = require('../../middleware/idcheck.auth.middleware')
 
 // search post
 router.get('/', authMiddleware, postController.searchPost)
@@ -24,7 +25,7 @@ router.get('/recommend', authMiddleware, postController.recommendPost)
 router.get('/profile/:username', authMiddleware, postController.getPostByUserId)
 
 // get post by Id
-router.get('/:postId', verifyMiddleware, postController.getPost)
+router.get('/:postId', idCheckerMiddleware, verifyMiddleware, postController.getPost)
 
 // check post classifier for testing
 router.post('/classifierac', postController.checkContentClassify)
@@ -39,10 +40,10 @@ router.post('/create-link', authMiddleware, postController.createPostWithLink)
 router.post('/share', authMiddleware, postController.sharePost)
 
 //delete post
-router.delete('/:postId', authMiddleware, postController.deletePost)
+router.delete('/:postId', idCheckerMiddleware, authMiddleware, postController.deletePost)
 
 // like or unlike a post
-router.put('/:postId/like', authMiddleware, postController.likeOrUnlikePost)
+router.put('/:postId/like', idCheckerMiddleware, authMiddleware, postController.likeOrUnlikePost)
 
 
 

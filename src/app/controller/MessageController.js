@@ -260,19 +260,6 @@ class MessageController {
 			res.status(500).json({ Error: 'Not authentication' })
 		}
 	}
-
-	testDelete = async (req, res) => {
-		try {
-			const data = await cloudinary.uploader.destroy(
-				'zola_files/images/zxd1zsnaznoqmwskfdip'
-			)
-			res.sendStatus(200)
-			console.log(data)
-		} catch (error) {
-			res.sendStatus(401)
-			console.log(error)
-		}
-	}
 }
 
 module.exports = new MessageController()

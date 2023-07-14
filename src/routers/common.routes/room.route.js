@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const roomController = require('../../app/controller/RoomController')
 const authMiddleware = require('../../middleware/auth.middleware')
+const idCheckerMiddleware = require('../../middleware/idcheck.auth.middleware')
 
 // create a new room
 router.post('/create', authMiddleware, roomController.createRoom)
@@ -23,16 +24,16 @@ router.get('/check-user' , authMiddleware, roomController.checkUserIsInRoom)
 router.get('/check', authMiddleware, roomController.checkRoomWithTwoUser)
 
 // get chat room from roomId
-router.get('/:roomId' , authMiddleware, roomController.getRoomById)
+router.get('/:roomId' , idCheckerMiddleware, authMiddleware, roomController.getRoomById)
 
 // check user is admin of room
-router.get('/is-admin/:id' , authMiddleware, roomController.checkUserIsAdmin)
+router.get('/is-admin/:id' , idCheckerMiddleware, authMiddleware, roomController.checkUserIsAdmin)
 
 // add user to room
-router.patch('/add-user/:id' , authMiddleware, roomController.addUserToRoom)
+router.patch('/add-user/:id' , idCheckerMiddleware, authMiddleware, roomController.addUserToRoom)
 
 // remove user from room
-router.patch('/remove-user/:id' , authMiddleware, roomController.removeUserFromRoom)
+router.patch('/remove-user/:id' , idCheckerMiddleware, authMiddleware,  roomController.removeUserFromRoom)
 
 // leave room
 router.patch('/leave-room/:id' , authMiddleware, roomController.leaveRoom)

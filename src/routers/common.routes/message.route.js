@@ -20,6 +20,4 @@ router.post('/send-file', upload.array("attach_files") ,authMiddleware, messageC
 // react to message with body messageId=....
 router.patch('/reaction/:messageId', authMiddleware, messageController.addReaction)
 
-router.delete('/test', messageController.testDelete)
-
 module.exports = router

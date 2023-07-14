@@ -55,7 +55,23 @@ class AdminUserController {
 					{ _id: req.params.id },
 					{ deleted_at: Date.now() }
 				)
-				
+					
+				// delete all follow and following of user and like post of user
+				await User.updateMany(
+					{ $or: [{ follow: req.params.id }, { following: req.params.id }] },
+					{ $pull: { follow: req.params.id, following: req.params.id } }
+				)
+
+				await Post.updateMany(
+					{ like_by: req.params.id },
+					{ $pull: { like_by: req.params.id } }
+				)
+
+				await Comment.updateMany(
+					{ like_by: req.params.id },
+					{ $pull: { like_by: req.params.id } }
+				)
+
 				if (response.matchedCount)
 					return res
 						.status(200)
@@ -96,6 +112,18 @@ class AdminUserController {
 			await Post.deleteMany({ author: req.params.id }).session(session)
 			await Comment.deleteMany({ author: req.params.id }).session(session)
 			await File.deleteMany({ owner: req.params.id }).session(session)
+			await User.updateMany(
+				{ $or: [{ follow: req.params.id }, { following: req.params.id }] },
+				{ $pull: { follow: req.params.id, following: req.params.id } }
+			)
+			await Post.updateMany(
+				{ like_by: req.params.id },
+				{ $pull: { like_by: req.params.id } }
+			)
+			await Comment.updateMany(
+				{ like_by: req.params.id },
+				{ $pull: { like_by: req.params.id } }
+			)
 			await session.commitTransaction()
 			return res.status(200).json({ message: 'Delete user successful' })
 		} catch (error) {

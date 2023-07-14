@@ -17,7 +17,7 @@ describe('GET /', () => {
 	describe('Follow a user', () => {
 		it('should return 200 OK', async () => {
 			const response = await request(app)
-				.patch('/api/v1/user/follow/votri_chjwy1689243096159')
+				.patch('/api/v1/user/follow/votri_mqhmj1689318951844')
 				.set('Authorization', `Bearer ${accessToken}`)
 				.expect(200)
 		})
@@ -26,7 +26,7 @@ describe('GET /', () => {
     describe('Follow another user', () => {
 		it('should return 200 OK', async () => {
 			const response = await request(app)
-				.patch('/api/v1/user/follow/votri_lbxgy1689242870933')
+				.patch('/api/v1/user/follow/votri_xbjlw1689318924914')
 				.set('Authorization', `Bearer ${accessToken}`)
 				.expect(200)
 		})

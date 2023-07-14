@@ -1,7 +1,6 @@
 const Post = require('../../models/Post')
 const Comment = require('../../models/Comment')
 const User = require('../../models/User')
-const { post } = require('../../routers/common.routes/comment.route')
 
 class CommentController {
 	// get a comment
@@ -75,7 +74,7 @@ class CommentController {
 
 				return res
 					.status(201)
-					.json({ message: 'Add a comment successful' })
+					.json({ message: 'Add a comment successful', data: comment })
 			}
 			return res.status(404).json({ message: 'Post is not existed' })
 		} catch (err) {
@@ -167,6 +166,10 @@ class CommentController {
 
 	async getReplyComment(req, res) {
 		try {
+			// check if id is valid for object id
+			if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+				return res.status(400).json({ message: 'Invalid id' })
+			}
 			const currentComment = await Comment.findOne({
 				_id: req.params.id,
 				deleted_at: null,
