@@ -9,8 +9,9 @@ const getRecommendPost = async (userId, limit) => {
 			like_by: userId,
 		})
 
-		// get author of last five post
-		const author = lastFivePost.map((post) => post.author)
+		// get author of last five post but not me
+		const author = lastFivePost.map((post) => post.author).filter((author) => author !== userId)
+
 
 		// get the category of last five post
 		const category = lastFivePost.map((post) => post.category_by_ai)

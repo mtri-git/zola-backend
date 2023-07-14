@@ -159,6 +159,20 @@ UserSchema.pre('updateOne', (next) => {
 	next()
 })
 
+// Delete all post, comment, file of user if user is remove
+UserSchema.pre('remove', async function (next) {
+	try {
+		await Promise.all([
+			mongoose.model('Post').deleteMany({ author: this._id }),
+			mongoose.model('Comment').deleteMany({ author: this._id }),
+			mongoose.model('File').deleteMany({ owner: this._id }),
+		])
+		next()
+	} catch (error) {
+		console.log('Error: ', error)
+		next(error)
+	}
+})
 
 const User = mongoose.model('User', UserSchema)
 module.exports = User

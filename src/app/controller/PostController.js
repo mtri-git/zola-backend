@@ -596,6 +596,7 @@ class PostController {
 		try {
 			const limit = Number(req.query.limit) || 10
 			const user = await User.findById(req.user.id)
+			if (!user) return res.status(400).json({ message: 'User not found' })
 			const recommendPost = await getRecommendPost(user._id, limit)
 			res.status(200).json({ data: recommendPost })
 		} catch (error) {
