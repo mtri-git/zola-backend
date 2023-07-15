@@ -7,11 +7,11 @@ const getRecommendPost = async (userId, limit) => {
 		// get last five post that user liked
 		const lastFivePost = await Post.find({
 			like_by: userId,
-		})
+		}).limit(10).sort({created_at: -1})
 
 		// get author of last five post but not me
-		const author = lastFivePost.map((post) => post.author).filter((author) => author !== userId)
-
+		const author = lastFivePost.map((post) => post.author).filter((author) => author.toString() !== userId)
+    console.log(author);
 
 		// get the category of last five post
 		const category = lastFivePost.map((post) => post.category_by_ai)
@@ -21,7 +21,8 @@ const getRecommendPost = async (userId, limit) => {
             {
               $match: {
                 category_by_ai: { $in: category },
-                author: { $in: author },
+                // author: { $in: author },
+                author: { $ne: userId },
                 deleted_at: null,
                 like_by: { $ne: userId },
               },
@@ -76,7 +77,7 @@ const getRecommendPost = async (userId, limit) => {
                       },
                     },
                   },
-                  title: 1,
+                  // title: 1,
                   content: 1,
                   created_at: 1,
                   isLike: 1,
