@@ -41,6 +41,7 @@ class RoomController {
 
 				if (validUserList) {
 					roomData.users.push(req.user.id)
+					roomData.admins.push(req.user.id)
 					const room = new Room(roomData)
 					await room.save()
 					res.status(201).json({
@@ -91,6 +92,10 @@ class RoomController {
 					deleted_at: null,
 				})
 
+				if (!room) {
+					return res.status(404).json({ message: 'Room not found' })
+				}
+
 				if (room.users.includes(req.user.id)) {
 					const roomDoc = await Room.getRoomById(req.params.roomId)
 
@@ -103,7 +108,7 @@ class RoomController {
 			}
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: "Can't access this !" })
+			return res.status(500).json({ message: "Server error" })
 		}
 	}
 
@@ -161,9 +166,6 @@ class RoomController {
 	async getAllUserInRoom(req, res) {
 		try {
 			const room = await Room.findById(req.query.roomId)
-			// const users = await Promise.all(
-			// 	room.users.map((userId) => User.getUserWithIdLessData(userId))
-			// )
 			const users = await User.find({ _id: { $in: room.users } })
 			.select('fullname username contact_info status avatarUrl last_online')
 
@@ -172,9 +174,6 @@ class RoomController {
 				users[i]._doc.role = room.admins.includes(users[i]._id) ? 'admin' : 'member'
 			}
 			
-			for (let i = 0; i < users.length; i++) {
-				users[i]._doc.role = room.admins.includes(users[i]._id) ? 'admin' : 'member'
-			}
 			res.status(200).json({ user: users })
 		} catch (err) {
 			console.error('Get all User In Room: ', err)
@@ -186,7 +185,11 @@ class RoomController {
 		try {
 			
 			// using $addToSet to void duplicated values
-			const room = await Room.findById(req.params.id)
+			const room = await Room.findOne({ _id: req.params.id , isRoom: true, deleted_at: null })
+
+			if (!room) {
+				return res.status(404).json({ message: 'Room not found' })
+			}
 			// check user is admin of room
 			if (!room.admins.includes(req.user.id)) {
 				res.status(401).json({ message: 'You are not admin of room' })
