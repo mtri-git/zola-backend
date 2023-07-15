@@ -214,7 +214,7 @@ class PostController {
 			// 	type: 'image',
 			// }
 
-			const { content, scope, link, created_at } = req.body
+			const { content, scope, link, created_at, type } = req.body
 
 			const hashtag = content.match(/#[a-zA-Z0-9]+/g)
 			const mention = content.match(/@[a-zA-Z0-9]+/g)
@@ -243,7 +243,8 @@ class PostController {
 						req.user.id,
 						post._id,
 						link.url[i],
-						link.type
+						link.type,
+						type
 					)
 					listFile.push(file._id)
 				}
@@ -251,7 +252,7 @@ class PostController {
 				post.attach_files = listFile
 			}
 			await post.save()
-			return res.status(201).json({ message: 'Post successfully' })
+			return res.status(201).json({ message: 'Post successfully', data: post })
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json({ Error: "There's an error." })
@@ -261,7 +262,7 @@ class PostController {
 	// Add a post
 	async createPost(req, res) {
 		try {
-			let { content, scope } = req.body
+			let { content = "", scope } = req.body
 			let attach_files = req.files
 
 			if (!scope) scope = 'public'
@@ -287,6 +288,20 @@ class PostController {
 			let uploadData = []
 			
 			
+			// get the hashtag and mention from content
+			const hashtag = content.match(/#[a-zA-Z0-9]+/g)
+			const mention = content.match(/@[a-zA-Z0-9]+/g)
+
+			const {category} = await classifyPostText(content)
+			const post = new Post({
+				author: req.user.id,
+				category_by_ai: category,
+				hashtag,
+				mention,
+				content,
+				scope
+			})
+			
 			for (let i = 0; i < attach_files.length; i++) {
 				const data = await addNewFile(
 					attach_files[i].path,
@@ -306,20 +321,8 @@ class PostController {
 
 			attach_files = [...uploadData]
 
-			// get the hashtag and mention from content
-			const hashtag = content.match(/#[a-zA-Z0-9]+/g)
-			const mention = content.match(/@[a-zA-Z0-9]+/g)
+			post.attach_files = attach_files
 
-			const {category} = await classifyPostText(content)
-			const post = new Post({
-				author: req.user.id,
-				category_by_ai: category,
-				hashtag,
-				mention,
-				content,
-				scope,
-				attach_files,
-			})
 			await post.save()
 
 			// send notification to followers
@@ -501,6 +504,7 @@ class PostController {
 
 			const totalPost = await Post.find({
 				author: currentUser._id,
+				deleted_at: null,
 			}).count()
 			const totalPage = Math.ceil(totalPost / pageSize)
 			const paginate = { offset, pageSize, totalPage, totalPost }

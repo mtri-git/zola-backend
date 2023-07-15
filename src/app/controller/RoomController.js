@@ -166,6 +166,11 @@ class RoomController {
 			// )
 			const users = await User.find({ _id: { $in: room.users } })
 			.select('fullname username contact_info status avatarUrl last_online')
+
+			// add role for user
+			for (let i = 0; i < users.length; i++) {
+				users[i]._doc.role = room.admins.includes(users[i]._id) ? 'admin' : 'member'
+			}
 			
 			for (let i = 0; i < users.length; i++) {
 				users[i]._doc.role = room.admins.includes(users[i]._id) ? 'admin' : 'member'

@@ -26,34 +26,37 @@ const fileConfig = {
 	},
 }
 
+const config = (type, _format) => {
+	switch (type) {
+		case 'image':
+			if (_format !== 'gif') return fileConfig.imageConfig
+			return fileConfig.otherConfig
+
+		case 'video':
+			return fileConfig.videoConfig
+
+		case 'audio':
+			return fileConfig.audioConfig
+
+		case 'other':
+			return fileConfig.otherConfig
+
+		default:
+			return fileConfig.otherConfig
+	}
+}
+
 const addNewFile = async (
 	path,
 	type,
 	myFormat,
 	userId,
 	scope,
-	isFromPost = false
+	isFromPost = false,
+	postId
 ) => {
 	try {
-		const config = (type, _format) => {
-			switch (type) {
-				case 'image':
-					if (_format !== 'gif') return fileConfig.imageConfig
-					return fileConfig.otherConfig
-
-				case 'video':
-					return fileConfig.videoConfig
-
-				case 'audio':
-					return fileConfig.audioConfig
-
-				case 'other':
-					return fileConfig.otherConfig
-
-				default:
-					return fileConfig.otherConfig
-			}
-		}
+		
 
 		const data = await cloudinary2.uploader
 			.upload(path, config(type, myFormat))
@@ -73,6 +76,7 @@ const addNewFile = async (
 			public_id: public_id,
 			resource_type: resource_type,
 			format: format,
+			post_id: postId,
 			url: url,
 			isPrivate,
 			isFromPost: isFromPost,
@@ -86,15 +90,30 @@ const addNewFile = async (
 	}
 }
 
-const createFileByURL = async (owner_id ,post_id ,url, type) => {
+const createFileByURL = async (owner_id ,post_id ,input_url, type) => {
 	try {
+		const data = await cloudinary2.uploader
+		.upload(input_url)
+		.then((result, error) => {
+			return {
+				result: result,
+				error: error,
+			}
+		})
+
+		const { format, public_id, resource_type, created_at, url } =
+		data.result
+
 		const file = await File.create({
 			owner: owner_id,
 			post_id: post_id,
+			public_id: public_id,
+			resource_type: resource_type,
+			format: format,
 			url: url,
-			resource_type: type,
 			isPrivate: false,
 			isFromPost: true,
+			created_at: created_at,
 		})
 		return file
 		
