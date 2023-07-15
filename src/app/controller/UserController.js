@@ -246,6 +246,9 @@ class UserController {
 						username: req.query.username,
 				  }
 				: { id: req.query.id }
+			// check is user is existed or not deleted
+			if(! (await User.exists({username: req.query.username, deleted_at: null})))
+				return res.status(400).json({message: 'User is not existed or deleted'})
 			const user = await User.getUser(query).select(
 				'-password -devices -__v -email -phone -deleted_at'
 			)
@@ -369,6 +372,7 @@ class UserController {
 			recommend = await User.find({
 				_id: { $ne: req.user.id },
 				follower: { $ne: req.user.id },
+				deleted_at: null,
 			})
 				.sort({ follower: -1 })
 				.limit(10)
