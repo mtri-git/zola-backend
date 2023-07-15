@@ -46,7 +46,7 @@ RoomSchema.virtual('last_message', {
 
 // statics
 RoomSchema.statics.getRoomById = async function (id) {
-	const room =  await this.findOne({ _id: id, deleted_at: null })
+	let room =  await this.findOne({ _id: id, deleted_at: null })
 		.populate({
 			path: 'users',
 			select: 'contact_info username fullname status avatarUrl',
@@ -66,7 +66,7 @@ RoomSchema.statics.getRoomById = async function (id) {
 
 	// add role for user
 	for (let i = 0; i < room.users.length; i++) {
-		room.users[i]._doc.role = room.admins.includes(room.users[i]._id)
+		room.users[i].role = room.admins.includes(room.users[i]._id)
 			? 'admin'
 			: 'member'
 	}
