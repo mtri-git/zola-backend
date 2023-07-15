@@ -6,6 +6,7 @@ class HashtagController{
         let {limit} = req.query;
         //if limit is not provided, set default limit to 10
         if(!limit) limit = 5;
+        limit = parseInt(limit);
 
         try {
             const data = await Post.aggregate([
