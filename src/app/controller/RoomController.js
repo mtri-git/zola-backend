@@ -20,14 +20,27 @@ class RoomController {
 				// if room is 2 user and already exist
 				if (roomData.users.length === 1) {
 					roomData.isRoom = false
-					const objectIdArray = [...roomData.users, req.user.id].map(str => mongoose.Types.ObjectId(str));
+					const objectIdArray = [...roomData.users, req.user.id].map(
+						(str) => mongoose.Types.ObjectId(str)
+					)
 					const room = await Room.findOne({
-						users: objectIdArray, deleted_at: null
+						users: objectIdArray,
+						deleted_at: null,
 					})
-					
+
+
 					if (room) {
 						return res.status(200).json({
 							message: 'Room is existed. Cant create new',
+							data: room,
+						})
+					}
+					else{
+						roomData.admins = [req.user.id, ...users]
+						const room = new Room(roomData)
+						await room.save()
+						return res.status(201).json({
+							message: 'Create a new chat room',
 							data: room,
 						})
 					}
@@ -41,7 +54,7 @@ class RoomController {
 
 				if (validUserList) {
 					roomData.users.push(req.user.id)
-					roomData.admins.push(req.user.id)
+					// roomData.admins.push(req.user.id)
 					const room = new Room(roomData)
 					await room.save()
 					res.status(201).json({
@@ -116,7 +129,7 @@ class RoomController {
 			}
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: "Server error" })
+			return res.status(500).json({ message: 'Server error' })
 		}
 	}
 
@@ -124,7 +137,7 @@ class RoomController {
 		try {
 			let { limit, page } = req.query
 
-			if (!limit) limit = 10 
+			if (!limit) limit = 10
 			else limit = parseInt(limit)
 			if (!page) page = 1
 			else page = parseInt(page)
@@ -150,7 +163,6 @@ class RoomController {
 				totalPage: Math.ceil(total / limit),
 			}
 
-
 			return res.status(200).json({ Rooms: rooms, pagination })
 		} catch (err) {
 			console.log(err)
@@ -173,15 +185,25 @@ class RoomController {
 
 	async getAllUserInRoom(req, res) {
 		try {
-			const room = await Room.findById(req.query.roomId)
-			const users = await User.find({ _id: { $in: room.users } })
-			.select('fullname username contact_info status avatarUrl last_online')
+			const room = await Room.findOne({
+				_id: req.params.id,
+				deleted_at: null,
+			})
+
+			if (!room) {
+				return res.status(404).json({ message: 'Room not found' })
+			}
+			const users = await User.find({ _id: { $in: room.users } }).select(
+				'fullname username contact_info status avatarUrl last_online'
+			)
 
 			// add role for user
 			for (let i = 0; i < users.length; i++) {
-				users[i]._doc.role = room.admins.includes(users[i]._id) ? 'admin' : 'member'
+				users[i]._doc.role = room.admins.includes(users[i]._id)
+					? 'admin'
+					: 'member'
 			}
-			
+
 			res.status(200).json({ user: users })
 		} catch (err) {
 			console.error('Get all User In Room: ', err)
@@ -191,9 +213,12 @@ class RoomController {
 
 	async addUserToRoom(req, res) {
 		try {
-			
 			// using $addToSet to void duplicated values
-			const room = await Room.findOne({ _id: req.params.id , isRoom: true, deleted_at: null })
+			const room = await Room.findOne({
+				_id: req.params.id,
+				isRoom: true,
+				deleted_at: null,
+			})
 
 			if (!room) {
 				return res.status(404).json({ message: 'Room not found' })
@@ -203,7 +228,7 @@ class RoomController {
 				res.status(401).json({ message: 'You are not admin of room' })
 			}
 			const userList = req.body.users
-			console.log(userList);
+			console.log(userList)
 			//check list user is valid
 			for (let i = 0; i < userList.length; i++) {
 				// check userList[i] is ObjectId valid
@@ -232,9 +257,8 @@ class RoomController {
 			} else {
 				res.status(200).json({ message: 'User is not in room' })
 			}
-		}
-		catch (err) {
-			res.status(500).json({ message: "Server error" })
+		} catch (err) {
+			res.status(500).json({ message: 'Server error' })
 		}
 	}
 
@@ -247,7 +271,6 @@ class RoomController {
 
 		if (await !User.exists({ _id: req.body.userId })) {
 			return res.status(401).json({ message: 'User not existed' })
-			
 		}
 		if (!room.users.includes(req.user.id)) {
 			return res.status(401).json({ message: 'Not authorization' })
@@ -280,19 +303,46 @@ class RoomController {
 	// leave room
 	async leaveRoom(req, res) {
 		try {
-			const room = await Room.findOne({ _id: req.params.id })
-			if (
-				room.users.includes(req.user.id) &&
-				room.isRoom &&
-				room.users.length > 2
-			) {
+			const room = await Room.findOne({
+				_id: req.params.id,
+				deleted_at: null,
+			})
+			if (!room) {
+				res.status(400).json({ message: 'Room not exist' })
+			}
+
+			// change req.user.id to ObjectId
+			const userId = mongoose.Types.ObjectId(req.user.id)
+
+			console.log(userId, room.users)
+
+			if (!room.users.includes(userId))
+				return res
+					.status(401)
+					.json({ message: "You're not in this room" })
+
+			if (room.isRoom && room.users.length > 2) {
 				await Room.updateOne(
 					{ _id: req.params.id },
 					{ $pull: { users: req.user.id } }
 				)
+
+				// if room have no admin => set admin to all user
+				if (room.admins.length === 0) {
+					await Room.updateOne(
+						{ _id: req.params.id },
+						{ $addToSet: { admins: { $each: room.users } } }
+					)
+				}
+
 				return res.status(200).json({ message: 'Leave room success' })
 			} else {
-				return res.status(401).json({ message: "Can't access this" })
+				return res
+					.status(401)
+					.json({
+						message:
+							'This is not room or room has one member can only delete',
+					})
 			}
 		} catch (error) {
 			console.log(error)
@@ -307,19 +357,26 @@ class RoomController {
 				return res.status(200).json({ message: 'User is admin' })
 			}
 			return res.status(200).json({ message: 'User is not admin' })
-
 		} catch (error) {
-			return  res.status(500).json({ message: 'Server error' })
+			return res.status(500).json({ message: 'Server error' })
 		}
 	}
 
 	// delete room
 	async deleteRoom(req, res) {
 		try {
-			const room = await Room.findOne({ _id: req.params.id })
-			if (!room.admins.includes(req.user.id)) {
+			const room = await Room.findOne({
+				_id: req.params.id,
+				deleted_at: null,
+			})
+			if (!room) {
+				res.status(400).json({ message: 'Room not exist' })
+			}
+
+			if (!room.admins.includes(req.user.id) && room.users.length > 2) {
 				res.status(401).json({ message: 'You are not admin of room' })
 			}
+
 			if (room.users.includes(req.user.id) && room.isRoom) {
 				await Room.updateOne(
 					{ _id: req.params.id },
@@ -327,7 +384,19 @@ class RoomController {
 				)
 				return res.status(200).json({ message: 'Delete room success' })
 			} else {
-				return res.status(401).json({ message: "Can't access this" })
+				// delete room for 2 user
+				if (!room.isRoom) {
+					await Room.updateOne(
+						{ _id: req.params.id },
+						{ deleted_at: Date.now() }
+					)
+					return res
+						.status(200)
+						.json({ message: 'Delete room success' })
+				} else
+					return res
+						.status(401)
+						.json({ message: "Can't access this" })
 			}
 		} catch (error) {
 			console.log(error)
