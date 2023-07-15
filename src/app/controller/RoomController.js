@@ -186,7 +186,7 @@ class RoomController {
 	async getAllUserInRoom(req, res) {
 		try {
 			const room = await Room.findOne({
-				_id: req.params.id,
+				_id: req.query.roomId,
 				deleted_at: null,
 			})
 
@@ -321,12 +321,16 @@ class RoomController {
 					.status(401)
 					.json({ message: "You're not in this room" })
 
-			if (room.isRoom && room.users.length > 2) {
+			if (room.isRoom) {
+
+
+				// if user is admin => remove admin
 				await Room.updateOne(
 					{ _id: req.params.id },
-					{ $pull: { users: req.user.id } }
+					{ $pull: { users: req.user.id } },
+					{ $pull: { admins: req.user.id } },
 				)
-
+				
 				// if room have no admin => set admin to all user
 				if (room.admins.length === 0) {
 					await Room.updateOne(
