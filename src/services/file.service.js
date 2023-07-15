@@ -1,4 +1,4 @@
-const cloudinary = require('../configs/cloudinary.config')
+const cloudinary2 = require('../configs/cloudinary2.config')
 const File = require('../models/File')
 
 const fs = require('fs')
@@ -55,7 +55,7 @@ const addNewFile = async (
 			}
 		}
 
-		const data = await cloudinary.uploader
+		const data = await cloudinary2.uploader
 			.upload(path, config(type, myFormat))
 			.then((result, error) => {
 				return {

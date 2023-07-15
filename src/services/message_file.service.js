@@ -1,4 +1,4 @@
-const cloudinary = require('../configs/cloudinary.config')
+const cloudinary2 = require('../configs/cloudinary2.config')
 const MessageFile = require('../models/MessageFile')
 
 const fs = require('fs')
@@ -54,7 +54,7 @@ const addNewMessageFile = async (path, type, myFormat, userId, roomId) => {
 			}
 		}
 
-		const data = await cloudinary.uploader
+		const data = await cloudinary2.uploader
 			.upload(path, config(type, myFormat))
 			.then((result, error) => {
 				return {

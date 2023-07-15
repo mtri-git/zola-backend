@@ -6,6 +6,8 @@ const Comment = require('../../models/Comment')
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
 const { formatDate } = require('../../utils/format')
 const {softDeleteUser} = require('../../services/user.service')
+const cloudinary = require('../../configs/cloudinary.config')
+const cloudinary2 = require('../../configs/cloudinary2.config')
 
 class UserController {
 	async getInfo(req, res) {
@@ -134,6 +136,21 @@ class UserController {
 					{ _id: req.user.id },
 					{ avatarUrl: data.url }
 				)
+				
+				// delete from cloudinary
+				try{
+					// find the old avatar in File with url
+					const oldAvatar = await File.findOne({url: req.user.avatarUrl})
+					// delete the old avatar in cloudinary
+					if(oldAvatar.cloudinary !== 'dmeufji3d')
+						await cloudinary.uploader.destroy(oldAvatar.public_id)
+					else
+						await cloudinary2.uploader.destroy(oldAvatar.public_id)
+					await File.deleteOne({url: req.user.avatarUrl})
+				}
+				catch(err){
+					console.log(err)
+				}
 
 				res.status(201).json({ message: 'Change avatar successful' })
 			} else {
@@ -158,6 +175,21 @@ class UserController {
 					{ _id: req.user.id },
 					{ coverUrl: data.url }
 				)
+
+				// delete from cloudinary
+				try{
+					// find the old avatar in File with url
+					const oldCover = await File.findOne({url: data.coverUrl})
+					// delete the old avatar in cloudinary
+					if(oldCover.cloudinary !== "dmeufji3d")
+						await cloudinary.uploader.destroy(oldCover.public_id)
+					else
+						await cloudinary2.uploader.destroy(oldCover.public_id)
+					await File.deleteOne({url: data.coverUrl})
+				}
+				catch(err){
+					console.log(err)
+				}
 
 				res.status(201).json({
 					message: 'Change cover image successful',

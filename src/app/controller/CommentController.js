@@ -149,6 +149,7 @@ class CommentController {
 				for (let index = 0; index < data.length; index++) {
 					data[index]._doc.totalReply = await Comment.find({
 						parent_id: data[index]._id,
+						deleted_at: null,
 					}).count()
 					data[index]._doc.totalLike = data[index].like_by.length
 					data[index]._doc.isLike = data[index].like_by.includes(

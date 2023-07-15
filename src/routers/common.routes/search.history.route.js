@@ -12,7 +12,10 @@ router.post('/text', authMiddleware, SearchHistoryController.createSearchTextHis
 
 router.post('/user', authMiddleware, SearchHistoryController.createSearchUserHistory)
 
-router.delete('/:id',idCheckerMiddleware, authMiddleware, SearchHistoryController.deleteSearchHistory)
+router.delete('/:id', idCheckerMiddleware, authMiddleware, SearchHistoryController.deleteSearchHistory)
+
+router.get('/search', authMiddleware, SearchHistoryController.recommendSearchText)
+
 
 module.exports = router
 
