@@ -63,14 +63,7 @@ RoomSchema.statics.getRoomById = async function (id) {
 		// })
 		.lean()
 
-	if (room.last_message?.deleted_at) room.last_message = null
-
-	// add role for user
-	for (let i = 0; i < room.users.length; i++) {
-		room._doc.users[i].role = room._doc.admins.includes(room.users[i]._id)
-			? 'admin'
-			: 'member'
-	}
+	// if (room.last_message?.deleted_at) room.last_message = null
 
 	return room
 }

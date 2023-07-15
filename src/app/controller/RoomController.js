@@ -99,6 +99,14 @@ class RoomController {
 				if (room.users.includes(req.user.id)) {
 					const roomDoc = await Room.getRoomById(req.params.roomId)
 
+					for (let i = 0; i < roomDoc.users.length; i++) {
+						roomDoc.users[i].role = roomDoc.admins.includes(
+							roomDoc.users[i]._id
+						)
+							? 'admin'
+							: 'member'
+					}
+
 					return res.status(200).json({ room: roomDoc })
 				} else {
 					return res.status(401).json({ error: "Can't access this." })
