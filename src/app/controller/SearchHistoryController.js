@@ -54,7 +54,8 @@ class SearchHistoryController {
 			const searchHistory = await SearchHistory.find({
 				user: req.user.id,
 				searchText: { $exists: true },
-			}).limit(10)
+			}).sort({ timestamp: -1 })
+			.limit(10)
 			return res.status(200).json({ data: searchHistory })
 		} catch (error) {
 			console.log(error)
@@ -68,6 +69,7 @@ class SearchHistoryController {
 				user: req.user.id,
 				searchUser: { $exists: true },
 			})
+			.sort({ timestamp: -1 })
 				.limit(10)
 				.populate('searchUser', 'fullname username avatarUrl')
 			return res.status(200).json({ data: searchHistory })
