@@ -193,19 +193,19 @@ class PostController {
 		}
 	}
 
-	async checkContentClassify(req, res) {
-		try {
+	// async checkContentClassify(req, res) {
+	// 	try {
 			
-			// fetch data from api from placeholder with fetch and return data
-			const data = await classifyPostText(req.body.content)
-			res.status(200).json({ data: data })
+	// 		// fetch data from api from placeholder with fetch and return data
+	// 		const data = await classifyPostText(req.body.content)
+	// 		res.status(200).json({ data: data })
 			
 			
-		} catch (error) {
-			console.log(error);
-			return res.status(500).json({ Error: "There's an error." })
-		}
-	}
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 		return res.status(500).json({ Error: "There's an error." })
+	// 	}
+	// }
 
 	async createPostWithLink(req, res){
 		try {

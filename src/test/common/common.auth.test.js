@@ -19,6 +19,7 @@ describe('Register new user', () => {
 
 describe('POST Login', () => {
   let accessToken;
+  let refreshToken;
 
   it('should return a JWT token if the credentials are correct', async () => {
     const response = await request(app)
@@ -26,6 +27,9 @@ describe('POST Login', () => {
       .send({ username: 'votri', password: '12345' })
       .expect(200);
     accessToken = response.body.token;
+    refreshToken = response.headers['set-cookie'][0].split(';')[0].split('=')[1]
+    console.log(refreshToken)
+    
     expect(response.body.token).toBeDefined();
   });
 

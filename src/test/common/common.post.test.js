@@ -35,6 +35,13 @@ describe('Login to get the accessToken', () => {
                 .set('Authorization', `Bearer ${accessToken}`)
                 .expect(200)
         })
+
+        it('should return 400 if id post not valid', async () => {
+            const response = await request(app)
+                .get('/api/v1/post/64b0f8a47fe22dd34976fcb23121236')
+                .set('Authorization', `Bearer ${accessToken}`)
+                .expect(400)
+        });
     })
 
     describe('Get all post by username', () => {

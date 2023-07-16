@@ -188,7 +188,7 @@ class AuthController {
 
 			await user.save()
 			res.status(200).json({ message: 'Register successful' })
-			console.log('Create new user successful')
+			// console.log('Create new user successful')
 		} catch (error) {
 			console.log('Register:', error.message)
 			res.status(500).json({ message: 'Register fail' })
@@ -201,7 +201,7 @@ class AuthController {
 
 			// check old password
 			const user = await User.findById(req.user.id)
-			console.log(user)
+			// console.log(user)
 			const { oldPassword, password } = req.body
 
 			const validPassword = await bcrypt.compare(
@@ -232,7 +232,7 @@ class AuthController {
 		try {
 			// verify if this is a refresh token
 			const user = verifyToken('refresh', refreshToken)
-			console.log(user)
+			// console.log(user)
 			const { id, fullname, username, avatarUrl } = user
 			if (!redis.verifyRefreshToken(id, refreshToken))
 				return res

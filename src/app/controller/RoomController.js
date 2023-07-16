@@ -82,7 +82,7 @@ class RoomController {
 				const room = await Room.findOne({
 					users: { $size: 2, $all: [req.user.id, user._id] },
 				})
-				console.log(room)
+				// console.log(room)
 				if (room && user) {
 					res.status(403).json({
 						message: 'Room is existed. Cant create new',
@@ -228,7 +228,7 @@ class RoomController {
 				res.status(401).json({ message: 'You are not admin of room' })
 			}
 			const userList = req.body.users
-			console.log(userList)
+			// console.log(userList)
 			//check list user is valid
 			for (let i = 0; i < userList.length; i++) {
 				// check userList[i] is ObjectId valid
@@ -250,7 +250,7 @@ class RoomController {
 	async checkUserIsInRoom(req, res) {
 		try {
 			const { roomId, userId } = req.query
-			console.log(roomId, userId)
+			// console.log(roomId, userId)
 			const room = await Room.findOne({ _id: roomId })
 			if (room.users.includes(userId)) {
 				res.status(200).json({ message: 'User is in room' })

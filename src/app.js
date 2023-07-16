@@ -29,6 +29,8 @@ app.use(
 )
 
 // log morgan
+// check if production or test
+// if(process.env.NODE_ENV === 'production')
 app.use(morgan('default'))
 
 // app.use(morgan({ stream: accessLogStream }))

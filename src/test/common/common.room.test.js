@@ -1,9 +1,9 @@
 const request = require('supertest')
 const app = require('../../app')
 
-describe('Login to get the accessToken', () => {
+describe('Room API for user', () => {
 	let accessToken
-	it('should return 200 OK', async () => {
+	it('login to get accessToken', async () => {
 		const response = await request(app)
 			.post('/api/v1/auth/login')
 			.send({ username: 'votri', password: '12345' })

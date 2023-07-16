@@ -13,6 +13,15 @@ describe('Admin Login', () => {
     expect(response.body.token).toBeDefined();
   });
 
+  it('should return 400 if the credentials are incorrect', async () => {
+    const response = await request(app)
+      .post('/api/v1/admin/auth/login')
+      .send({ username: 'admin', password: 'wrongpassword' })
+      .expect(400);
+
+    expect(response.body.message).toBe("Invalid Phone, Email, Username or Password");
+  });
+
   it('should return 400 if account not exist', async () => {
     const response = await request(app)
       .post('/api/v1/admin/auth/login')
