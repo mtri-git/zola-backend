@@ -11,6 +11,7 @@ class AdminRoomController {
 
 			const rooms = await Room.find()
 				.select('-__v -updated_at')
+				.sort({ created_at: -1 })
 				.populate({
 					path: 'users',
 					select: '_id username fullname avatarUrl',
