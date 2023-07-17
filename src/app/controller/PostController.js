@@ -562,8 +562,18 @@ class PostController {
 			)
 			const totalPost = await Post.find({
 				author: { $in: currentUser.following },
+				$or: [
+				  { scope: 'public' },
+				  {
+					$and: [
+					  { scope: 'friend' },
+					  { follower: currentUser._id },
+					  { following: currentUser._id },
+					],
+				  },
+				],
 				deleted_at: null,
-			}).count()
+			  }).countDocuments();
 			const totalPage = Math.ceil(totalPost / pageSize)
 			const paginate = { offset, pageSize, totalPage, totalPost }
 

@@ -126,7 +126,16 @@ PostSchema.statics.getPostByAuthor = function (userId, userArray, offset = 1, pa
 	return this.aggregate([
 		{
 			$match: {
-				scope: 'public',
+				$or: [
+					{ scope: 'public' },
+					{ 
+						scope: 'friend', 
+						$and: [
+							{ follower: userId },
+							{ following: userId }
+						]
+					}
+				],
 				author: {$in: userArray},
 				deleted_at: null,
 			},
