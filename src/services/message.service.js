@@ -37,7 +37,8 @@ const sendPushNotificationForMessage = async ({roomId, type, content, userId}) =
 		tokens,
 		title: `${user.fullname} đã nhắn tin`,
 		body: messageContent,
-		id: message.roomId,
+		id: roomId,
+		type: 'message',
 	})
 }
 

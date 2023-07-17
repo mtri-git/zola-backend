@@ -11,7 +11,7 @@ const init = () => {
     });
 }
 
-const sendPushNotification = async({tokens, title, body, id}) => {
+const sendPushNotification = async({tokens, title, body, id, type = "post"}) => {
     try {
         tokens = tokens.filter(token => token !== undefined)
         console.log({tokens, title, body, postId: id})
@@ -26,7 +26,7 @@ const sendPushNotification = async({tokens, title, body, id}) => {
                 "sound": "default", 
                 "status": "done",
                 "id": id,
-                "type": "post",
+                "type": type,
             }
         })
     } catch (error) {
