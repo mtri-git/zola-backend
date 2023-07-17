@@ -29,6 +29,7 @@ class RoomController {
 						deleted_at: null,
 					})
 
+					roomData.users = objectIdArray
 
 					if (room) {
 						return res.status(200).json({
