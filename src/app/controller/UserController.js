@@ -5,7 +5,7 @@ const File = require('../../models/File')
 const Comment = require('../../models/Comment')
 const { addNewFile, unlinkAsync } = require('../../services/file.service')
 const { formatDate } = require('../../utils/format')
-const {softDeleteUser} = require('../../services/user.service')
+const { softDeleteUser } = require('../../services/user.service')
 const cloudinary = require('../../configs/cloudinary.config')
 const cloudinary2 = require('../../configs/cloudinary2.config')
 
@@ -19,12 +19,15 @@ class UserController {
 			const follower = user.follower.length
 			const following = user.following.length
 			const post = await Post.find({ author: user._id }).count()
-			
+
 			// drop follower and following in user
 			delete user._doc.follower
 			delete user._doc.following
 
-			res.status(200).json({ data: user, metadata: { follower, following, post } })
+			res.status(200).json({
+				data: user,
+				metadata: { follower, following, post },
+			})
 		} catch (err) {
 			res.status(500).json({ error: "There's an error" })
 		}
@@ -120,13 +123,14 @@ class UserController {
 		try {
 			if (req.user) {
 				const file = req.file
-				
-				//check if file is png or jpg
-				console.log(file.mimetype);
-				// allow binary file and image but not svg
-				if (file.mimetype.includes('svg') ) {
 
-					return res.status(400).json({ message: 'File is not image' })
+				//check if file is png or jpg
+				console.log(file.mimetype)
+				// allow binary file and image but not svg
+				if (file.mimetype.includes('svg')) {
+					return res
+						.status(400)
+						.json({ message: 'File is not image' })
 				}
 				const data = await addNewFile(file.path, 'image', req.user.id)
 				// delete temp file after upload with multer
@@ -136,19 +140,19 @@ class UserController {
 					{ _id: req.user.id },
 					{ avatarUrl: data.url }
 				)
-				
+
 				// delete from cloudinary
-				try{
+				try {
 					// find the old avatar in File with url
-					const oldAvatar = await File.findOne({url: req.user.avatarUrl})
+					const oldAvatar = await File.findOne({
+						url: req.user.avatarUrl,
+					})
 					// delete the old avatar in cloudinary
-					if(oldAvatar.cloudinary !== 'dmeufji3d')
+					if (oldAvatar.cloudinary !== 'dmeufji3d')
 						await cloudinary.uploader.destroy(oldAvatar.public_id)
-					else
-						await cloudinary2.uploader.destroy(oldAvatar.public_id)
-					await File.deleteOne({url: req.user.avatarUrl})
-				}
-				catch(err){
+					else await cloudinary2.uploader.destroy(oldAvatar.public_id)
+					await File.deleteOne({ url: req.user.avatarUrl })
+				} catch (err) {
 					console.log(err)
 				}
 
@@ -177,17 +181,15 @@ class UserController {
 				)
 
 				// delete from cloudinary
-				try{
+				try {
 					// find the old avatar in File with url
-					const oldCover = await File.findOne({url: data.coverUrl})
+					const oldCover = await File.findOne({ url: data.coverUrl })
 					// delete the old avatar in cloudinary
-					if(oldCover.cloudinary !== "dmeufji3d")
+					if (oldCover.cloudinary !== 'dmeufji3d')
 						await cloudinary.uploader.destroy(oldCover.public_id)
-					else
-						await cloudinary2.uploader.destroy(oldCover.public_id)
-					await File.deleteOne({url: data.coverUrl})
-				}
-				catch(err){
+					else await cloudinary2.uploader.destroy(oldCover.public_id)
+					await File.deleteOne({ url: data.coverUrl })
+				} catch (err) {
 					console.log(err)
 				}
 
@@ -247,8 +249,15 @@ class UserController {
 				  }
 				: { id: req.query.id }
 			// check is user is existed or not deleted
-			if(! (await User.exists({username: req.query.username, deleted_at: null})))
-				return res.status(400).json({message: 'User is not existed or deleted'})
+			if (
+				!(await User.exists({
+					username: req.query.username,
+					deleted_at: null,
+				}))
+			)
+				return res
+					.status(400)
+					.json({ message: 'User is not existed or deleted' })
 			const user = await User.getUser(query).select(
 				'-password -devices -__v -email -phone -deleted_at'
 			)
@@ -304,22 +313,22 @@ class UserController {
 	async getFollower(req, res) {
 		try {
 			const user = await User.findOne({ username: req.query.username })
-			const myId = req.user.id
 
-			let follower = await Promise.all(
-				user.follower.map((userId) =>
-					User.getUserWithIdLessData(userId)
-				)
+			// delete the user that is deleted
+
+			let follower = await User.find({
+				_id: { $in: user.follower },
+				deleted_at: null,
+			}).select(
+				'fullname follower username contact_info status avatarUrl last_online'
 			)
 
 			follower = follower.filter((user) => user != null)
 
 			const data = follower.map((user) => {
-					user._doc.isFollowing = user._doc.follower.includes(
-						req.user.id
-					)
-					delete user._doc.follower
-					return user
+				user._doc.isFollowing = user._doc.follower.includes(req.user.id)
+				delete user._doc.follower
+				return user
 			})
 
 			res.status(200).json({ data })
@@ -334,10 +343,11 @@ class UserController {
 		try {
 			const user = await User.findOne({ username: req.query.username })
 
-			const following = await Promise.all(
-				user.following.map((userId) =>
-					User.getUserWithIdLessData(userId)
-				)
+			const following = await User.find({
+				_id: { $in: user.following },
+				deleted_at: null,
+			}).select(
+				'fullname follower username contact_info status avatarUrl last_online'
 			)
 			res.status(200).json({ data: following })
 		} catch (err) {
@@ -368,7 +378,6 @@ class UserController {
 			let recommend = []
 			const user = await User.findById(req.user.id)
 
-
 			recommend = await User.find({
 				_id: { $ne: req.user.id },
 				follower: { $ne: req.user.id },
@@ -376,7 +385,7 @@ class UserController {
 			})
 				.sort({ follower: -1 })
 				.limit(10)
-			
+
 			let listFriends = []
 
 			for (let i = 0; i < user.friends.length; i++) {
@@ -397,7 +406,6 @@ class UserController {
 				(user, index, self) =>
 					index === self.findIndex((u) => u._id === user._id)
 			)
-
 
 			res.status(200).json({ data: recommend })
 		} catch (error) {
@@ -484,7 +492,6 @@ class UserController {
 	}
 
 	async destroy(req, res) {
-
 		// check if user is existed
 		const user = await User.findById(req.user.id)
 		if (!user) return res.status(400).json({ message: 'User not found' })
@@ -493,7 +500,9 @@ class UserController {
 		// session.startTransaction()
 		try {
 			await softDeleteUser(req.user.id)
-			return res.status(200).json({ message: 'Account deleted successful' })
+			return res
+				.status(200)
+				.json({ message: 'Account deleted successful' })
 		} catch (error) {
 			await session.abortTransaction()
 			return res.status(500).json({ message: 'Server error' })
