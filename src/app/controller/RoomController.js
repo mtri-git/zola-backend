@@ -25,6 +25,7 @@ class RoomController {
 					)
 					const room = await Room.findOne({
 						users: objectIdArray,
+						isRoom: false,
 						deleted_at: null,
 					})
 
