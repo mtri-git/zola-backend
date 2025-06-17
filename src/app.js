@@ -16,17 +16,17 @@ app.use(express.json())
 
 app.use(cookieParser())
 app.use(compression())
-app.use(
-	cors({
-		origin: [
-			'http://localhost:5173',
-			'http://localhost:5175',
-			'https://zola-social.netlify.app',
-			'https://zola-admin.vercel.app'
-		],
-		credentials: true,
-	})
-)
+
+const allowList = process.env.ALLOW_LIST
+if (allowList) {
+	const allowListArray = allowList.split('|')
+	app.use(
+		cors({
+			origin: allowListArray,
+			credentials: true,
+		})
+	)
+}
 
 // log morgan
 // check if production or test
